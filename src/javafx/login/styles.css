@@ -1,0 +1,37 @@
+.bg {
+    -fx-background-image: url("./assets/bg.png");
+}
+
+.form {
+    -fx-background-color: black;
+}
+
+.mfx-text-field {
+    -fx-background-color: transparent;
+}
+
+.mfx-text-field .floating-text {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.login-button {
+    -fx-background-color: transparent;
+    -fx-border-color: slateblue;
+}
+
+.login-button:hover {
+    -fx-background-color: slateblue;
+}
+
+.mfx-progress-spinner .percentage{
+    -fx-fill: transparent;
+}
+
+.succeed {
+    -fx-fill: green;
+}
+
+.succeed {
+    -fx-fill: red;
+}
