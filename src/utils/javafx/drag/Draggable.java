@@ -2,7 +2,6 @@ package utils.javafx.drag;
 
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
