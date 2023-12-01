@@ -1,7 +1,6 @@
 package javafx.run;
 
 import javafx.application.Application;
-import javafx.company.create.CreateCompanyController;
 import javafx.fxml.FXMLLoader;
 import javafx.login.LoginController;
 import javafx.scene.Scene;
