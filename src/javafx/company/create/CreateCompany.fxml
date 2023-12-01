@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXCheckListView?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXSpinner?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="pane" prefHeight="600.0" prefWidth="902.0" styleClass="bg" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.company.create.CreateCompanyController">
+   <children>
+      <Line endX="659.0" layoutX="179.0" layoutY="77.0" startX="-103.0" stroke="#740097" />
+      <Text fill="#545454" layoutX="105.0" layoutY="58.0" stroke="#17171700" strokeType="OUTSIDE" strokeWidth="5.0" text="Create Company" wrappingWidth="187.79342651367188">
+         <font>
+            <Font name="Sans Serif Collection" size="27.0" />
+         </font>
+      </Text>
+      <MFXTextField floatingText="Company Name" layoutX="76.0" layoutY="111.0" prefHeight="49.0" prefWidth="353.0" />
+      <MFXComboBox floatingText="Company Type" layoutX="508.0" layoutY="111.0" prefHeight="49.0" prefWidth="324.0" />
+      <MFXSpinner layoutX="332.0" layoutY="180.0" prefHeight="41.0" prefWidth="252.0" promptText="Fuel Tariff" />
+      <Text layoutX="65.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Priority" />
+      <Text layoutX="349.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Handling Goods" />
+      <Text layoutX="614.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Conditioning" />
+      <MFXCheckListView depthLevel="LEVEL1" layoutX="349.0" layoutY="256.0" prefHeight="320.0" prefWidth="218.0" />
+      <MFXCheckListView depthLevel="LEVEL1" layoutX="65.0" layoutY="256.0" prefHeight="320.0" prefWidth="218.0" />
+      <MFXCheckListView depthLevel="LEVEL1" layoutX="614.0" layoutY="256.0" prefHeight="320.0" prefWidth="218.0" />
+   </children>
+</AnchorPane>
