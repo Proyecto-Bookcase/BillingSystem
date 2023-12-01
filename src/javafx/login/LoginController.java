@@ -5,11 +5,22 @@ import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
+import javafx.stage.Stage;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class LoginController {
+
+    @FXML
+    private MFXButton closeButton;
+    @FXML
+    private GridPane pane;
 
     @javafx.fxml.FXML
     private MFXTextField username;
@@ -32,6 +43,14 @@ public class LoginController {
     @FXML
     private void onLogin() {
 
+    }
+
+    @FXML
+    private void close() {
+
+        Stage stage = (Stage) pane.getScene().getWindow();
+
+        stage.close();
     }
 
 
@@ -63,6 +82,4 @@ public class LoginController {
         progress.setColor3(Color.RED);
         progress.setColor4(Color.RED);
     }
-
-
 }

@@ -24,7 +24,7 @@
     -fx-background-color: slateblue;
 }
 
-.mfx-progress-spinner .percentage{
+.mfx-progress-spinner .percentage {
     -fx-fill: transparent;
 }
 
@@ -34,4 +34,14 @@
 
 .succeed {
     -fx-fill: red;
+}
+
+.close-button {
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+    -fx-background-color: rgba(100, 100, 100, 0.1);
+}
+
+.close-button:hover {
+    -fx-background-color: rgba(246, 34, 34, 0.5);
 }
