@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="pane" prefHeight="600.0" prefWidth="902.0" styleClass="bg" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.company.create.CreateCompanyController">
+<AnchorPane fx:id="pane" prefHeight="600.0" prefWidth="902.0" styleClass="bg" stylesheets="@../create/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.scenes.company.create.CreateCompanyController">
    <children>
       <Line endX="659.0" layoutX="179.0" layoutY="77.0" startX="-103.0" stroke="#740097" />
       <Text fill="#545454" layoutX="105.0" layoutY="58.0" stroke="#17171700" strokeType="OUTSIDE" strokeWidth="5.0" text="Create Company" wrappingWidth="187.79342651367188">

@@ -1,4 +1,4 @@
-package javafx.company.create;
+package javafx.scenes.company.create;
 
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;

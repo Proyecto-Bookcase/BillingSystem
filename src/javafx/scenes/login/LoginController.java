@@ -1,4 +1,4 @@
-package javafx.login;
+package javafx.scenes.login;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
