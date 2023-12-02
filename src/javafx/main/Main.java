@@ -1,12 +1,11 @@
 package javafx.main;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.login.LoginController;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import utils.javafx.drag.Draggable;
+import javafx.utils.drag.Draggable;
+import javafx.utils.scene_manager.LoginSM;
+import javafx.utils.scene_manager.MainSM;
 
 import java.io.IOException;
 
@@ -19,15 +18,15 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        //Setting scene
-        FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("Login.fxml"));
-        Scene scene = new Scene(loader.load());
-        stage.setScene(scene);
+        LoginSM.initialize(stage);
+        MainSM.initialize(stage);
+
+        LoginSM.showLogin();
 
         //Adjusting stage
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
-        Draggable.set(scene);
+        Draggable.set(LoginSM.getActualScene());
 
         //Showing stage
         stage.show();
