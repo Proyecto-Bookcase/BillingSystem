@@ -14,6 +14,7 @@ public class Locationonnection {
         manager = DbManager.getDbManager();
     }
 
+    //comment to commit
     public void insertLocation(int p_compartment, int p_floor, int p_shelf,
                                boolean p_maintenance, int p_warehouse_number,
                                int p_cargo_id) {
