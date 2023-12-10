@@ -20,8 +20,6 @@ public class MainSM extends SceneManager {
 
     /**
      * Constructor privado de MainSM.
-     *
-     * @param stage El escenario principal.
      */
     private MainSM() {
         super(new Stage());

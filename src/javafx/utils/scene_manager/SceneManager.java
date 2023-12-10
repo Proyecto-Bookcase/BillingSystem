@@ -3,7 +3,7 @@ package javafx.utils.scene_manager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.utils.others.Aux;
+import javafx.utils.others.Auxiliary;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -37,7 +37,7 @@ public abstract class SceneManager {
      * @return La escena almacenada en caché.
      */
     protected Scene cache() {
-        String key = Aux.getCallingFunctionName(1);
+        String key = Auxiliary.getCallingFunctionName(1);
         return store.get(key);
     }
 
@@ -47,7 +47,7 @@ public abstract class SceneManager {
      * @param scene La escena a almacenar en caché.
      */
     private void cache(@NotNull Scene scene) {
-        String key = Aux.getCallingFunctionName(1);
+        String key = Auxiliary.getCallingFunctionName(1);
         store.put(key, scene);
     }
 
