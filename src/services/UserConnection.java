@@ -148,4 +148,20 @@ public class UserConnection {
         return esc;
     }
 
+    public boolean checkPermission(String permission)
+    {
+        boolean esc = false;
+        ActualUser actualUser = ActualUser.getActualUser();
+        ArrayList<String> permissions = actualUser.getPermissions();
+        int index = 0;
+        while (index < permissions.size() && !esc) {
+            String perm = permissions.get(index);
+            if (perm.equals(permission)) {
+                esc = true;
+            }
+            index++;
+        }
+
+        return esc;
+    }
 }
