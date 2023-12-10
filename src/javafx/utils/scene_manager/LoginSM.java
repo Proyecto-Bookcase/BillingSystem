@@ -2,11 +2,12 @@ package javafx.utils.scene_manager;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.jetbrains.annotations.NotNull;
+import javafx.stage.StageStyle;
+import javafx.utils.drag.Draggable;
 
 import java.io.IOException;
 
-public class LoginSM extends SceneManager{
+public class LoginSM extends SceneManager {
 
     private static LoginSM instance;
 
@@ -16,12 +17,8 @@ public class LoginSM extends SceneManager{
      *
      * @param stage La ventana principal de la aplicación.
      */
-    private LoginSM(Stage stage) {
-        super(stage);
-    }
-
-    public static Scene getActualScene() {
-        return instance.actualScene;
+    private LoginSM() {
+        super(new Stage());
     }
 
     /**
@@ -29,15 +26,33 @@ public class LoginSM extends SceneManager{
      *
      * @param stage El escenario principal.
      */
-    public static void initialize(@NotNull Stage stage) {
-        if (instance == null)
-            instance = new LoginSM(stage);
+    private static LoginSM getInstance() {
+        if (instance == null) {
+            instance = new LoginSM();
+            instance.stage.setResizable(false);
+            instance.stage.initStyle(StageStyle.UNDECORATED);
+        }
+
+        if (!instance.stage.isShowing()) {
+            instance.stage.show();
+            instance.stage.centerOnScreen();
+        }
+
+        return instance;
     }
 
-    public static void showLogin(boolean...cache) throws IOException {
-        Scene scene = instance.generateScene(cache, "/login/Login.fxml");
-        instance.stage.setScene(scene);
+    public static Scene getActualScene() {
+        return getInstance().actualScene;
     }
 
+    public static void showLogin(boolean... cache) throws IOException {
+        Scene scene = getInstance().generateScene(cache, "/login/Login.fxml");
+        getInstance().stage.setScene(scene);
+        Draggable.set(scene);
+    }
+
+    public static void close() {
+        getInstance().stage.close();
+    }
 
 }

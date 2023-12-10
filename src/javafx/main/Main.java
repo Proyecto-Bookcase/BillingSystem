@@ -8,6 +8,7 @@ import javafx.utils.scene_manager.LoginSM;
 import javafx.utils.scene_manager.MainSM;
 
 import java.io.IOException;
+import java.util.concurrent.Flow;
 
 public class Main extends Application {
 
@@ -18,17 +19,8 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        LoginSM.initialize(stage);
-        MainSM.initialize(stage);
+        //LoginSM.showLogin();
 
-        LoginSM.showLogin();
-
-        //Adjusting stage
-        stage.setResizable(false);
-        stage.initStyle(StageStyle.UNDECORATED);
-        Draggable.set(LoginSM.getActualScene());
-
-        //Showing stage
-        stage.show();
+        MainSM.showCreateCompany();
     }
 }

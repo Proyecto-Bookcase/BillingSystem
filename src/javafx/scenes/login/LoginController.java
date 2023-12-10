@@ -4,12 +4,17 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
-import javafx.stage.Stage;
+import javafx.utils.async.timeout.Timer;
+import javafx.utils.scene_manager.LoginSM;
+import javafx.utils.scene_manager.MainSM;
+
+import java.io.IOException;
 
 public class LoginController {
 
@@ -37,16 +42,28 @@ public class LoginController {
     private MFXButton loginButton;
 
     @FXML
-    private void onLogin() {
+    private void onLogin() throws IOException {
 
+        String user = username.getText();
+        String pass = password.getText();
+        loading(true);
+
+        /*
+        try{
+            // Verificación de usuario
+
+
+            //succeed();
+        } catch (SQLException e){
+            loading(false);
+            fail();
+        }
+         */
     }
 
     @FXML
     private void close() {
-
-        Stage stage = (Stage) pane.getScene().getWindow();
-
-        stage.close();
+        LoginSM.close();
     }
 
 
@@ -55,17 +72,39 @@ public class LoginController {
         password.setDisable(b);
         loginButton.setDisable(b);
         progress.setDisable(!b);
+
+        progress.setColor1(Color.SLATEBLUE);
+        progress.setColor2(Color.MEDIUMVIOLETRED);
+        progress.setColor3(Color.BLUE);
+        progress.setColor4(Color.DEEPPINK);
     }
 
     private void succeed() {
+
         head.getStyleClass().remove("fail");
         head.getStyleClass().add("succeed");
         body.getStyleClass().remove("fail");
         body.getStyleClass().add("succeed");
+
         progress.setColor1(Color.GREEN);
         progress.setColor2(Color.GREEN);
         progress.setColor3(Color.GREEN);
         progress.setColor4(Color.GREEN);
+
+
+        Timer.timeout(1000, () -> {
+
+            progress.setProgress(1);
+
+            Timer.timeout(200, () -> {
+
+                Platform.runLater(() -> {
+                    MainSM.showCreateCompany();
+                    LoginSM.close();
+                });
+
+            });
+        });
     }
 
     private void fail() {
@@ -73,9 +112,23 @@ public class LoginController {
         head.getStyleClass().add("fail");
         body.getStyleClass().remove("succeed");
         body.getStyleClass().add("fail");
+
         progress.setColor1(Color.RED);
         progress.setColor2(Color.RED);
         progress.setColor3(Color.RED);
         progress.setColor4(Color.RED);
+
+        Timer.timeout(1000, () -> {
+
+            progress.setProgress(1);
+        });
+
+        username.getStyleClass().add("input-fail");
+        password.getStyleClass().add("input-fail");
+
+        username.setDisable(false);
+        password.setDisable(false);
+        loginButton.setDisable(false);
+
     }
 }
