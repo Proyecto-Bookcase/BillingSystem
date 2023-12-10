@@ -1,5 +1,7 @@
 package services;
 
+import Entity.ActualUser;
+import Entity.Role;
 import Entity.User;
 
 import java.sql.CallableStatement;
@@ -107,5 +109,58 @@ public class UserConnection {
         return user;
     }
 
+    public boolean checkUser(String username, String password){
+        boolean esc = true;
+        ActualUser actualUser = ActualUser.getActualUser();
+        try {
+            CallableStatement cstmt = manager.getConnection().prepareCall(
+                    "{call get_user_info2(?,?)}");
+            cstmt.setString(1,username);
+            cstmt.setString(2,password);
 
+            ResultSet rs = cstmt.executeQuery();
+            System.out.println("1");
+            if (rs.next()){
+                System.out.println("2");
+                actualUser.setPassword(rs.getString("password"));
+                actualUser.setEmail(rs.getString("email"));
+                actualUser.setUsername(rs.getString("username"));
+                actualUser.setRole(new Role(rs.getInt("role_id"), rs.getString("role")));
+
+                CallableStatement cstmt2 = manager.getConnection().prepareCall(
+                        "{call get_permissions_for_role(?)}");
+                cstmt2.setInt(1, actualUser.getRole().getId());
+
+                ResultSet rs2 = cstmt2.executeQuery();
+                ArrayList<String> permissions = new ArrayList<String>();
+                while (rs2.next()){
+                    permissions.add(rs2.getString("permission_identifier"));
+                }
+                actualUser.setPermissions(permissions);
+            }
+            else {
+                esc = false;
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return esc;
+    }
+
+    public boolean checkPermission(String permission)
+    {
+        boolean esc = false;
+        ActualUser actualUser = ActualUser.getActualUser();
+        ArrayList<String> permissions = actualUser.getPermissions();
+        int index = 0;
+        while (index < permissions.size() && !esc) {
+            String perm = permissions.get(index);
+            if (perm.equals(permission)) {
+                esc = true;
+            }
+            index++;
+        }
+
+        return esc;
+    }
 }

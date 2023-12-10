@@ -1,20 +1,22 @@
 package Entity;
 
 public class Role {
-    private String id;
+    private int id;
     private String description;
 
-    public Role(String id, String description) {
+    public Role(int id, String description) {
         this.id = id;
         this.description = description;
     }
+    public Role() {
 
+    }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
