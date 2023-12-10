@@ -1,6 +1,5 @@
 package services;
 
-import Dtos.UserDto;
 import Entity.ActualUser;
 import Entity.Role;
 import Entity.User;
@@ -126,7 +125,7 @@ public class UserConnection {
                 actualUser.setPassword(rs.getString("password"));
                 actualUser.setEmail(rs.getString("email"));
                 actualUser.setUsername(rs.getString("username"));
-                actualUser.setRole(new Role(rs.getInt("role_id"), rs.getString("description")));
+                actualUser.setRole(new Role(rs.getInt("role_id"), rs.getString("role")));
 
                 CallableStatement cstmt2 = manager.getConnection().prepareCall(
                         "{call get_permissions_for_role(?)}");

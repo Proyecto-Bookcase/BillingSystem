@@ -1,8 +1,5 @@
 package Entity;
 
-import Dtos.UserDto;
-import services.DbManager;
-
 import java.util.ArrayList;
 
 public class ActualUser {
