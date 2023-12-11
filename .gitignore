@@ -2,6 +2,8 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+misc.xml
+git_toolbox_prj.xml
 
 ### Eclipse ###
 .apt_generated
