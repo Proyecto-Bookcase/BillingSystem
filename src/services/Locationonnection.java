@@ -141,6 +141,61 @@ public class Locationonnection {
         }
         return locationArrayList;
     }
+    public ArrayList<Location> getAllEmptyLocationByCooled(boolean cooledValue) {
+        ArrayList<Location> locationArrayList = new ArrayList<Location>();
+
+        try {
+            CallableStatement cstmt = manager.getConnection().prepareCall(
+                    "{ call get_all_location_by_WAREHOSE(?)}");
+            cstmt.setBoolean(1, cooledValue);
+
+            ResultSet rs = cstmt.executeQuery();
+            while (rs.next())
+            {
+                Location location = new Location(
+                        rs.getInt("compartment"),
+                        rs.getInt("floor"),
+                        rs.getInt("shelf"),
+                        rs.getBoolean("maintenance"),
+                        rs.getInt("WAREHOSE_NUMBER"),
+                        rs.getInt("cargo__id")
+
+                );
+                locationArrayList.add(location);
+            }
+        } catch (SQLException e) {
+            //throw new RuntimeException(e);
+            System.out.println(e);
+        }
+        return locationArrayList;
+    }
+    public ArrayList<Location> getAllEmptyLocation() {
+        ArrayList<Location> locationArrayList = new ArrayList<Location>();
+
+        try {
+            CallableStatement cstmt = manager.getConnection().prepareCall(
+                    "{ call get_all_location_by_WAREHOSE()}");
+
+            ResultSet rs = cstmt.executeQuery();
+            while (rs.next())
+            {
+                Location location = new Location(
+                        rs.getInt("compartment"),
+                        rs.getInt("floor"),
+                        rs.getInt("shelf"),
+                        rs.getBoolean("maintenance"),
+                        rs.getInt("WAREHOSE_NUMBER"),
+                        rs.getInt("cargo__id")
+
+                );
+                locationArrayList.add(location);
+            }
+        } catch (SQLException e) {
+            //throw new RuntimeException(e);
+            System.out.println(e);
+        }
+        return locationArrayList;
+    }
 
 
 
@@ -165,4 +220,5 @@ public class Locationonnection {
             System.out.println(e);
         }
     }
+
 }
