@@ -1,5 +1,10 @@
 package javafx.scenes.enterprise.update;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXSpinner;
+import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.scene.image.ImageView;
+
 public class UpdateEnterpriseController {
     @javafx.fxml.FXML
     private MFXButton submit;

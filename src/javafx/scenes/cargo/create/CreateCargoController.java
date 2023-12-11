@@ -1,5 +1,7 @@
 package javafx.scenes.cargo.create;
 
+import io.github.palexdev.materialfx.controls.*;
+
 public class CreateCargoController {
     @javafx.fxml.FXML
     private MFXTextField name;
