@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.control.Label?>
+<AnchorPane prefHeight="600.0" prefWidth="902.0" styleClass="bg" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.scenes.home.HomeController">
+   <children>
+      <Text fill="#fffefe" layoutX="381.0" layoutY="550.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="OUTSIDE" strokeWidth="2.0" text="Adaminista" wrappingWidth="456.13671875">
+         <font>
+            <Font name="Bell MT" size="96.0" />
+         </font>
+      </Text>
+      <MFXProgressSpinner fx:id="progress" disable="true" layoutX="28.0" layoutY="18.0" prefHeight="77.0" prefWidth="65.0" stylesheets="@../login/styles.css">
+         <color4>
+            <Color red="0.061000000685453415" green="0.6100000143051147" blue="0.33550000190734863" />
+         </color4>
+      </MFXProgressSpinner>
+      <SVGPath fx:id="body" content="M200-143.583c-76.248,0-100,49.999-100,49.999v25h200v-25C300-93.583,276.25-143.583,200-143.583z" fill="#f2f2f2" layoutX="-139.0" layoutY="173.0" scaleX="0.2" scaleY="0.2" AnchorPane.bottomAnchor="495.58399200439453" AnchorPane.topAnchor="29.417007446289062" />
+      <Circle fx:id="head" fill="#f8f8f8" layoutX="61.0" layoutY="43.0" radius="11.0" stroke="#00000019" strokeType="INSIDE" />
+      <MFXButton buttonType="RAISED" layoutX="24.0" layoutY="558.0" prefHeight="28.0" prefWidth="85.0" text="Log out" />
+      <Label contentDisplay="TOP" layoutX="119.0" layoutY="43.0" prefHeight="27.0" prefWidth="162.0" text="Username" textAlignment="CENTER" textFill="#fffbfb" underline="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="29.0" layoutY="117.0" prefHeight="27.0" prefWidth="241.0" styleClass="option" text="Empresa" textFill="#fff8f8" underline="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="29.0" layoutY="153.0" prefHeight="27.0" prefWidth="241.0" styleClass="option" text="Compañías" textFill="#fff8f8" underline="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="29.0" layoutY="192.0" prefHeight="27.0" prefWidth="241.0" styleClass="option" text="Clientes" textFill="#fff8f8" underline="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="29.0" layoutY="229.0" prefHeight="27.0" prefWidth="241.0" styleClass="option" text="Cargas" textFill="#fff8f8" underline="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="29.0" layoutY="266.0" prefHeight="27.0" prefWidth="241.0" styleClass="option" text="Almacenes" textFill="#fff8f8" underline="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="29.0" layoutY="300.0" prefHeight="27.0" prefWidth="241.0" styleClass="option" text="Reportes" textFill="#fff8f8" underline="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

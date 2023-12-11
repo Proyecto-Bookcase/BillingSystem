@@ -1,4 +1,4 @@
-package utils.javafx.drag;
+package javafx.utils.drag;
 
 import javafx.scene.Node;
 import javafx.scene.Scene;

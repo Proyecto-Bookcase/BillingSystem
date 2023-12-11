@@ -1,0 +1,12 @@
+
+.bg {
+    -fx-background-image: url('./assets/bg.jpg');
+    -fx-background-size: contain;
+    -fx-background-repeat: space;
+    -fx-background-position: right;
+    -fx-background-color: #0c324d;
+}
+
+.option:hover {
+    -fx-text-fill: slateblue;
+}

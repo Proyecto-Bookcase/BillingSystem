@@ -24,6 +24,28 @@
     -fx-background-color: slateblue;
 }
 
+.progress-fail {
+    -mfx-color1: red;
+    -mfx-color2: red;
+    -mfx-color3: red;
+    -mfx-color4: red;
+}
+
+.progress-success {
+    -mfx-color1: green;
+    -mfx-color2: green;
+    -mfx-color3: green;
+    -mfx-color4: green;
+}
+
+.progress-loading{
+    -mfx-color1: slateblue;
+    -mfx-color2: violet;
+    -mfx-color3: blue;
+    -mfx-color4: pink;
+
+}
+
 .mfx-progress-spinner .percentage {
     -fx-fill: transparent;
 }
@@ -32,7 +54,7 @@
     -fx-fill: green;
 }
 
-.succeed {
+.fail {
     -fx-fill: red;
 }
 
@@ -44,4 +66,8 @@
 
 .close-button:hover {
     -fx-background-color: rgba(246, 34, 34, 0.5);
+}
+
+.input-fail{
+    -fx-border-color: red;
 }

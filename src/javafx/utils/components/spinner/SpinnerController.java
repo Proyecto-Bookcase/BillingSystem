@@ -1,15 +1,24 @@
-package javafx.company.create;
+package javafx.utils.components.spinner;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 
+import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CreateCompanyController implements Initializable {
-    public AnchorPane pane;
-    //public MFXStepper stepper;
+public class SpinnerController implements Initializable {
 
+    @javafx.fxml.FXML
+    private HBox container;
+    @javafx.fxml.FXML
+    private MFXButton left;
+    @javafx.fxml.FXML
+    private TextField input;
+    @javafx.fxml.FXML
+    private MFXButton right;
 
     /**
      * Called to initialize a controller after its root element has been
@@ -22,5 +31,6 @@ public class CreateCompanyController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        input.setStyle("");
     }
 }

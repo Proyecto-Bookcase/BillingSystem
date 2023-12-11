@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXCheckbox?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXSpinner?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.control.Label?>
+<AnchorPane prefHeight="600.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.scenes.client.create.CreateClientController">
+   <children>
+      <Line endX="659.0" layoutX="189.0" layoutY="87.0" startX="-103.0" stroke="#740097" />
+      <Text fill="#545454" layoutX="115.0" layoutY="68.0" stroke="#17171700" strokeType="OUTSIDE" strokeWidth="5.0" text="Creando Cliente" wrappingWidth="187.79342651367188">
+         <font>
+            <Font name="Sans Serif Collection" size="27.0" />
+         </font>
+      </Text>
+      <MFXButton fx:id="submit" buttonType="RAISED" defaultButton="true" depthLevel="LEVEL1" layoutX="727.0" layoutY="40.0" prefHeight="35.0" prefWidth="100.0" rippleColor="#f9fcf8" styleClass="submit" stylesheets="@../../company/create/styles.css" text="Crear">
+         <font>
+            <Font name="Sans Serif Collection" size="12.0" />
+         </font>
+      </MFXButton>
+      <Line endX="-100.0" endY="452.0" layoutX="574.0" layoutY="111.0" startX="-100.0" />
+      <MFXTextField fx:id="name" floatingText="Nombre" layoutX="104.0" layoutY="129.0" prefHeight="54.0" prefWidth="339.0" />
+      <MFXTextField fx:id="phone_number" floatingText="Teléfono" layoutX="104.0" layoutY="196.0" prefHeight="54.0" prefWidth="339.0" />
+      <MFXComboBox fx:id="type" floatingText="Tipo de Cliente" layoutX="499.0" layoutY="129.0" prefHeight="54.0" prefWidth="339.0" />
+      <MFXComboBox fx:id="attention_type" floatingText="Tipo de Atención" layoutX="499.0" layoutY="196.0" prefHeight="54.0" prefWidth="339.0" />
+      <MFXTextField fx:id="email" floatingText="Correo Electrónico" layoutX="104.0" layoutY="261.0" prefHeight="54.0" prefWidth="339.0" />
+      <MFXTextField fx:id="fax" floatingText="Fax" layoutX="104.0" layoutY="328.0" prefHeight="54.0" prefWidth="339.0" />
+      <MFXTextField fx:id="country" floatingText="País" layoutX="104.0" layoutY="392.0" prefHeight="54.0" prefWidth="339.0" />
+      <MFXSpinner fx:id="antique" editable="true" layoutX="103.0" layoutY="458.0" prefHeight="44.0" prefWidth="308.0" promptText="Antiguedad" />
+      <MFXSpinner fx:id="hours" editable="true" layoutX="499.0" layoutY="382.0" prefHeight="44.0" prefWidth="339.0" promptText="Por horas" />
+      <MFXCheckbox fx:id="preferencial_trate" layoutX="104.0" layoutY="517.0" prefHeight="28.0" prefWidth="157.0" text="Trato Preferencial" />
+      <MFXSpinner fx:id="transportation" editable="true" layoutX="499.0" layoutY="328.0" prefHeight="44.0" prefWidth="339.0" promptText="Por Transportación" />
+      <MFXSpinner fx:id="refrigeration" editable="true" layoutX="499.0" layoutY="491.0" prefHeight="44.0" prefWidth="339.0" promptText="Por Refrigeración" />
+      <MFXSpinner fx:id="billing" editable="true" layoutX="499.0" layoutY="437.0" prefHeight="44.0" prefWidth="339.0" promptText="Aforo" />
+      <Label layoutX="499.0" layoutY="292.0" text="Tarifas" underline="true" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
