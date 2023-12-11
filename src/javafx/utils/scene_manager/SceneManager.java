@@ -64,7 +64,7 @@ public abstract class SceneManager {
         if (cache.length > 0 && cache[0]) {
             scene = cache();
         } else {
-            FXMLLoader loader = new FXMLLoader(MainSM.class.getResource(STR. "/javafx/scenes\{ path }" ));
+            FXMLLoader loader = new FXMLLoader(MainSM.class.getResource(STR."/javafx/scenes\{ path }" ));
             scene = new Scene(loader.load());
             cache(scene);
             actualScene = scene;
