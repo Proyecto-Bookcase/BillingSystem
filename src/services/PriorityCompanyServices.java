@@ -3,20 +3,21 @@ package services;
 import Dtos.PriorityCompanyDto;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class PriorityCompanyServices {
-    public static ServicesLocator manager;
-    public PriorityCompanyServices(){
-        manager = ServicesLocator.getDbManager();
+    private Connection connection;
+    public PriorityCompanyServices(Connection connection){
+        this.connection = connection;
     }
 
     public void insertPriorityCompany(String desciption){
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call createpriority(?)}");
             cstmt.setString(1, desciption);
             cstmt.executeQuery();
@@ -28,7 +29,7 @@ public class PriorityCompanyServices {
     public void deletePriorityCompany(int id){
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call deletepriority(?)}");
             cstmt.setInt(1, id);
             cstmt.executeQuery();
@@ -40,7 +41,7 @@ public class PriorityCompanyServices {
     public ArrayList<PriorityCompanyDto> getAllPriorityCompany(){
         ArrayList<PriorityCompanyDto> priorityCompanyArrayList = new ArrayList<PriorityCompanyDto>();
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call getallpriority()}");
 
             ResultSet rs = cstmt.executeQuery();
@@ -59,7 +60,7 @@ public class PriorityCompanyServices {
     public ArrayList<PriorityCompanyDto> getAllPriorityCompanyByCompany(int companyId){
         ArrayList<PriorityCompanyDto> priorityCompanyArrayList = new ArrayList<PriorityCompanyDto>();
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call getallprioritybycompany(?)}");
             cstmt.setInt(1, companyId);
 
@@ -79,7 +80,7 @@ public class PriorityCompanyServices {
     public PriorityCompanyDto getPriorityCompanyById(int id){
         PriorityCompanyDto priorityCompany = null;
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call getpriority(?)}");
             cstmt.setInt(1, id);
 
@@ -98,7 +99,7 @@ public class PriorityCompanyServices {
 
     public void updatePriorityCompany(int id, String description){
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call updatepriority(?,?)}");
             cstmt.setInt(1, id);
             cstmt.setString(2, description);

@@ -3,20 +3,21 @@ package services;
 import Dtos.CompanyTypeDto;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CompanyTypeServices {
-    public static ServicesLocator manager;
-    public CompanyTypeServices(){
-        manager = ServicesLocator.getDbManager();
+    private Connection connection;
+    public CompanyTypeServices(Connection connection){
+        this.connection = connection;
     }
 
     public void insertCompanyTypeConnection(String desciption){
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call createcompanytype(?)}");
             cstmt.setString(1, desciption);
             cstmt.executeQuery();
@@ -28,7 +29,7 @@ public class CompanyTypeServices {
     public void deleteCompanyType(int id){
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call deletecompanytype(?)}");
             cstmt.setInt(1, id);
             cstmt.executeQuery();
@@ -40,7 +41,7 @@ public class CompanyTypeServices {
     public ArrayList<CompanyTypeDto> getAllCompanyType(){
         ArrayList<CompanyTypeDto> companyTypes = new ArrayList<CompanyTypeDto>();
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call getallcompanytype()}");//implementar esto
 
             ResultSet rs = cstmt.executeQuery();
@@ -59,7 +60,7 @@ public class CompanyTypeServices {
     public CompanyTypeDto getCompanyTypeByCompany(int companyId){
         CompanyTypeDto companyType = null;
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call getcompanytypebycompany(?)}");
             cstmt.setInt(1, companyId);
 
@@ -80,7 +81,7 @@ public class CompanyTypeServices {
     public CompanyTypeDto getCompanyTypeCompanyById(int id){
         CompanyTypeDto conditioningCompany = null;
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call getCompanyType (?)}");
             cstmt.setInt(1, id);
 
@@ -99,7 +100,7 @@ public class CompanyTypeServices {
 
     public void updategetCompanyType(int id, String description){
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call updatecompanytype(?,?)}");
             cstmt.setInt(1, id);
             cstmt.setString(2, description);

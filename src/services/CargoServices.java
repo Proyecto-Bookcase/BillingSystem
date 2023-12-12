@@ -8,10 +8,9 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class CargoServices {
-
-    public static ServicesLocator manager;
-    public CargoServices(){
-        manager = ServicesLocator.getDbManager();
+    private Connection connection;
+    public CargoServices(Connection connection){
+        this.connection = connection;
     }
 
     public void insertCargo(
@@ -24,7 +23,7 @@ public class CargoServices {
 
         try {
             // Llama al procedimiento almacenado "insert_cargo" con los parámetros
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call insert_cargo(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }");
 
             // Configura los parámetros
@@ -61,7 +60,7 @@ public class CargoServices {
 
     public void deleteCargo(int cargoId){
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall("{ call delete_cargo(?)}");
+            CallableStatement cstmt = connection.prepareCall("{ call delete_cargo(?)}");
             // Configura los parámetros
             cstmt.setInt(1, cargoId);
             cstmt.executeQuery();
@@ -71,7 +70,7 @@ public class CargoServices {
     }
     public CargoDto getCargoDbFunction(int cargoId) {
         CargoDto cargoDTO = null;
-        try (CallableStatement cstmt = manager.getConnection().prepareCall("{call getCargo(?) }")) {
+        try (CallableStatement cstmt = connection.prepareCall("{call getCargo(?) }")) {
             cstmt.setInt(1, cargoId);
 
             cstmt.executeQuery();
@@ -108,7 +107,7 @@ public class CargoServices {
     }
     public ArrayList<CargoDto>  getAllCargoDbFunction() {
         ArrayList<CargoDto> cargoDTOs = new ArrayList<CargoDto>();
-        try (CallableStatement cstmt = manager.getConnection().prepareCall("{call getCargo() }")) {
+        try (CallableStatement cstmt = connection.prepareCall("{call getCargo() }")) {
 
             cstmt.executeQuery();
 

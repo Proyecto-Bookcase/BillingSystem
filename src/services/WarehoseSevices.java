@@ -3,22 +3,23 @@ package services;
 import Dtos.WarehoseDto;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class WarehoseSevices {
 
-    public static ServicesLocator manager;
-    public WarehoseSevices(){
-        manager = ServicesLocator.getDbManager();
+    private Connection connection;
+    public WarehoseSevices(Connection connection){
+        this.connection = connection;
     }
 
 
     public void insertWarehose(int enterpriseId, boolean cooled){
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call insert_warehose(?,?)}");
             cstmt.setBoolean(1, cooled);
             cstmt.setInt(2, enterpriseId);
@@ -32,7 +33,7 @@ public class WarehoseSevices {
     public void deleteWarehose(int number){
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call delete_warehose(?)}");
             cstmt.setInt(1, number);
             cstmt.executeQuery();
@@ -44,7 +45,7 @@ public class WarehoseSevices {
     public ArrayList<WarehoseDto> getAllWarehose(){
         ArrayList<WarehoseDto> priorityCompanyArrayList = new ArrayList<WarehoseDto>();
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call getallwarehouse()}");
 
             ResultSet rs = cstmt.executeQuery();
@@ -64,7 +65,7 @@ public class WarehoseSevices {
     public WarehoseDto getWarehose(int number){
         WarehoseDto warehose = null;
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call getwarehouse(?)}");
             cstmt.setInt(1, number);
 
@@ -83,7 +84,7 @@ public class WarehoseSevices {
 
     public void updateWarehose(int numer, boolean cooled){
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call update_warehose(?,?)}");
             cstmt.setInt(1, numer);
             cstmt.setBoolean(2, cooled);

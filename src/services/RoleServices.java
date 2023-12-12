@@ -1,11 +1,13 @@
 package services;
 
+import java.sql.Connection;
+
 public class RoleServices {
 
-    public static ServicesLocator manager;
+    private Connection connection;
 
-    public RoleServices(){
-        manager = ServicesLocator.getDbManager();
+    public RoleServices(Connection connection){
+        this.connection = connection;
     }
 
 

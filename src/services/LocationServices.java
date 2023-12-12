@@ -3,14 +3,15 @@ package services;
 import Dtos.LocationDto;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class LocationServices {
-    public static ServicesLocator manager;
-    public LocationServices(){
-        manager = ServicesLocator.getDbManager();
+    private Connection connection;
+    public LocationServices(Connection connection){
+        this.connection = connection;
     }
 
     //comment to commit 2
@@ -19,7 +20,7 @@ public class LocationServices {
                                int p_cargo_id) {
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call insert_location(?,?,?,?,?,?)}");
 
             cstmt.setInt(1, p_compartment);
@@ -38,7 +39,7 @@ public class LocationServices {
     public void deleteLocation(int p_compartment, int p_floor, int p_shelf, int p_warehouse_number) {
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call delete_location(?,?,?,?)}");
 
             cstmt.setInt(1, p_compartment);
@@ -56,7 +57,7 @@ public class LocationServices {
         ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call get_all_location_by_floor(?,?,?)}");
             cstmt.setInt(1, p_floor);
             cstmt.setInt(2, p_shelf);
@@ -86,7 +87,7 @@ public class LocationServices {
         ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call get_all_location_by_SHELF(?,?)}");
 
             cstmt.setInt(1, p_shelf);
@@ -116,7 +117,7 @@ public class LocationServices {
         ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call get_all_location_by_WAREHOSE(?)}");
             cstmt.setInt(1, p_warehouse_number);
 
@@ -144,7 +145,7 @@ public class LocationServices {
         ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call get_all_location_by_WAREHOSE(?)}");
             cstmt.setBoolean(1, cooledValue);
 
@@ -172,7 +173,7 @@ public class LocationServices {
         ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call get_all_location_by_WAREHOSE()}");
 
             ResultSet rs = cstmt.executeQuery();
@@ -202,7 +203,7 @@ public class LocationServices {
                                           boolean p_maintenance, int p_cargo_id) {
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call update_location_maintenance(?,?,?,?,?,?)}");
 
             cstmt.setInt(1, p_compartment);

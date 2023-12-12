@@ -3,20 +3,21 @@ package services;
 import Dtos.ProductTypeDto;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ProductTypeServices {
-    public static ServicesLocator manager;
-    public ProductTypeServices(){
-        manager = ServicesLocator.getDbManager();
+    private Connection connection;
+    public ProductTypeServices(Connection connection){
+        this.connection = connection;
     }
 
     public void insertProductTypeConnection(String desciption){
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call createproducttype(?)}");
             cstmt.setString(1, desciption);
             cstmt.executeQuery();
@@ -28,7 +29,7 @@ public class ProductTypeServices {
     public void deleteProductType(int id){
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call deleteproducttype(?)}");
             cstmt.setInt(1, id);
             cstmt.executeQuery();
@@ -40,7 +41,7 @@ public class ProductTypeServices {
     public ArrayList<ProductTypeDto> getAllProductType(){
         ArrayList<ProductTypeDto> companyTypes = new ArrayList<ProductTypeDto>();
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call getAllProductType()}");//implementar esto
 
             ResultSet rs = cstmt.executeQuery();
@@ -59,7 +60,7 @@ public class ProductTypeServices {
     public ProductTypeDto getProductTypeByCargo(int cargoId){
         ProductTypeDto productType = null;
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call getProductTypeByCargo(?)}");
             cstmt.setInt(1, cargoId);
 
@@ -80,7 +81,7 @@ public class ProductTypeServices {
     public ProductTypeDto getProductTypeById(int id){
         ProductTypeDto conditioningCompany = null;
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call getProductType (?)}");
             cstmt.setInt(1, id);
 
@@ -99,7 +100,7 @@ public class ProductTypeServices {
 
     public void updateProductType(int id, String description){
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call updateproducttype(?,?)}");
             cstmt.setInt(1, id);
             cstmt.setString(2, description);

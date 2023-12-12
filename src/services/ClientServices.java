@@ -5,9 +5,9 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class ClientServices {
-    public static ServicesLocator manager;
-    public ClientServices(){
-        manager = ServicesLocator.getDbManager();
+    private Connection connection;
+    public ClientServices(Connection connection){
+        this.connection = connection;
     }
 
     public  void insertClient(String p_name, String p_type, String p_country,
@@ -15,7 +15,7 @@ public class ClientServices {
                          char p_attention_type, int p_antique, Date p_preferred_rate) {
         try {
             // Llama al procedimiento almacenado "insertclient" con los parámetros
-            CallableStatement cstmt1 = manager.getConnection().prepareCall(
+            CallableStatement cstmt1 = connection.prepareCall(
                     "{ call insert_client(?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 
 
@@ -44,7 +44,7 @@ public class ClientServices {
     public ClientDto getClientDbFunction(int id) {
         ClientDto clientDTO = null;
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall("{ call getclient(?) }");
+            CallableStatement cstmt = connection.prepareCall("{ call getclient(?) }");
 
             // Establecer los parámetros de la función almacenada
             cstmt.setInt(1, id);
@@ -82,7 +82,7 @@ public class ClientServices {
     public ArrayList<ClientDto> getClientAllClientFunction() {
         ArrayList<ClientDto> clients = new ArrayList<ClientDto>();
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall("{ call getallclients() }");
+            CallableStatement cstmt = connection.prepareCall("{ call getallclients() }");
 
             // Ejecutar la consulta
             ResultSet rs = cstmt.executeQuery();
@@ -113,7 +113,7 @@ public class ClientServices {
 
     public void updateClient(ClientDto client){
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall("{ call update_client(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            CallableStatement cstmt = connection.prepareCall("{ call update_client(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
             // Configura los parámetros
             cstmt.setInt(1, client.getId());
             cstmt.setString(2, client.getName());
@@ -135,7 +135,7 @@ public class ClientServices {
 
     public void deleteClient(int id){
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall("{ call delete_client(?)}");
+            CallableStatement cstmt = connection.prepareCall("{ call delete_client(?)}");
             // Configura los parámetros
             cstmt.setInt(1, id);
             cstmt.executeQuery();

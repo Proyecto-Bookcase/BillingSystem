@@ -10,9 +10,9 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class CompanyServices {
-    public static ServicesLocator manager;
-    public CompanyServices(){
-        manager = ServicesLocator.getDbManager();
+    private Connection connection;
+    public CompanyServices(Connection connection){
+        this.connection = connection;
     }
 
     /*
@@ -70,15 +70,15 @@ public class CompanyServices {
     public void insertCompany(String name, float fuelTariff, int companyTypeId, int enterpriseId,
                                   Integer[] conditionings, Integer[] handlingGoods, Integer[] prioritys)  {
         try  {
-            CallableStatement cstmt = manager.getConnection().prepareCall("{call insert_company(?, ?, ?, ?, ?, ?, ?)}");
+            CallableStatement cstmt = connection.prepareCall("{call insert_company(?, ?, ?, ?, ?, ?, ?)}");
             // Configurar los parámetros
             cstmt.setString(1, name);
             cstmt.setFloat(2, fuelTariff);
             cstmt.setInt(3, companyTypeId);
             cstmt.setInt(4, enterpriseId);
-            cstmt.setArray(5, manager.getConnection().createArrayOf("integer", conditionings));
-            cstmt.setArray(6, manager.getConnection().createArrayOf("integer", handlingGoods));
-            cstmt.setArray(7, manager.getConnection().createArrayOf("integer", prioritys));
+            cstmt.setArray(5, connection.createArrayOf("integer", conditionings));
+            cstmt.setArray(6, connection.createArrayOf("integer", handlingGoods));
+            cstmt.setArray(7, connection.createArrayOf("integer", prioritys));
 
             // Ejecutar la llamada a la función
             cstmt.executeQuery();
@@ -88,7 +88,7 @@ public class CompanyServices {
     }
     public void deleteCompany(int id) {
         try  {
-            CallableStatement cstmt = manager.getConnection().prepareCall("{call delete_company()}");
+            CallableStatement cstmt = connection.prepareCall("{call delete_company()}");
             cstmt.executeQuery();
         }catch (Exception e) {
             System.out.println(e.getMessage());
@@ -98,7 +98,7 @@ public class CompanyServices {
     {
         CompanyDto companyDto = new CompanyDto();
             try  {
-                CallableStatement cstmt = manager.getConnection().prepareCall("{  call getCompany(?) }");
+                CallableStatement cstmt = connection.prepareCall("{  call getCompany(?) }");
                 cstmt.setInt(1, companyId);
 
 
@@ -130,7 +130,7 @@ public class CompanyServices {
     {
         ArrayList<CompanyDto> companyDtoList = new ArrayList<CompanyDto>();
         try  {
-            CallableStatement cstmt = manager.getConnection().prepareCall("{  call get_all_companies() }");
+            CallableStatement cstmt = connection.prepareCall("{  call get_all_companies() }");
             // Obtener el conjunto de resultados
             ResultSet resultSet = cstmt.executeQuery();
 

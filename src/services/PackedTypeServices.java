@@ -3,20 +3,21 @@ package services;
 import Dtos.PackedTypeDto;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class PackedTypeServices {
-    public static ServicesLocator manager;
-    public PackedTypeServices(){
-        manager = ServicesLocator.getDbManager();
+    private Connection connection;
+    public PackedTypeServices(Connection connection){
+        this.connection = connection;
     }
 
     public void insertPackedType(String desciption){
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call createpackedtype(?)}");
             cstmt.setString(1, desciption);
             cstmt.executeQuery();
@@ -28,7 +29,7 @@ public class PackedTypeServices {
     public void deletePackedType(int id){
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call deletepackedtype(?)}");
             cstmt.setInt(1, id);
             cstmt.executeQuery();
@@ -40,7 +41,7 @@ public class PackedTypeServices {
     public ArrayList<PackedTypeDto> getAllPackagedType(){
         ArrayList<PackedTypeDto> packageTypes = new ArrayList<PackedTypeDto>();
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call getAllpackedtype()}");//implementar esto
 
             ResultSet rs = cstmt.executeQuery();
@@ -59,7 +60,7 @@ public class PackedTypeServices {
     public PackedTypeDto getPackedTypeByCargo(int cargoId){
         PackedTypeDto companyType = null;
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call getpackedtypeByCargo(?)}");
             cstmt.setInt(1, cargoId);
 
@@ -80,7 +81,7 @@ public class PackedTypeServices {
     public PackedTypeDto getPackedTypeById(int id){
         PackedTypeDto conditioningCompany = null;
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call getPackedType(?)}");
             cstmt.setInt(1, id);
 
@@ -99,7 +100,7 @@ public class PackedTypeServices {
 
     public void updatePackedType(int id, String description){
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call updatepackedtype(?,?)}");
             cstmt.setInt(1, id);
             cstmt.setString(2, description);
