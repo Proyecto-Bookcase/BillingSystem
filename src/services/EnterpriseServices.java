@@ -5,10 +5,10 @@ import Dtos.EnterpirseDto;
 
 import java.sql.*;
 
-public class EnterpriseConection {
-    public static DbManager manager;
-    public EnterpriseConection(){
-        manager = DbManager.getDbManager();
+public class EnterpriseServices {
+    public static ServicesLocator manager;
+    public EnterpriseServices(){
+        manager = ServicesLocator.getDbManager();
     }
 
     public EnterpirseDto getEnterpirse(){

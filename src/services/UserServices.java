@@ -1,21 +1,21 @@
 package services;
 
-import Entity.ActualUser;
-import Entity.Role;
-import Entity.User;
+import Dtos.ActualUser;
+import Dtos.RoleDto;
+import Dtos.UserDto;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class UserConnection {
+public class UserServices {
 
-    public static  DbManager manager;
+    public static ServicesLocator manager;
 
 
-    public UserConnection() {
-        manager = DbManager.getDbManager();
+    public UserServices() {
+        manager = ServicesLocator.getDbManager();
     }
 
     public void inset_User(String username, String password, String email, int id_Enterprise, int id_role){
@@ -65,15 +65,15 @@ public class UserConnection {
             throw new RuntimeException();
         }
     }
-    public ArrayList<User> getAll_Users(){
+    public ArrayList<UserDto> getAll_Users(){
 
-        ArrayList<User> list_users = new ArrayList<User>();
+        ArrayList<UserDto> list_users = new ArrayList<UserDto>();
         try{
             CallableStatement cstmt = manager.getConnection().prepareCall(
                     "{call get_all_userr()}");
             ResultSet rs = cstmt.executeQuery();
             while (rs.next()){
-                User user = new User(
+                UserDto user = new UserDto(
                         rs.getString("username"),
                         rs.getString("password"),
                         rs.getString("email")
@@ -85,8 +85,8 @@ public class UserConnection {
         }
         return list_users;
     }
-    public  User getUser(String username){
-        User user = null;
+    public UserDto getUser(String username){
+        UserDto user = null;
         try {
             CallableStatement cstmt = manager.getConnection().prepareCall(
                     "{call get_user_info(?)}");
@@ -96,7 +96,7 @@ public class UserConnection {
             System.out.println("1");
             if (rs.next()){
                 System.out.println("2");
-                user = new User(
+                user = new UserDto(
                         rs.getString("username"),
                         rs.getString("password"),
                         rs.getString("email")
@@ -125,7 +125,7 @@ public class UserConnection {
                 actualUser.setPassword(rs.getString("password"));
                 actualUser.setEmail(rs.getString("email"));
                 actualUser.setUsername(rs.getString("username"));
-                actualUser.setRole(new Role(rs.getInt("role_id"), rs.getString("role")));
+                actualUser.setRole(new RoleDto(rs.getInt("role_id"), rs.getString("role")));
 
                 CallableStatement cstmt2 = manager.getConnection().prepareCall(
                         "{call get_permissions_for_role(?)}");

@@ -1,24 +1,23 @@
 package services;
 
-import Entity.CompanyType;
-import Entity.PackedType;
+import Dtos.ConditioningCompanyDto;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class PackedTypeConnection {
-    public static DbManager manager;
-    public PackedTypeConnection(){
-        manager = DbManager.getDbManager();
+public class ConditioningCompanyServices {
+    public static ServicesLocator manager;
+    public ConditioningCompanyServices(){
+        manager = ServicesLocator.getDbManager();
     }
 
-    public void insertPackedType(String desciption){
+    public void insertConditioningCompany(String desciption){
 
         try {
             CallableStatement cstmt = manager.getConnection().prepareCall(
-                    "{ call createpackedtype(?)}");
+                    "{ call createconditioning(?)}");
             cstmt.setString(1, desciption);
             cstmt.executeQuery();
 
@@ -26,11 +25,11 @@ public class PackedTypeConnection {
             throw new RuntimeException(e);
         }
     }
-    public void deletePackedType(int id){
+    public void deleteConditioningCompany(int id){
 
         try {
             CallableStatement cstmt = manager.getConnection().prepareCall(
-                    "{ call deletepackedtype(?)}");
+                    "{ call deletepriority(?)}");
             cstmt.setInt(1, id);
             cstmt.executeQuery();
 
@@ -38,56 +37,56 @@ public class PackedTypeConnection {
             throw new RuntimeException(e);
         }
     }
-    public ArrayList<PackedType> getAllPackagedType(){
-        ArrayList<PackedType> packageTypes = new ArrayList<PackedType>();
+    public ArrayList<ConditioningCompanyDto> getAllConditioningCompany(){
+        ArrayList<ConditioningCompanyDto> ConditioningCompanyArrayList = new ArrayList<ConditioningCompanyDto>();
         try {
             CallableStatement cstmt = manager.getConnection().prepareCall(
-                    "{ call getAllpackedtype()}");//implementar esto
+                    "{ call getallconditioning()}");
 
             ResultSet rs = cstmt.executeQuery();
             while (rs.next()) {
-                PackedType pt = new PackedType(
+                ConditioningCompanyDto ConditioningCompany = new ConditioningCompanyDto(
                         rs.getInt("id"),
                         rs.getString("description")
                 );
-                packageTypes.add(pt);
+                ConditioningCompanyArrayList.add(ConditioningCompany);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return  packageTypes;
+        return  ConditioningCompanyArrayList;
     }
-    public PackedType getPackedTypeByCargo(int cargoId){
-        PackedType companyType = null;
+    public ArrayList<ConditioningCompanyDto> getAllConditioningCompanyByCompany(int companyId){
+        ArrayList<ConditioningCompanyDto> ConditioningCompanyArrayList = new ArrayList<ConditioningCompanyDto>();
         try {
             CallableStatement cstmt = manager.getConnection().prepareCall(
-                    "{ call getpackedtypeByCargo(?)}");
-            cstmt.setInt(1, cargoId);
+                    "{ call getAllConditioningByCompany(?)}");
+            cstmt.setInt(1, companyId);
 
             ResultSet rs = cstmt.executeQuery();
-            if (rs.next()) {
-                companyType = new PackedType(
+            while (rs.next()) {
+                ConditioningCompanyDto ConditioningCompany = new ConditioningCompanyDto(
                         rs.getInt("id"),
                         rs.getString("description")
                 );
-
+                ConditioningCompanyArrayList.add(ConditioningCompany);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return  companyType;
+        return  ConditioningCompanyArrayList;
     }
 
-    public PackedType getPackedTypeById(int id){
-        PackedType conditioningCompany = null;
+    public ConditioningCompanyDto getConditioningCompanyById(int id){
+        ConditioningCompanyDto conditioningCompany = null;
         try {
             CallableStatement cstmt = manager.getConnection().prepareCall(
-                    "{ call getPackedType(?)}");
+                    "{ call getconditionings (?)}");
             cstmt.setInt(1, id);
 
             ResultSet rs = cstmt.executeQuery();
             if (rs.next()) {
-                conditioningCompany= new PackedType(
+                conditioningCompany = new ConditioningCompanyDto(
                         rs.getInt("id"),
                         rs.getString("description")
                 );
@@ -98,10 +97,10 @@ public class PackedTypeConnection {
         return  conditioningCompany;
     }
 
-    public void updatePackedType(int id, String description){
+    public void updateConditioningCompany(int id, String description){
         try {
             CallableStatement cstmt = manager.getConnection().prepareCall(
-                    "{ call updatepackedtype(?,?)}");
+                    "{ call updateconditioning(?,?)}");
             cstmt.setInt(1, id);
             cstmt.setString(2, description);
 

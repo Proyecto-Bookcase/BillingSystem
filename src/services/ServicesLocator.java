@@ -3,14 +3,14 @@ package services;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class DbManager {
+public class ServicesLocator {
     //db contection
     private static String userName = "postgres";
     private static String password = "postgres";
     private  static Connection connection;
-    private  static  DbManager manager;
+    private  static ServicesLocator manager;
 
-    private DbManager()
+    private ServicesLocator()
     {
         try {
 
@@ -28,10 +28,10 @@ public class DbManager {
         }
 
     }
-    public  static DbManager getDbManager()
+    public  static ServicesLocator getDbManager()
     {
         if(manager == null) {
-            manager = new DbManager();
+            manager = new ServicesLocator();
         }
         return manager;
     }

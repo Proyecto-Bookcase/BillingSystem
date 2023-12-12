@@ -4,10 +4,10 @@ import Dtos.ClientDto;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ClientConection {
-    public static DbManager manager;
-    public ClientConection(){
-        manager = DbManager.getDbManager();
+public class ClientServices {
+    public static ServicesLocator manager;
+    public ClientServices(){
+        manager = ServicesLocator.getDbManager();
     }
 
     public  void insertClient(String p_name, String p_type, String p_country,

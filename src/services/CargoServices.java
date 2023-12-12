@@ -1,17 +1,17 @@
 package services;
 
 import Dtos.CargoDto;
-import Entity.PackedType;
-import Entity.ProductType;
+import Dtos.PackedTypeDto;
+import Dtos.ProductTypeDto;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class CargoConnection {
+public class CargoServices {
 
-    public static DbManager manager;
-    public CargoConnection(){
-        manager = DbManager.getDbManager();
+    public static ServicesLocator manager;
+    public CargoServices(){
+        manager = ServicesLocator.getDbManager();
     }
 
     public void insertCargo(
@@ -86,8 +86,8 @@ public class CargoConnection {
                 cargoDTO.setPackedUnitWeight(rs.getFloat("PACKED_UNIT_WEIGHT"));
                 cargoDTO.setPackParts(rs.getInt("PACK_PARTS"));
                 cargoDTO.setWeight(rs.getFloat("WEIGHT"));
-                cargoDTO.setProductType(new ProductType(rs.getInt("PRODUCTTYPE__ID"), rs.getString("PRODUCTTYPE_DESCRIPTION")));
-                cargoDTO.setPackedType(new PackedType(rs.getInt("PACKEDTYPE__ID"), rs.getString("PACKEDTYPE_DESCRIPTION")));
+                cargoDTO.setProductType(new ProductTypeDto(rs.getInt("PRODUCTTYPE__ID"), rs.getString("PRODUCTTYPE_DESCRIPTION")));
+                cargoDTO.setPackedType(new PackedTypeDto(rs.getInt("PACKEDTYPE__ID"), rs.getString("PACKEDTYPE_DESCRIPTION")));
                 cargoDTO.setClientId(rs.getInt("CLIENT__ID"));
                 cargoDTO.setArrivalDate(rs.getTimestamp("ARRIVAL_DATE"));
                 cargoDTO.setDepartureDate(rs.getTimestamp("DEPARTURE_DATE"));
@@ -122,8 +122,8 @@ public class CargoConnection {
                 cargoDTO.setPackedUnitWeight(rs.getFloat("PACKED_UNIT_WEIGHT"));
                 cargoDTO.setPackParts(rs.getInt("PACK_PARTS"));
                 cargoDTO.setWeight(rs.getFloat("WEIGHT"));
-                cargoDTO.setProductType(new ProductType(rs.getInt("PRODUCTTYPE__ID"), rs.getString("PRODUCTTYPE_DESCRIPTION")));
-                cargoDTO.setPackedType(new PackedType(rs.getInt("PACKEDTYPE__ID"), rs.getString("PACKEDTYPE_DESCRIPTION")));
+                cargoDTO.setProductType(new ProductTypeDto(rs.getInt("PRODUCTTYPE__ID"), rs.getString("PRODUCTTYPE_DESCRIPTION")));
+                cargoDTO.setPackedType(new PackedTypeDto(rs.getInt("PACKEDTYPE__ID"), rs.getString("PACKEDTYPE_DESCRIPTION")));
                 cargoDTO.setClientId(rs.getInt("CLIENT__ID"));
                 cargoDTO.setArrivalDate(rs.getTimestamp("ARRIVAL_DATE"));
                 cargoDTO.setDepartureDate(rs.getTimestamp("DEPARTURE_DATE"));

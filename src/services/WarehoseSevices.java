@@ -1,18 +1,17 @@
 package services;
 
-import Entity.PriorityCompany;
-import Entity.Warehose;
+import Dtos.WarehoseDto;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class WarehoseConnection {
+public class WarehoseSevices {
 
-    public static DbManager manager;
-    public WarehoseConnection(){
-        manager = DbManager.getDbManager();
+    public static ServicesLocator manager;
+    public WarehoseSevices(){
+        manager = ServicesLocator.getDbManager();
     }
 
 
@@ -42,15 +41,15 @@ public class WarehoseConnection {
             throw new RuntimeException(e);
         }
     }
-    public ArrayList<Warehose> getAllWarehose(){
-        ArrayList<Warehose> priorityCompanyArrayList = new ArrayList<Warehose>();
+    public ArrayList<WarehoseDto> getAllWarehose(){
+        ArrayList<WarehoseDto> priorityCompanyArrayList = new ArrayList<WarehoseDto>();
         try {
             CallableStatement cstmt = manager.getConnection().prepareCall(
                     "{ call getallwarehouse()}");
 
             ResultSet rs = cstmt.executeQuery();
             while (rs.next()) {
-                Warehose priorityCompany = new Warehose(
+                WarehoseDto priorityCompany = new WarehoseDto(
                         rs.getInt("number"),
                         rs.getBoolean("cooled")
                 );
@@ -62,8 +61,8 @@ public class WarehoseConnection {
         return  priorityCompanyArrayList;
     }
 
-    public Warehose getWarehose(int number){
-        Warehose warehose = null;
+    public WarehoseDto getWarehose(int number){
+        WarehoseDto warehose = null;
         try {
             CallableStatement cstmt = manager.getConnection().prepareCall(
                     "{ call getwarehouse(?)}");
@@ -71,7 +70,7 @@ public class WarehoseConnection {
 
             ResultSet rs = cstmt.executeQuery();
             if (rs.next()) {
-                warehose = new Warehose(
+                warehose = new WarehoseDto(
                         rs.getInt("number"),
                         rs.getBoolean("cooled")
                 );

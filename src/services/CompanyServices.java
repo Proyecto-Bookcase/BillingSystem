@@ -1,20 +1,18 @@
 package services;
 
-import Dtos.ClientDto;
 import Dtos.CompanyDto;
-import Entity.CompanyType;
-import Entity.ConditioningCompany;
-import Entity.HandlingGoods;
-import Entity.PriorityCompany;
+import Dtos.CompanyTypeDto;
+import Dtos.ConditioningCompanyDto;
+import Dtos.HandlingGoodsDto;
+import Dtos.PriorityCompanyDto;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class CompanyConection {
-    public static DbManager manager;
-    public CompanyConection(){
-        manager = DbManager.getDbManager();
+public class CompanyServices {
+    public static ServicesLocator manager;
+    public CompanyServices(){
+        manager = ServicesLocator.getDbManager();
     }
 
     /*
@@ -111,14 +109,14 @@ public class CompanyConection {
                     companyDto.setId(resultSet.getInt("ID"));
                     companyDto.setName(resultSet.getString("NAME"));
                     companyDto.setFuelTariff(resultSet.getFloat("FUEL_TARIFF"));
-                    companyDto.setCompanyType(new CompanyType(resultSet.getInt("COMPANYTYPE__ID"), resultSet.getString("COMPANYTYPE_description")));
+                    companyDto.setCompanyType(new CompanyTypeDto(resultSet.getInt("COMPANYTYPE__ID"), resultSet.getString("COMPANYTYPE_description")));
                     companyDto.setEnterpriseId(resultSet.getInt("ENTERPRISE__ID"));
-                    ConditioningCompanyConnection conditioningCompanyConnection = new ConditioningCompanyConnection();
-                    ArrayList<ConditioningCompany> conditioningCompanies = conditioningCompanyConnection.getAllConditioningCompanyByCompany(companyDto.getId());
-                    HandlingGoodsConnection handlingGoodsConnection = new HandlingGoodsConnection();
-                    ArrayList<HandlingGoods> handlingGoods = handlingGoodsConnection.getAllHandlingGoodsCompany(companyDto.getId());
-                    PriorityCompanyConnection priorityCompanyConnection = new PriorityCompanyConnection();
-                    ArrayList<PriorityCompany> priorityCompanies = priorityCompanyConnection.getAllPriorityCompanyByCompany(companyDto.getId());
+                    ConditioningCompanyServices conditioningCompanyConnection = new ConditioningCompanyServices();
+                    ArrayList<ConditioningCompanyDto> conditioningCompanies = conditioningCompanyConnection.getAllConditioningCompanyByCompany(companyDto.getId());
+                    HandlingGoodsServices handlingGoodsConnection = new HandlingGoodsServices();
+                    ArrayList<HandlingGoodsDto> handlingGoods = handlingGoodsConnection.getAllHandlingGoodsCompany(companyDto.getId());
+                    PriorityCompanyServices priorityCompanyConnection = new PriorityCompanyServices();
+                    ArrayList<PriorityCompanyDto> priorityCompanies = priorityCompanyConnection.getAllPriorityCompanyByCompany(companyDto.getId());
                     companyDto.setConditionings(conditioningCompanies);
                     companyDto.setHandlingGoods(handlingGoods);
                     companyDto.setPriorityCompanies(priorityCompanies);
@@ -141,14 +139,14 @@ public class CompanyConection {
                 companyDto.setId(resultSet.getInt("ID"));
                 companyDto.setName(resultSet.getString("NAME"));
                 companyDto.setFuelTariff(resultSet.getFloat("FUEL_TARIFF"));
-                companyDto.setCompanyType(new CompanyType(resultSet.getInt("COMPANYTYPE__ID"), resultSet.getString("COMPANYTYPE_description")));
+                companyDto.setCompanyType(new CompanyTypeDto(resultSet.getInt("COMPANYTYPE__ID"), resultSet.getString("COMPANYTYPE_description")));
                 companyDto.setEnterpriseId(resultSet.getInt("ENTERPRISE__ID"));
-                ConditioningCompanyConnection conditioningCompanyConnection = new ConditioningCompanyConnection();
-                ArrayList<ConditioningCompany> conditioningCompanies = conditioningCompanyConnection.getAllConditioningCompanyByCompany(companyDto.getId());
-                HandlingGoodsConnection handlingGoodsConnection = new HandlingGoodsConnection();
-                ArrayList<HandlingGoods> handlingGoods = handlingGoodsConnection.getAllHandlingGoodsCompany(companyDto.getId());
-                PriorityCompanyConnection priorityCompanyConnection = new PriorityCompanyConnection();
-                ArrayList<PriorityCompany> priorityCompanies = priorityCompanyConnection.getAllPriorityCompanyByCompany(companyDto.getId());
+                ConditioningCompanyServices conditioningCompanyConnection = new ConditioningCompanyServices();
+                ArrayList<ConditioningCompanyDto> conditioningCompanies = conditioningCompanyConnection.getAllConditioningCompanyByCompany(companyDto.getId());
+                HandlingGoodsServices handlingGoodsConnection = new HandlingGoodsServices();
+                ArrayList<HandlingGoodsDto> handlingGoods = handlingGoodsConnection.getAllHandlingGoodsCompany(companyDto.getId());
+                PriorityCompanyServices priorityCompanyConnection = new PriorityCompanyServices();
+                ArrayList<PriorityCompanyDto> priorityCompanies = priorityCompanyConnection.getAllPriorityCompanyByCompany(companyDto.getId());
                 companyDto.setConditionings(conditioningCompanies);
                 companyDto.setHandlingGoods(handlingGoods);
                 companyDto.setPriorityCompanies(priorityCompanies);
