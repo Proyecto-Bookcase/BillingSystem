@@ -70,9 +70,9 @@ public class CompanyConection {
         }
     }*/
     public void insertCompany(String name, float fuelTariff, int companyTypeId, int enterpriseId,
-                              Integer[] conditionings, Integer[] handlingGoods)  {
+                                  Integer[] conditionings, Integer[] handlingGoods, Integer[] prioritys)  {
         try  {
-            CallableStatement cstmt = manager.getConnection().prepareCall("{call insert_company(?, ?, ?, ?, ?, ?)}");
+            CallableStatement cstmt = manager.getConnection().prepareCall("{call insert_company(?, ?, ?, ?, ?, ?, ?)}");
             // Configurar los parámetros
             cstmt.setString(1, name);
             cstmt.setFloat(2, fuelTariff);
@@ -80,6 +80,7 @@ public class CompanyConection {
             cstmt.setInt(4, enterpriseId);
             cstmt.setArray(5, manager.getConnection().createArrayOf("integer", conditionings));
             cstmt.setArray(6, manager.getConnection().createArrayOf("integer", handlingGoods));
+            cstmt.setArray(7, manager.getConnection().createArrayOf("integer", prioritys));
 
             // Ejecutar la llamada a la función
             cstmt.executeQuery();
