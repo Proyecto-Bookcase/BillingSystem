@@ -11,8 +11,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
 import javafx.utils.async.timeout.Timer;
-import javafx.utils.scene_manager.LoginSM;
-import javafx.utils.scene_manager.MainSM;
+import javafx.utils.scene_manager.SceneManager;
+import javafx.utils.scene_manager.Scenes;
 import services.ServicesLocator;
 import services.UserServices;
 
@@ -66,7 +66,7 @@ public class LoginController {
 
     @FXML
     private void close() {
-        LoginSM.close();
+        SceneManager.close();
     }
 
 
@@ -102,8 +102,7 @@ public class LoginController {
             Timer.timeout(200, () -> {
 
                 Platform.runLater(() -> {
-                    MainSM.showCreateCompany();
-                    LoginSM.close();
+                    SceneManager.show(Scenes.HOME);
                 });
 
             });

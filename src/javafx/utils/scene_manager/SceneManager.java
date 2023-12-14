@@ -3,6 +3,8 @@ package javafx.utils.scene_manager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.utils.drag.Draggable;
 import javafx.utils.others.Auxiliary;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,19 +18,32 @@ import static java.lang.StringTemplate.STR;
  * Esta clase proporciona métodos para almacenar y recuperar escenas en un HashMap,
  * así como generar nuevas escenas a partir de archivos FXML.
  */
-public abstract class SceneManager {
+public class SceneManager {
+
+    private static SceneManager instance;
     protected Stage stage;
     protected Scene actualScene;
     private final HashMap<String, Scene> store;
 
+    private final HashMap<Scenes, String> scenes;
+
     /**
      * Constructor de la clase SceneManager.
-     *
-     * @param stage La ventana principal de la aplicación.
      */
-    protected SceneManager(Stage stage) {
-        this.stage = stage;
+    protected SceneManager() {
+        this.stage = new Stage();
         this.store = new HashMap<>();
+        this.scenes = new HashMap<>();
+
+        scenes.put(Scenes.LOGIN, "/login/Login.fxml");
+        scenes.put(Scenes.HOME, "/home/Home.fxml");
+    }
+
+    private static SceneManager getInstance() {
+        if (instance == null) {
+            instance = new SceneManager();
+        }
+        return instance;
     }
 
     /**
@@ -55,20 +70,48 @@ public abstract class SceneManager {
      * Genera una nueva escena a partir de un archivo FXML.
      *
      * @param cache Un arreglo de booleanos indicando si se debe almacenar en caché la escena generada.
-     * @param path  La ruta del archivo FXML.
      * @return La escena generada.
      * @throws IOException Si ocurre un error al cargar el archivo FXML.
      */
-    protected Scene generateScene(boolean[] cache, String path) throws IOException {
+    protected Scene generateScene(boolean[] cache, Scenes sceneEnum) throws IOException {
+
+        String path = scenes.get(sceneEnum);
+
         Scene scene;
         if (cache.length > 0 && cache[0]) {
             scene = cache();
         } else {
-            FXMLLoader loader = new FXMLLoader(MainSM.class.getResource(STR."/javafx/scenes\{ path }" ));
+            FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource(STR. "/javafx/scenes\{ path }" ));
             scene = new Scene(loader.load());
             cache(scene);
             actualScene = scene;
         }
         return scene;
+    }
+
+    /**
+     * @param sceneEnum Scene que se quiere mostrar
+     * @param cache     (Opcional) si se quiere guardar la scene en caché
+     */
+    public static void show(Scenes sceneEnum, boolean... cache) {
+
+        try {
+            Scene scene = getInstance().generateScene(cache, sceneEnum);
+            getInstance().stage.setScene(scene);
+            Draggable.set(scene);
+
+            if (!getInstance().stage.isShowing()) {
+                getInstance().stage.setResizable(false);
+                getInstance().stage.initStyle(StageStyle.UNDECORATED);
+                getInstance().stage.show();
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void close() {
+        getInstance().stage.close();
     }
 }
