@@ -13,7 +13,8 @@ import javafx.scene.shape.SVGPath;
 import javafx.utils.async.timeout.Timer;
 import javafx.utils.scene_manager.LoginSM;
 import javafx.utils.scene_manager.MainSM;
-import services.UserConnection;
+import services.ServicesLocator;
+import services.UserServices;
 
 import java.io.IOException;
 
@@ -53,8 +54,8 @@ public class LoginController {
 
         thread(() -> {
 
-            UserConnection conn = new UserConnection();
-            boolean check = conn.checkUser(user, pass);
+            UserServices userServices = ServicesLocator.getUserServices();
+            boolean check = userServices.checkUser(user, pass);
 
             if (check)
                 succeed();

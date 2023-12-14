@@ -4,7 +4,6 @@ out/
 !**/src/test/**/out/
 misc.xml
 git_toolbox_prj.xml
-.idea
 
 ### Eclipse ###
 .apt_generated
@@ -32,4 +31,5 @@ bin/
 .DS_Store
 
 ### Project ###
-src/conf/
+/.idea/
+/src/conf/
