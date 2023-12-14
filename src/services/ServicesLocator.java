@@ -5,10 +5,8 @@ import java.sql.DriverManager;
 
 public class ServicesLocator {
     //db contection
-    private static String userName = "postgres";
-    private static String password = "postgres";
-    private  static Connection connection;
-    private  static ServicesLocator manager;
+
+    private static ServicesLocator manager;
 
     private static String userName = Secret.username;
     private static String password = Secret.password;
