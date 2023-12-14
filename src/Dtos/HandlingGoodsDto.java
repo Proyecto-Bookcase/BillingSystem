@@ -1,10 +1,10 @@
-package Entity;
+package Dtos;
 
-public class ProductType {
+public class HandlingGoodsDto {
     private  int id ;
     private String description;
 
-    public ProductType(int id, String description) {
+    public HandlingGoodsDto(int id, String description) {
         this.id = id;
         this.description = description;
     }

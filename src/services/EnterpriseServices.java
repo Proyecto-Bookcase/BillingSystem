@@ -5,17 +5,17 @@ import Dtos.EnterpirseDto;
 
 import java.sql.*;
 
-public class EnterpriseConection {
-    public static DbManager manager;
-    public EnterpriseConection(){
-        manager = DbManager.getDbManager();
+public class EnterpriseServices {
+    private Connection connection;
+    public EnterpriseServices(Connection connection){
+        this.connection = connection;
     }
 
     public EnterpirseDto getEnterpirse(){
 
 
         try {
-            Statement stmt = manager.getConnection().createStatement();
+            Statement stmt = connection.createStatement();
             // Ejecutar una consulta estática
 
             ResultSet rs = stmt.executeQuery("SELECT * FROM enterpirse;");
@@ -49,7 +49,7 @@ public class EnterpriseConection {
 
         // Crear un objeto PreparedStatement
         //PreparedStatement pstmt = manager.getConnection().prepareStatement("SELECT * FROM enterprise WHERE id = ?");
-        PreparedStatement pstmt = manager.getConnection().prepareStatement("SELECT getenterprise(?)");
+        PreparedStatement pstmt = connection.prepareStatement("SELECT getenterprise(?)");
 
         // Establecer los parámetros de la consulta
         pstmt.setInt(1, id);
@@ -83,7 +83,7 @@ public class EnterpriseConection {
         try {
 
 
-            CallableStatement cstmt = manager.getConnection().prepareCall("{ call getenterprise(?)}");
+            CallableStatement cstmt = connection.prepareCall("{ call getenterprise(?)}");
 
             // Establecer los parámetros de la función almacenada
             cstmt.setInt(1, id);
@@ -136,7 +136,7 @@ public class EnterpriseConection {
 
 
             //CallableStatement cstmt = manager.getConnection().prepareCall("{ call update_enterprise(?)}");
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call update_enterprise(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 
             // Establecer los parámetros de la función almacenada

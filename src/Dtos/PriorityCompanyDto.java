@@ -1,15 +1,12 @@
-package Entity;
+package Dtos;
 
-public class Role {
-    private int id;
+public class PriorityCompanyDto {
+    private  int id ;
     private String description;
 
-    public Role(int id, String description) {
+    public PriorityCompanyDto(int id, String description) {
         this.id = id;
         this.description = description;
-    }
-    public Role() {
-
     }
 
     public int getId() {
@@ -23,6 +20,7 @@ public class Role {
     public String getDescription() {
         return description;
     }
+
 
     public void setDescription(String description) {
         this.description = description;

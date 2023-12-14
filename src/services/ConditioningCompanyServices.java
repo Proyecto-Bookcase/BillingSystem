@@ -1,23 +1,23 @@
 package services;
 
-import Entity.ConditioningCompany;
-import Entity.PriorityCompany;
+import Dtos.ConditioningCompanyDto;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ConditioningCompanyConnection {
-    public static DbManager manager;
-    public ConditioningCompanyConnection(){
-        manager = DbManager.getDbManager();
+public class ConditioningCompanyServices {
+    private Connection connection;
+    public ConditioningCompanyServices(Connection connection){
+        this.connection = connection;
     }
 
     public void insertConditioningCompany(String desciption){
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call createconditioning(?)}");
             cstmt.setString(1, desciption);
             cstmt.executeQuery();
@@ -29,7 +29,7 @@ public class ConditioningCompanyConnection {
     public void deleteConditioningCompany(int id){
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call deletepriority(?)}");
             cstmt.setInt(1, id);
             cstmt.executeQuery();
@@ -38,15 +38,15 @@ public class ConditioningCompanyConnection {
             throw new RuntimeException(e);
         }
     }
-    public ArrayList<ConditioningCompany> getAllConditioningCompany(){
-        ArrayList<ConditioningCompany> ConditioningCompanyArrayList = new ArrayList<ConditioningCompany>();
+    public ArrayList<ConditioningCompanyDto> getAllConditioningCompany(){
+        ArrayList<ConditioningCompanyDto> ConditioningCompanyArrayList = new ArrayList<ConditioningCompanyDto>();
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call getallconditioning()}");
 
             ResultSet rs = cstmt.executeQuery();
             while (rs.next()) {
-                ConditioningCompany ConditioningCompany = new ConditioningCompany(
+                ConditioningCompanyDto ConditioningCompany = new ConditioningCompanyDto(
                         rs.getInt("id"),
                         rs.getString("description")
                 );
@@ -57,16 +57,16 @@ public class ConditioningCompanyConnection {
         }
         return  ConditioningCompanyArrayList;
     }
-    public ArrayList<ConditioningCompany> getAllConditioningCompanyByCompany(int companyId){
-        ArrayList<ConditioningCompany> ConditioningCompanyArrayList = new ArrayList<ConditioningCompany>();
+    public ArrayList<ConditioningCompanyDto> getAllConditioningCompanyByCompany(int companyId){
+        ArrayList<ConditioningCompanyDto> ConditioningCompanyArrayList = new ArrayList<ConditioningCompanyDto>();
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call getAllConditioningByCompany(?)}");
             cstmt.setInt(1, companyId);
 
             ResultSet rs = cstmt.executeQuery();
             while (rs.next()) {
-                ConditioningCompany ConditioningCompany = new ConditioningCompany(
+                ConditioningCompanyDto ConditioningCompany = new ConditioningCompanyDto(
                         rs.getInt("id"),
                         rs.getString("description")
                 );
@@ -78,16 +78,16 @@ public class ConditioningCompanyConnection {
         return  ConditioningCompanyArrayList;
     }
 
-    public ConditioningCompany getConditioningCompanyById(int id){
-        ConditioningCompany conditioningCompany = null;
+    public ConditioningCompanyDto getConditioningCompanyById(int id){
+        ConditioningCompanyDto conditioningCompany = null;
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call getconditionings (?)}");
             cstmt.setInt(1, id);
 
             ResultSet rs = cstmt.executeQuery();
             if (rs.next()) {
-                conditioningCompany = new ConditioningCompany(
+                conditioningCompany = new ConditioningCompanyDto(
                         rs.getInt("id"),
                         rs.getString("description")
                 );
@@ -100,7 +100,7 @@ public class ConditioningCompanyConnection {
 
     public void updateConditioningCompany(int id, String description){
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call updateconditioning(?,?)}");
             cstmt.setInt(1, id);
             cstmt.setString(2, description);

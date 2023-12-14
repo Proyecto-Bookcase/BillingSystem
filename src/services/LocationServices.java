@@ -1,17 +1,17 @@
 package services;
 
-import Entity.Location;
-import Entity.Warehose;
+import Dtos.LocationDto;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Locationonnection {
-    public static DbManager manager;
-    public Locationonnection(){
-        manager = DbManager.getDbManager();
+public class LocationServices {
+    private Connection connection;
+    public LocationServices(Connection connection){
+        this.connection = connection;
     }
 
     //comment to commit 2
@@ -20,7 +20,7 @@ public class Locationonnection {
                                int p_cargo_id) {
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call insert_location(?,?,?,?,?,?)}");
 
             cstmt.setInt(1, p_compartment);
@@ -39,7 +39,7 @@ public class Locationonnection {
     public void deleteLocation(int p_compartment, int p_floor, int p_shelf, int p_warehouse_number) {
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call delete_location(?,?,?,?)}");
 
             cstmt.setInt(1, p_compartment);
@@ -53,11 +53,11 @@ public class Locationonnection {
             throw new RuntimeException(e);
         }
     }
-    public ArrayList<Location> getAllLocationByFloor(int p_floor, int p_shelf, int p_warehouse_number) {
-        ArrayList<Location> locationArrayList = new ArrayList<Location>();
+    public ArrayList<LocationDto> getAllLocationByFloor(int p_floor, int p_shelf, int p_warehouse_number) {
+        ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call get_all_location_by_floor(?,?,?)}");
             cstmt.setInt(1, p_floor);
             cstmt.setInt(2, p_shelf);
@@ -66,7 +66,7 @@ public class Locationonnection {
             ResultSet rs = cstmt.executeQuery();
             while (rs.next())
             {
-                Location location = new Location(
+                LocationDto location = new LocationDto(
                         rs.getInt("compartment"),
                         rs.getInt("floor"),
                         rs.getInt("shelf"),
@@ -83,11 +83,11 @@ public class Locationonnection {
         }
         return locationArrayList;
     }
-    public ArrayList<Location> getAllLocationByShelf(int p_shelf, int p_warehouse_number) {
-        ArrayList<Location> locationArrayList = new ArrayList<Location>();
+    public ArrayList<LocationDto> getAllLocationByShelf(int p_shelf, int p_warehouse_number) {
+        ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call get_all_location_by_SHELF(?,?)}");
 
             cstmt.setInt(1, p_shelf);
@@ -96,7 +96,7 @@ public class Locationonnection {
             ResultSet rs = cstmt.executeQuery();
             while (rs.next())
             {
-                Location location = new Location(
+                LocationDto location = new LocationDto(
                         rs.getInt("compartment"),
                         rs.getInt("floor"),
                         rs.getInt("shelf"),
@@ -113,18 +113,73 @@ public class Locationonnection {
         }
         return locationArrayList;
     }
-    public ArrayList<Location> getAllLocationByWarehouse(int p_warehouse_number) {
-        ArrayList<Location> locationArrayList = new ArrayList<Location>();
+    public ArrayList<LocationDto> getAllLocationByWarehouse(int p_warehouse_number) {
+        ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call get_all_location_by_WAREHOSE(?)}");
             cstmt.setInt(1, p_warehouse_number);
 
             ResultSet rs = cstmt.executeQuery();
             while (rs.next())
             {
-                Location location = new Location(
+                LocationDto location = new LocationDto(
+                        rs.getInt("compartment"),
+                        rs.getInt("floor"),
+                        rs.getInt("shelf"),
+                        rs.getBoolean("maintenance"),
+                        rs.getInt("WAREHOSE_NUMBER"),
+                        rs.getInt("cargo__id")
+
+                );
+                locationArrayList.add(location);
+            }
+        } catch (SQLException e) {
+            //throw new RuntimeException(e);
+            System.out.println(e);
+        }
+        return locationArrayList;
+    }
+    public ArrayList<LocationDto> getAllEmptyLocationByCooled(boolean cooledValue) {
+        ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
+
+        try {
+            CallableStatement cstmt = connection.prepareCall(
+                    "{ call get_all_location_by_WAREHOSE(?)}");
+            cstmt.setBoolean(1, cooledValue);
+
+            ResultSet rs = cstmt.executeQuery();
+            while (rs.next())
+            {
+                LocationDto location = new LocationDto(
+                        rs.getInt("compartment"),
+                        rs.getInt("floor"),
+                        rs.getInt("shelf"),
+                        rs.getBoolean("maintenance"),
+                        rs.getInt("WAREHOSE_NUMBER"),
+                        rs.getInt("cargo__id")
+
+                );
+                locationArrayList.add(location);
+            }
+        } catch (SQLException e) {
+            //throw new RuntimeException(e);
+            System.out.println(e);
+        }
+        return locationArrayList;
+    }
+    public ArrayList<LocationDto> getAllEmptyLocation() {
+        ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
+
+        try {
+            CallableStatement cstmt = connection.prepareCall(
+                    "{ call get_all_location_by_WAREHOSE()}");
+
+            ResultSet rs = cstmt.executeQuery();
+            while (rs.next())
+            {
+                LocationDto location = new LocationDto(
                         rs.getInt("compartment"),
                         rs.getInt("floor"),
                         rs.getInt("shelf"),
@@ -148,7 +203,7 @@ public class Locationonnection {
                                           boolean p_maintenance, int p_cargo_id) {
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call update_location_maintenance(?,?,?,?,?,?)}");
 
             cstmt.setInt(1, p_compartment);
@@ -165,4 +220,5 @@ public class Locationonnection {
             System.out.println(e);
         }
     }
+
 }

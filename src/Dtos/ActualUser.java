@@ -1,4 +1,4 @@
-package Entity;
+package Dtos;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ public class ActualUser {
     private String username;
     private String password ;
     private String email;
-    private Role role;
+    private RoleDto role;
     private ArrayList<String> permissions;
 
     private static ActualUser instance;
@@ -35,11 +35,11 @@ public class ActualUser {
         this.email = email;
     }
 
-    public Role getRole() {
+    public RoleDto getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(RoleDto role) {
         this.role = role;
     }
 
@@ -53,7 +53,7 @@ public class ActualUser {
 
     private ActualUser(){
         permissions = new ArrayList<String>();
-        role = new Role();
+        role = new RoleDto();
     }
 
     public static ActualUser getActualUser()

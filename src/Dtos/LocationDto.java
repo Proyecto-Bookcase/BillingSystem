@@ -1,6 +1,6 @@
-package Entity;
+package Dtos;
 
-public class Location {
+public class LocationDto {
     private int compartment;
     private int floor;
     private int shelf;
@@ -8,7 +8,7 @@ public class Location {
     private int warehouseNumber;
     private int cargoId;
 
-    public Location(int compartment, int floor, int shelf, boolean maintenance, int warehouseNumber, int cargoId) {
+    public LocationDto(int compartment, int floor, int shelf, boolean maintenance, int warehouseNumber, int cargoId) {
         this.compartment = compartment;
         this.floor = floor;
         this.shelf = shelf;

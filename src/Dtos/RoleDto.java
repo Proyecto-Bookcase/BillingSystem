@@ -1,12 +1,15 @@
-package Entity;
+package Dtos;
 
-public class ConditioningCompany {
-    private  int id ;
+public class RoleDto {
+    private int id;
     private String description;
 
-    public ConditioningCompany(int id, String description) {
+    public RoleDto(int id, String description) {
         this.id = id;
         this.description = description;
+    }
+    public RoleDto() {
+
     }
 
     public int getId() {
@@ -20,7 +23,6 @@ public class ConditioningCompany {
     public String getDescription() {
         return description;
     }
-
 
     public void setDescription(String description) {
         this.description = description;
