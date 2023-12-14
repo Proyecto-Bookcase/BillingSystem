@@ -14,6 +14,7 @@ public class ServicesLocator {
     private static ClientServices clientServices;
     private static CompanyServices companyServices;
     private static CompanyTypeServices companyTypeServices;
+    private static ConditioningCompanyServices conditioningCompanyServices;
     private static EnterpriseServices enterpriseServices;
     private static HandlingGoodsServices handlingGoodsServices;
     private static LocationServices locationServices;
@@ -46,6 +47,7 @@ public class ServicesLocator {
             roleServices = new RoleServices(connection);
             userServices = new UserServices(connection);
             warehoseSevices = new WarehoseSevices(connection);
+            conditioningCompanyServices = new ConditioningCompanyServices(connection);
 
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -118,5 +120,9 @@ public class ServicesLocator {
 
     public static WarehoseSevices getWarehoseSevices() {
         return warehoseSevices;
+    }
+
+    public static ConditioningCompanyServices getConditioningCompanyServices() {
+        return conditioningCompanyServices;
     }
 }

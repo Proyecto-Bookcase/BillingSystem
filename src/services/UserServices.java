@@ -1,7 +1,6 @@
 package services;
 
 import Dtos.ActualUser;
-import Dtos.Dto;
 import Dtos.RoleDto;
 import Dtos.UserDto;
 
