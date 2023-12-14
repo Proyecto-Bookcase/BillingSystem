@@ -5,25 +5,26 @@ import java.sql.DriverManager;
 
 public class ServicesLocator {
     //db contection
-    private static String userName = "postgres";
-    private static String password = "postgres";
-    private  static Connection connection;
-    private  static ServicesLocator manager;
 
-    private static CargoServices cargoServices;
-    private static ClientServices clientServices;
-    private static CompanyServices companyServices;
-    private static CompanyTypeServices companyTypeServices;
-    private static ConditioningCompanyServices conditioningCompanyServices;
-    private static EnterpriseServices enterpriseServices;
-    private static HandlingGoodsServices handlingGoodsServices;
-    private static LocationServices locationServices;
-    private static PackedTypeServices packedTypeServices;
-    private static PriorityCompanyServices priorityCompanyServices;
-    private static ProductTypeServices productTypeServices;
-    private static RoleServices roleServices;
-    private static UserServices userServices;
-    private static WarehoseSevices warehoseSevices;
+    private static ServicesLocator manager;
+
+    private static String userName = Secret.username;
+    private static String password = Secret.password;
+    private Connection connection;
+    private CargoServices cargoServices;
+    private ClientServices clientServices;
+    private CompanyServices companyServices;
+    private CompanyTypeServices companyTypeServices;
+    private ConditioningCompanyServices conditioningCompanyServices;
+    private EnterpriseServices enterpriseServices;
+    private HandlingGoodsServices handlingGoodsServices;
+    private LocationServices locationServices;
+    private PackedTypeServices packedTypeServices;
+    private PriorityCompanyServices priorityCompanyServices;
+    private ProductTypeServices productTypeServices;
+    private RoleServices roleServices;
+    private UserServices userServices;
+    private WarehoseSevices warehoseSevices;
 
     private ServicesLocator()
     {
@@ -71,58 +72,58 @@ public class ServicesLocator {
     }
 
     public static CargoServices getCargoServices() {
-        return cargoServices;
+        return getDbManager().cargoServices;
     }
 
     public static ClientServices getClientServices() {
-        return clientServices;
+        return getDbManager().clientServices;
     }
 
     public static CompanyServices getCompanyServices() {
-        return companyServices;
+        return getDbManager().companyServices;
     }
 
     public static CompanyTypeServices getCompanyTypeServices() {
-        return companyTypeServices;
+        return getDbManager().companyTypeServices;
     }
 
     public static EnterpriseServices getEnterpriseServices() {
-        return enterpriseServices;
+        return getDbManager().enterpriseServices;
     }
 
     public static HandlingGoodsServices getHandlingGoodsServices() {
-        return handlingGoodsServices;
+        return getDbManager().handlingGoodsServices;
     }
 
     public static LocationServices getLocationServices() {
-        return locationServices;
+        return getDbManager().locationServices;
     }
 
     public static PackedTypeServices getPackedTypeServices() {
-        return packedTypeServices;
+        return getDbManager().packedTypeServices;
     }
 
     public static PriorityCompanyServices getPriorityCompanyServices() {
-        return priorityCompanyServices;
+        return getDbManager().priorityCompanyServices;
     }
 
     public static ProductTypeServices getProductTypeServices() {
-        return productTypeServices;
+        return getDbManager().productTypeServices;
     }
 
     public static RoleServices getRoleServices() {
-        return roleServices;
+        return getDbManager().roleServices;
     }
 
     public static UserServices getUserServices() {
-        return userServices;
+        return getDbManager().userServices;
     }
 
     public static WarehoseSevices getWarehoseSevices() {
-        return warehoseSevices;
+        return getDbManager().warehoseSevices;
     }
 
     public static ConditioningCompanyServices getConditioningCompanyServices() {
-        return conditioningCompanyServices;
+        return getDbManager().conditioningCompanyServices;
     }
 }
