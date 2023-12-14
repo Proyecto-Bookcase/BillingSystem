@@ -1,10 +1,10 @@
-package Entity;
+package Dtos;
 
-public class Warehose {
+public class WarehoseDto {
     private int number;
     private boolean cooled;
 
-    public Warehose(int number, boolean cooled) {
+    public WarehoseDto(int number, boolean cooled) {
         this.number = number;
         this.cooled = cooled;
     }

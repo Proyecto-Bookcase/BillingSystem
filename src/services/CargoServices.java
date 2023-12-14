@@ -1,17 +1,16 @@
 package services;
 
 import Dtos.CargoDto;
-import Entity.PackedType;
-import Entity.ProductType;
+import Dtos.PackedTypeDto;
+import Dtos.ProductTypeDto;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class CargoConnection {
-
-    public static DbManager manager;
-    public CargoConnection(){
-        manager = DbManager.getDbManager();
+public class CargoServices {
+    private Connection connection;
+    public CargoServices(Connection connection){
+        this.connection = connection;
     }
 
     public void insertCargo(
@@ -24,7 +23,7 @@ public class CargoConnection {
 
         try {
             // Llama al procedimiento almacenado "insert_cargo" con los parámetros
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call insert_cargo(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }");
 
             // Configura los parámetros
@@ -61,7 +60,7 @@ public class CargoConnection {
 
     public void deleteCargo(int cargoId){
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall("{ call delete_cargo(?)}");
+            CallableStatement cstmt = connection.prepareCall("{ call delete_cargo(?)}");
             // Configura los parámetros
             cstmt.setInt(1, cargoId);
             cstmt.executeQuery();
@@ -71,7 +70,7 @@ public class CargoConnection {
     }
     public CargoDto getCargoDbFunction(int cargoId) {
         CargoDto cargoDTO = null;
-        try (CallableStatement cstmt = manager.getConnection().prepareCall("{call getCargo(?) }")) {
+        try (CallableStatement cstmt = connection.prepareCall("{call getCargo(?) }")) {
             cstmt.setInt(1, cargoId);
 
             cstmt.executeQuery();
@@ -86,8 +85,8 @@ public class CargoConnection {
                 cargoDTO.setPackedUnitWeight(rs.getFloat("PACKED_UNIT_WEIGHT"));
                 cargoDTO.setPackParts(rs.getInt("PACK_PARTS"));
                 cargoDTO.setWeight(rs.getFloat("WEIGHT"));
-                cargoDTO.setProductType(new ProductType(rs.getInt("PRODUCTTYPE__ID"), rs.getString("PRODUCTTYPE_DESCRIPTION")));
-                cargoDTO.setPackedType(new PackedType(rs.getInt("PACKEDTYPE__ID"), rs.getString("PACKEDTYPE_DESCRIPTION")));
+                cargoDTO.setProductType(new ProductTypeDto(rs.getInt("PRODUCTTYPE__ID"), rs.getString("PRODUCTTYPE_DESCRIPTION")));
+                cargoDTO.setPackedType(new PackedTypeDto(rs.getInt("PACKEDTYPE__ID"), rs.getString("PACKEDTYPE_DESCRIPTION")));
                 cargoDTO.setClientId(rs.getInt("CLIENT__ID"));
                 cargoDTO.setArrivalDate(rs.getTimestamp("ARRIVAL_DATE"));
                 cargoDTO.setDepartureDate(rs.getTimestamp("DEPARTURE_DATE"));
@@ -108,7 +107,7 @@ public class CargoConnection {
     }
     public ArrayList<CargoDto>  getAllCargoDbFunction() {
         ArrayList<CargoDto> cargoDTOs = new ArrayList<CargoDto>();
-        try (CallableStatement cstmt = manager.getConnection().prepareCall("{call getCargo() }")) {
+        try (CallableStatement cstmt = connection.prepareCall("{call getCargo() }")) {
 
             cstmt.executeQuery();
 
@@ -122,8 +121,8 @@ public class CargoConnection {
                 cargoDTO.setPackedUnitWeight(rs.getFloat("PACKED_UNIT_WEIGHT"));
                 cargoDTO.setPackParts(rs.getInt("PACK_PARTS"));
                 cargoDTO.setWeight(rs.getFloat("WEIGHT"));
-                cargoDTO.setProductType(new ProductType(rs.getInt("PRODUCTTYPE__ID"), rs.getString("PRODUCTTYPE_DESCRIPTION")));
-                cargoDTO.setPackedType(new PackedType(rs.getInt("PACKEDTYPE__ID"), rs.getString("PACKEDTYPE_DESCRIPTION")));
+                cargoDTO.setProductType(new ProductTypeDto(rs.getInt("PRODUCTTYPE__ID"), rs.getString("PRODUCTTYPE_DESCRIPTION")));
+                cargoDTO.setPackedType(new PackedTypeDto(rs.getInt("PACKEDTYPE__ID"), rs.getString("PACKEDTYPE_DESCRIPTION")));
                 cargoDTO.setClientId(rs.getInt("CLIENT__ID"));
                 cargoDTO.setArrivalDate(rs.getTimestamp("ARRIVAL_DATE"));
                 cargoDTO.setDepartureDate(rs.getTimestamp("DEPARTURE_DATE"));

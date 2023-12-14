@@ -1,24 +1,24 @@
 package services;
 
-import Entity.HandlingGoods;
-import Entity.PriorityCompany;
+import Dtos.PriorityCompanyDto;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class HandlingGoodsConnection {
-    public static DbManager manager;
-    public HandlingGoodsConnection(){
-        manager = DbManager.getDbManager();
+public class PriorityCompanyServices {
+    private Connection connection;
+    public PriorityCompanyServices(Connection connection){
+        this.connection = connection;
     }
 
-    public void insertHandlingGoodsCompany(String desciption){
+    public void insertPriorityCompany(String desciption){
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
-                    "{ call createhandlinggoods(?)}");
+            CallableStatement cstmt = connection.prepareCall(
+                    "{ call createpriority(?)}");
             cstmt.setString(1, desciption);
             cstmt.executeQuery();
 
@@ -26,11 +26,11 @@ public class HandlingGoodsConnection {
             throw new RuntimeException(e);
         }
     }
-    public void deleteHandlingGoodsCompany(int id){
+    public void deletePriorityCompany(int id){
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
-                    "{ call deletehandlinggoods(?)}");
+            CallableStatement cstmt = connection.prepareCall(
+                    "{ call deletepriority(?)}");
             cstmt.setInt(1, id);
             cstmt.executeQuery();
 
@@ -38,15 +38,15 @@ public class HandlingGoodsConnection {
             throw new RuntimeException(e);
         }
     }
-    public ArrayList<HandlingGoods> getAllHandlingGoodsCompany(){
-        ArrayList<HandlingGoods> priorityCompanyArrayList = new ArrayList<HandlingGoods>();
+    public ArrayList<PriorityCompanyDto> getAllPriorityCompany(){
+        ArrayList<PriorityCompanyDto> priorityCompanyArrayList = new ArrayList<PriorityCompanyDto>();
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
-                    "{ call getAllHandlingGoods()}");
+            CallableStatement cstmt = connection.prepareCall(
+                    "{ call getallpriority()}");
 
             ResultSet rs = cstmt.executeQuery();
             while (rs.next()) {
-                HandlingGoods priorityCompany = new HandlingGoods(
+                PriorityCompanyDto priorityCompany = new PriorityCompanyDto(
                         rs.getInt("id"),
                         rs.getString("description")
                 );
@@ -57,16 +57,16 @@ public class HandlingGoodsConnection {
         }
         return  priorityCompanyArrayList;
     }
-    public ArrayList<HandlingGoods> getAllHandlingGoodsCompany(int companyId){
-        ArrayList<HandlingGoods> priorityCompanyArrayList = new ArrayList<HandlingGoods>();
+    public ArrayList<PriorityCompanyDto> getAllPriorityCompanyByCompany(int companyId){
+        ArrayList<PriorityCompanyDto> priorityCompanyArrayList = new ArrayList<PriorityCompanyDto>();
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
-                    "{ call getAllHandlingGoodsByCompany(?)}");
+            CallableStatement cstmt = connection.prepareCall(
+                    "{ call getallprioritybycompany(?)}");
             cstmt.setInt(1, companyId);
 
             ResultSet rs = cstmt.executeQuery();
             while (rs.next()) {
-                HandlingGoods priorityCompany = new HandlingGoods(
+                PriorityCompanyDto priorityCompany = new PriorityCompanyDto(
                         rs.getInt("id"),
                         rs.getString("description")
                 );
@@ -77,16 +77,16 @@ public class HandlingGoodsConnection {
         }
         return  priorityCompanyArrayList;
     }
-    public HandlingGoods getHandlingGoodsCompanyById(int id){
-        HandlingGoods handlingGoods = null;
+    public PriorityCompanyDto getPriorityCompanyById(int id){
+        PriorityCompanyDto priorityCompany = null;
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
-                    "{ call gethandlingGoods(?)}");
+            CallableStatement cstmt = connection.prepareCall(
+                    "{ call getpriority(?)}");
             cstmt.setInt(1, id);
 
             ResultSet rs = cstmt.executeQuery();
             if (rs.next()) {
-                handlingGoods = new HandlingGoods(
+                 priorityCompany = new PriorityCompanyDto(
                         rs.getInt("id"),
                         rs.getString("description")
                 );
@@ -94,13 +94,13 @@ public class HandlingGoodsConnection {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return  handlingGoods;
+        return  priorityCompany;
     }
 
-    public void updateHandlingGoodsCompany(int id, String description){
+    public void updatePriorityCompany(int id, String description){
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
-                    "{ call updatehandlinggoods(?,?)}");
+            CallableStatement cstmt = connection.prepareCall(
+                    "{ call updatepriority(?,?)}");
             cstmt.setInt(1, id);
             cstmt.setString(2, description);
 
@@ -110,4 +110,5 @@ public class HandlingGoodsConnection {
             throw new RuntimeException(e);
         }
     }
+
 }

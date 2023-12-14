@@ -1,25 +1,25 @@
 package services;
 
-import Entity.PriorityCompany;
-import Entity.Warehose;
+import Dtos.WarehoseDto;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class WarehoseConnection {
+public class WarehoseSevices {
 
-    public static DbManager manager;
-    public WarehoseConnection(){
-        manager = DbManager.getDbManager();
+    private Connection connection;
+    public WarehoseSevices(Connection connection){
+        this.connection = connection;
     }
 
 
     public void insertWarehose(int enterpriseId, boolean cooled){
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call insert_warehose(?,?)}");
             cstmt.setBoolean(1, cooled);
             cstmt.setInt(2, enterpriseId);
@@ -33,7 +33,7 @@ public class WarehoseConnection {
     public void deleteWarehose(int number){
 
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call delete_warehose(?)}");
             cstmt.setInt(1, number);
             cstmt.executeQuery();
@@ -42,15 +42,15 @@ public class WarehoseConnection {
             throw new RuntimeException(e);
         }
     }
-    public ArrayList<Warehose> getAllWarehose(){
-        ArrayList<Warehose> priorityCompanyArrayList = new ArrayList<Warehose>();
+    public ArrayList<WarehoseDto> getAllWarehose(){
+        ArrayList<WarehoseDto> priorityCompanyArrayList = new ArrayList<WarehoseDto>();
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call getallwarehouse()}");
 
             ResultSet rs = cstmt.executeQuery();
             while (rs.next()) {
-                Warehose priorityCompany = new Warehose(
+                WarehoseDto priorityCompany = new WarehoseDto(
                         rs.getInt("number"),
                         rs.getBoolean("cooled")
                 );
@@ -62,16 +62,16 @@ public class WarehoseConnection {
         return  priorityCompanyArrayList;
     }
 
-    public Warehose getWarehose(int number){
-        Warehose warehose = null;
+    public WarehoseDto getWarehose(int number){
+        WarehoseDto warehose = null;
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call getwarehouse(?)}");
             cstmt.setInt(1, number);
 
             ResultSet rs = cstmt.executeQuery();
             if (rs.next()) {
-                warehose = new Warehose(
+                warehose = new WarehoseDto(
                         rs.getInt("number"),
                         rs.getBoolean("cooled")
                 );
@@ -84,7 +84,7 @@ public class WarehoseConnection {
 
     public void updateWarehose(int numer, boolean cooled){
         try {
-            CallableStatement cstmt = manager.getConnection().prepareCall(
+            CallableStatement cstmt = connection.prepareCall(
                     "{ call update_warehose(?,?)}");
             cstmt.setInt(1, numer);
             cstmt.setBoolean(2, cooled);

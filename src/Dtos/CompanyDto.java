@@ -1,44 +1,39 @@
 package Dtos;
 
-import Entity.CompanyType;
-import Entity.ConditioningCompany;
-import Entity.HandlingGoods;
-import Entity.PriorityCompany;
-
 import java.util.ArrayList;
 
 public class CompanyDto {
     private int id;
     private String name;
     private float fuelTariff;
-    private CompanyType companyType;
+    private CompanyTypeDto companyType;
     private int enterpriseId;
 
-    private ArrayList<ConditioningCompany> conditionings;
-    private ArrayList<HandlingGoods> handlingGoods;
-    private ArrayList<PriorityCompany> priorityCompanies;
+    private ArrayList<ConditioningCompanyDto> conditionings;
+    private ArrayList<HandlingGoodsDto> handlingGoods;
+    private ArrayList<PriorityCompanyDto> priorityCompanies;
 
-    public ArrayList<ConditioningCompany> getConditionings() {
+    public ArrayList<ConditioningCompanyDto> getConditionings() {
         return conditionings;
     }
 
-    public void setConditionings(ArrayList<ConditioningCompany> conditionings) {
+    public void setConditionings(ArrayList<ConditioningCompanyDto> conditionings) {
         this.conditionings = conditionings;
     }
 
-    public ArrayList<HandlingGoods> getHandlingGoods() {
+    public ArrayList<HandlingGoodsDto> getHandlingGoods() {
         return handlingGoods;
     }
 
-    public void setHandlingGoods(ArrayList<HandlingGoods> handlingGoods) {
+    public void setHandlingGoods(ArrayList<HandlingGoodsDto> handlingGoods) {
         this.handlingGoods = handlingGoods;
     }
 
-    public ArrayList<PriorityCompany> getPriorityCompanies() {
+    public ArrayList<PriorityCompanyDto> getPriorityCompanies() {
         return priorityCompanies;
     }
 
-    public void setPriorityCompanies(ArrayList<PriorityCompany> priorityCompanies) {
+    public void setPriorityCompanies(ArrayList<PriorityCompanyDto> priorityCompanies) {
         this.priorityCompanies = priorityCompanies;
     }
 
@@ -74,11 +69,11 @@ public class CompanyDto {
         this.enterpriseId = enterpriseId;
     }
 
-    public CompanyType getCompanyType() {
+    public CompanyTypeDto getCompanyType() {
         return companyType;
     }
 
-    public void setCompanyType(CompanyType companyType) {
+    public void setCompanyType(CompanyTypeDto companyType) {
         this.companyType = companyType;
     }
 }

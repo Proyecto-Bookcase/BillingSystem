@@ -1,8 +1,5 @@
 package Dtos;
 
-import Entity.PackedType;
-import Entity.ProductType;
-
 import java.sql.Timestamp;
 
 public class CargoDto {
@@ -14,10 +11,10 @@ public class CargoDto {
     private int packParts;
     private float weight;
     //product type
-    private ProductType productType;
+    private ProductTypeDto productType;
 
     //PACKED TYPE
-    private PackedType packedType;
+    private PackedTypeDto packedType;
 
     private int clientId;
     private Timestamp arrivalDate;
@@ -86,19 +83,19 @@ public class CargoDto {
         this.weight = weight;
     }
 
-    public ProductType getProductType() {
+    public ProductTypeDto getProductType() {
         return productType;
     }
 
-    public void setProductType(ProductType productType) {
+    public void setProductType(ProductTypeDto productType) {
         this.productType = productType;
     }
 
-    public PackedType getPackedType() {
+    public PackedTypeDto getPackedType() {
         return packedType;
     }
 
-    public void setPackedType(PackedType packedType) {
+    public void setPackedType(PackedTypeDto packedType) {
         this.packedType = packedType;
     }
 
