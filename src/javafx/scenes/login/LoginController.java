@@ -13,8 +13,11 @@ import javafx.scene.shape.SVGPath;
 import javafx.utils.async.timeout.Timer;
 import javafx.utils.scene_manager.LoginSM;
 import javafx.utils.scene_manager.MainSM;
+import services.UserConnection;
 
 import java.io.IOException;
+
+import static javafx.utils.async.thread.ThreadHelpers.thread;
 
 public class LoginController {
 
@@ -48,17 +51,16 @@ public class LoginController {
         String pass = password.getText();
         loading(true);
 
-        /*
-        try{
-            // Verificación de usuario
+        thread(() -> {
 
+            UserConnection conn = new UserConnection();
+            boolean check = conn.checkUser(user, pass);
 
-            //succeed();
-        } catch (SQLException e){
-            loading(false);
-            fail();
-        }
-         */
+            if (check)
+                succeed();
+            else
+                fail();
+        });
     }
 
     @FXML
