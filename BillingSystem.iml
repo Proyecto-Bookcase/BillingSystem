@@ -17,7 +17,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="io.github.palexdev.materialfx" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -28,5 +27,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="postgresql-42.6.0" level="project" />
+    <orderEntry type="library" name="glavo.materialfx" level="project" />
   </component>
 </module>
