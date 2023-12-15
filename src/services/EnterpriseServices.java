@@ -137,7 +137,7 @@ public class EnterpriseServices {
 
             //CallableStatement cstmt = manager.getConnection().prepareCall("{ call update_enterprise(?)}");
             CallableStatement cstmt = connection.prepareCall(
-                    "{ call update_enterprise(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+                    "{ call update_enterprise(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 
             // Establecer los parámetros de la función almacenada
             cstmt.setInt(1, p_id);
