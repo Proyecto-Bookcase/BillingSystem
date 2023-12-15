@@ -51,7 +51,6 @@ public class HomeSceneManager {
 
     /**
      * @param sceneEnum Scene que se quiere mostrar
-     * @param cache     (Opcional) si se quiere guardar la scene en caché
      */
     public static void to(Scenes sceneEnum) {
 
