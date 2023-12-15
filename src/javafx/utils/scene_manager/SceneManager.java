@@ -11,8 +11,6 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.HashMap;
 
-import static java.lang.StringTemplate.STR;
-
 /**
  * Clase abstracta SceneManager que maneja las escenas en una aplicación JavaFX.
  * Esta clase proporciona métodos para almacenar y recuperar escenas en un HashMap,

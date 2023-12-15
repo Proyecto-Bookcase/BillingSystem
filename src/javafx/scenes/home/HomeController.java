@@ -1,7 +1,6 @@
 package javafx.scenes.home;
 
 import Dtos.ActualUser;
-import Dtos.UserDto;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.controls.MFXRectangleToggleNode;
@@ -15,8 +14,6 @@ import javafx.scene.shape.SVGPath;
 import javafx.scenes.home.subscenes.manager.HomeSceneManager;
 import javafx.scenes.home.subscenes.manager.Scenes;
 import javafx.utils.scene_manager.SceneManager;
-import services.ServicesLocator;
-import services.UserServices;
 
 import java.net.URL;
 import java.util.ResourceBundle;

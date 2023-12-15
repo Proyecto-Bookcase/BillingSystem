@@ -1,6 +1,6 @@
 package Dtos;
 
-import java.sql.*;
+import java.sql.Date;
 
 public class ClientDto {
     private String name;

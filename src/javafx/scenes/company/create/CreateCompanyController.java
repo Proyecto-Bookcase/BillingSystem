@@ -16,7 +16,6 @@ import javafx.utils.scene_manager.Scenes;
 import services.*;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import static javafx.utils.async.thread.ThreadHelpers.fxthread;
