@@ -7,6 +7,16 @@
     -fx-background-color: #0c324d;
 }
 
+.option {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+}
+
 .option:hover {
-    -fx-text-fill: slateblue;
+    -fx-border-color: slateblue;
+}
+
+.option:selected{
+    -fx-background-color: slateblue;
+    -fx-border-color: slateblue;
 }

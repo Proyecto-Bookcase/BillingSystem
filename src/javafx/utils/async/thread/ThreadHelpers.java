@@ -1,5 +1,6 @@
 package javafx.utils.async.thread;
 
+import javafx.application.Platform;
 import org.jetbrains.annotations.NotNull;
 
 public class ThreadHelpers {
@@ -16,5 +17,12 @@ public class ThreadHelpers {
         thread.start();
 
         return thread;
+    }
+
+    public static @NotNull Thread fxthread(Runnable func) {
+
+        return thread(() -> {
+            Platform.runLater(func);
+        });
     }
 }

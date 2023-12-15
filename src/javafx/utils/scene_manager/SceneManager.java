@@ -37,6 +37,8 @@ public class SceneManager {
 
         scenes.put(Scenes.LOGIN, "/login/Login.fxml");
         scenes.put(Scenes.HOME, "/home/Home.fxml");
+        scenes.put(Scenes.ENTERPRISE_UPDATE, "/enterprise/update/UpdateEnterprise.fxml");
+        scenes.put(Scenes.COMPANY_CREATE, "/company/create/CreateCompany.fxml");
     }
 
     private static SceneManager getInstance() {
@@ -92,11 +94,13 @@ public class SceneManager {
     /**
      * @param sceneEnum Scene que se quiere mostrar
      * @param cache     (Opcional) si se quiere guardar la scene en caché
+     * @return
      */
-    public static void show(Scenes sceneEnum, boolean... cache) {
+    public static Scene show(Scenes sceneEnum, boolean... cache) {
 
+        Scene scene = null;
         try {
-            Scene scene = getInstance().generateScene(cache, sceneEnum);
+            scene = getInstance().generateScene(cache, sceneEnum);
             getInstance().stage.setScene(scene);
             Draggable.set(scene);
 
@@ -109,6 +113,8 @@ public class SceneManager {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        return scene;
     }
 
     public static void close() {

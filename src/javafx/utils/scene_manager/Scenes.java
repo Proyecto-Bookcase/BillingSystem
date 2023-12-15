@@ -4,14 +4,9 @@ import java.util.ArrayList;
 
 public enum Scenes {
     LOGIN,
-    HOME
-}
-
-class Main {
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
+    HOME,
+    ENTERPRISE_UPDATE,
+    COMPANY_CREATE,
 }
 
 
