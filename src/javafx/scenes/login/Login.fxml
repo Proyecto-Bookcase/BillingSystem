@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import io.github.palexdev.materialfx.controls.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
-
-
+<?import javafx.scene.text.Font?>
 <GridPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
           prefHeight="485.0" prefWidth="827.0" styleClass="bg" stylesheets="@styles.css"
           xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"

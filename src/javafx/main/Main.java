@@ -2,13 +2,10 @@ package javafx.main;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.utils.drag.Draggable;
-import javafx.utils.scene_manager.LoginSM;
-import javafx.utils.scene_manager.MainSM;
+import javafx.utils.scene_manager.SceneManager;
+import javafx.utils.scene_manager.Scenes;
 
 import java.io.IOException;
-import java.util.concurrent.Flow;
 
 public class Main extends Application {
 
@@ -18,7 +15,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-
-        MainSM.showCreateCompany();
+        SceneManager.show(Scenes.LOGIN);
     }
 }
