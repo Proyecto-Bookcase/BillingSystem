@@ -73,7 +73,7 @@ public class CargoServices {
     }
     public CargoDto getCargoDbFunction(int cargoId) {
         CargoDto cargoDTO = null;
-        try (CallableStatement cstmt = connection.prepareCall("{call getCargo(?) }")) {
+        try (CallableStatement cstmt = connection.prepareCall("{call getcargo(?) }")) {
             cstmt.setInt(1, cargoId);
 
             cstmt.executeQuery();
@@ -110,7 +110,7 @@ public class CargoServices {
     }
     public ArrayList<CargoDto>  getAllCargoDbFunction() {
         ArrayList<CargoDto> cargoDTOs = new ArrayList<CargoDto>();
-        try (CallableStatement cstmt = connection.prepareCall("{call getCargo() }")) {
+        try (CallableStatement cstmt = connection.prepareCall("{call getAllCargo() }")) {
 
             cstmt.executeQuery();
 

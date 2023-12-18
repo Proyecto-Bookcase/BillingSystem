@@ -1,4 +1,4 @@
-package javafx.scenes.cargo.create;
+package javafx.scenes.cargo.edit;
 
 import Dtos.*;
 import io.github.palexdev.materialfx.controls.*;
@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 
 import static javafx.utils.async.thread.ThreadHelpers.thread;
 
-public class CreateCargoController implements Initializable {
+public class EditCargoController implements Initializable {
 
     private final ProductTypeServices productTypeServices = ServicesLocator.getProductTypeServices();
     private final PackedTypeServices packedTypeServices = ServicesLocator.getPackedTypeServices();
@@ -36,31 +36,31 @@ public class CreateCargoController implements Initializable {
     private ArrayList<WarehoseDto> warehouses;
     private ArrayList<LocationDto> locations;
 
-    @javafx.fxml.FXML
+    @FXML
     private MFXTextField name;
-    @javafx.fxml.FXML
+    @FXML
     private MFXFilterComboBox<ProductTypeDto> product_type;
-    @javafx.fxml.FXML
+    @FXML
     private MFXDatePicker expiration_date;
-    @javafx.fxml.FXML
+    @FXML
     private MFXFilterComboBox<PackedTypeDto> packed_type;
-    @javafx.fxml.FXML
+    @FXML
     private MFXSpinner<Float> weight_per_unit;
-    @javafx.fxml.FXML
+    @FXML
     private MFXCheckbox refrigeration;
-    @javafx.fxml.FXML
+    @FXML
     private MFXSpinner<Float> weight;
-    @javafx.fxml.FXML
+    @FXML
     private MFXDatePicker arrival_date;
-    @javafx.fxml.FXML
+    @FXML
     private MFXDatePicker departure_date;
-    @javafx.fxml.FXML
+    @FXML
     private MFXDatePicker actual_departure_date;
-    @javafx.fxml.FXML
+    @FXML
     private MFXButton submit;
-    @javafx.fxml.FXML
+    @FXML
     private MFXFilterComboBox<CompanyDto> company;
-    @javafx.fxml.FXML
+    @FXML
     private MFXFilterComboBox<ClientDto> client;
     @FXML
     private Label location;
@@ -106,6 +106,27 @@ public class CreateCargoController implements Initializable {
 
         this.location.setOnMousePressed(event -> modal.setVisible(!modal.isVisible()));
         this.accept.setOnAction(event -> modal.setVisible(false));
+
+        CargoDto cargo = cargoServices.getCargoDbFunction((Integer) HomeSceneManager.store);
+
+        name.setText(cargo.getName());
+        weight.setValue(cargo.getWeight());
+        expiration_date.setValue(cargo.getExpirationDate().toLocalDateTime().toLocalDate());
+        arrival_date.setValue(cargo.getArrivalDate().toLocalDateTime().toLocalDate());
+        departure_date.setValue(cargo.getDepartureDate().toLocalDateTime().toLocalDate());
+        actual_departure_date.setValue(cargo.getActualDepartureDate().toLocalDateTime().toLocalDate());
+        product_type.setValue(cargo.getProductType());
+        packed_type.setValue(cargo.getPackedType());
+        weight_per_unit.setValue(cargo.getPackedUnitWeight());
+        pack_parts.setValue(cargo.getPackParts());
+        fuel.setValue(cargo.getNeededFuel());
+        refrigeration.setSelected(cargo.isRefrigeration());
+        client.selectItem(client.getItems().filtered(clientDto -> clientDto.getId() == cargo.getClientId()).get(0));
+        company.selectItem(company.getItems().filtered(companyDto -> companyDto.getId() == cargo.CompanyId()).get(0));
+        warehose.selectItem(warehose.getItems().filtered(warehoseDto -> warehoseDto.getNumber() == cargo.getWarehouseNumber()).get(0));
+        shelf.setValue(cargo.getShelf());
+        floor.setValue(cargo.getFloor());
+        compartment.setValue(cargo.getCompartment());
     }
 
     private void init_spinners() {
@@ -179,9 +200,9 @@ public class CreateCargoController implements Initializable {
     }
 
     @FXML
-    private void create() {
+    private void update() {
 
-        cargoServices.insertCargo(
+        cargoServices.updateCargo(
                 name.getText(),
                 refrigeration.isSelected(),
                 Date.valueOf(expiration_date.getValue()),
