@@ -25,4 +25,12 @@ public class CompanyTypeDto {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "CompanyTypeDto{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

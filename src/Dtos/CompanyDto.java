@@ -76,4 +76,18 @@ public class CompanyDto {
     public void setCompanyType(CompanyTypeDto companyType) {
         this.companyType = companyType;
     }
+
+    @Override
+    public String toString() {
+        return "CompanyDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", fuelTariff=" + fuelTariff +
+                ", companyType=" + companyType +
+                ", enterpriseId=" + enterpriseId +
+                ", conditionings=" + conditionings +
+                ", handlingGoods=" + handlingGoods +
+                ", priorityCompanies=" + priorityCompanies +
+                '}';
+    }
 }
