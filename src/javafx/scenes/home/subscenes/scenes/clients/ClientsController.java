@@ -1,13 +1,11 @@
 package javafx.scenes.home.subscenes.scenes.clients;
 
 import Dtos.ClientDto;
-import Dtos.CompanyDto;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPaginatedTableView;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
-import io.github.palexdev.materialfx.filter.FloatFilter;
 import io.github.palexdev.materialfx.filter.IntegerFilter;
 import io.github.palexdev.materialfx.filter.StringFilter;
 import javafx.fxml.FXML;
@@ -16,7 +14,6 @@ import javafx.scenes.home.subscenes.manager.HomeSceneManager;
 import javafx.utils.scene_manager.SceneManager;
 import javafx.utils.scene_manager.Scenes;
 import services.ClientServices;
-import services.CompanyServices;
 import services.ServicesLocator;
 
 import java.net.URL;
@@ -84,9 +81,7 @@ public class ClientsController implements Initializable {
 
     @FXML()
     private void create() {
-        fxthread(() -> {
-            SceneManager.show(Scenes.CLIENT_CREATE);
-        });
+        fxthread(() -> SceneManager.show(Scenes.CLIENT_CREATE));
     }
 
     @FXML()

@@ -5,51 +5,67 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.scenes.home.subscenes.scenes.enterprise.EnterpriseController">
-   <children>
-      <Label fx:id="name" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="122.0" layoutY="26.0" text="Nombre de la Empresa">
-         <font>
-            <Font name="Georgia" size="35.0" />
-         </font>
-      </Label>
-      <MFXScrollPane layoutX="82.0" layoutY="80.0" prefHeight="508.0" prefWidth="434.0" style="-fx-background-color: transparent;">
-         <content>
-            <VBox prefHeight="162.0" prefWidth="419.0" spacing="10.0" style="-fx-background-color: transparent;">
-               <children>
-                  <MFXTextField fx:id="postal" allowEdit="false" editable="false" floatingText="Número Postal" prefHeight="49.0" prefWidth="420.0" selectable="false" />
-                  <HBox prefHeight="50.0" prefWidth="409.0" spacing="5.0">
-                     <children>
-                        <MFXTextField fx:id="email" allowEdit="false" editable="false" floatingText="Correo Electrónico" prefHeight="49.0" prefWidth="226.0" selectable="false" />
-                        <MFXTextField fx:id="phone_number" allowEdit="false" editable="false" floatingText="Número de Teléfono" prefHeight="49.0" prefWidth="177.0" selectable="false" />
-                     </children>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </HBox>
-                  <MFXTextField fx:id="general_boss" allowEdit="false" editable="false" floatingText="Nombre del Jefe General" prefHeight="49.0" prefWidth="420.0" selectable="false" />
-                  <MFXTextField fx:id="hhrr_boss" allowEdit="false" editable="false" floatingText="Nombre del Jefe de Recursos Humanos" prefHeight="49.0" prefWidth="420.0" selectable="false" />
-                  <MFXTextField fx:id="cont_resp" allowEdit="false" editable="false" floatingText="Nombre del Reesponsable del Departamento de Contabilidad" prefHeight="49.0" prefWidth="420.0" selectable="false" />
-                  <MFXTextField fx:id="core_sec" allowEdit="false" editable="false" floatingText="Nombre del Secretario del Núcleo del Partido" prefHeight="49.0" prefWidth="420.0" selectable="false" />
-                  <HBox prefHeight="50.0" prefWidth="409.0" spacing="5.0">
-                     <children>
-                        <MFXTextField fx:id="refri_tariff" allowEdit="false" editable="false" floatingText="Tarifa por Refrigeración" prefHeight="49.0" prefWidth="226.0" selectable="false" />
-                        <MFXTextField fx:id="bill_amount" allowEdit="false" editable="false" floatingText="Aforo" prefHeight="49.0" prefWidth="177.0" selectable="false" />
-                     </children>
-                  </HBox>
-                  <MFXTextField fx:id="discount" allowEdit="false" editable="false" floatingText="Descuento por Trato Preferencial" prefHeight="49.0" prefWidth="420.0" selectable="false" />
-                  <HBox prefHeight="50.0" prefWidth="409.0" spacing="5.0">
-                     <children>
-                        <MFXTextField fx:id="tariff_per_hour" allowEdit="false" editable="false" floatingText="Tarifa por Horas" prefHeight="49.0" prefWidth="226.0" selectable="false" />
-                        <MFXTextField fx:id="tariff_per_weight" allowEdit="false" editable="false" floatingText="Tarifa por Peso" prefHeight="49.0" prefWidth="247.0" selectable="false" />
-                     </children>
-                  </HBox>
-               </children>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </VBox>
-         </content>
-      </MFXScrollPane>
-      <MFXButton defaultButton="true" layoutX="516.0" layoutY="26.0" onAction="#toEdit" prefHeight="41.0" prefWidth="74.0" rippleColor="#3a28b2" style="-fx-border-color: slateblue; -fx-border-radius: 4; -fx-border-width: 2;" text="Editar" />
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+      prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="javafx.scenes.home.subscenes.scenes.enterprise.EnterpriseController">
+    <Label fx:id="name" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="122.0" layoutY="26.0"
+           text="Nombre de la Empresa">
+        <font>
+          <Font name="Georgia" size="35.0"/>
+        </font>
+    </Label>
+    <MFXScrollPane layoutX="82.0" layoutY="80.0" prefHeight="508.0" prefWidth="434.0"
+                   style="-fx-background-color: transparent;">
+        <VBox prefHeight="162.0" prefWidth="419.0" spacing="10.0" style="-fx-background-color: transparent;">
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </padding>
+            <MFXTextField fx:id="postal" allowEdit="false" editable="false" floatingText="Número Postal"
+                          prefHeight="49.0" prefWidth="420.0" selectable="false"/>
+            <HBox prefHeight="50.0" prefWidth="409.0" spacing="5.0">
+                <VBox.margin>
+                    <Insets/>
+                </VBox.margin>
+                <MFXTextField fx:id="email" allowEdit="false" editable="false" floatingText="Correo Electrónico"
+                              prefHeight="49.0" prefWidth="226.0" selectable="false"/>
+                <MFXTextField fx:id="phone_number" allowEdit="false" editable="false"
+                              floatingText="Número de Teléfono" prefHeight="49.0" prefWidth="177.0"
+                              selectable="false"/>
+            </HBox>
+            <MFXTextField fx:id="general_boss" allowEdit="false" editable="false"
+                          floatingText="Nombre del Jefe General" prefHeight="49.0" prefWidth="420.0"
+                          selectable="false"/>
+            <MFXTextField fx:id="hhrr_boss" allowEdit="false" editable="false"
+                          floatingText="Nombre del Jefe de Recursos Humanos" prefHeight="49.0" prefWidth="420.0"
+                          selectable="false"/>
+            <MFXTextField fx:id="cont_resp" allowEdit="false" editable="false"
+                          floatingText="Nombre del Reesponsable del Departamento de Contabilidad" prefHeight="49.0"
+                          prefWidth="420.0" selectable="false"/>
+            <MFXTextField fx:id="core_sec" allowEdit="false" editable="false"
+                          floatingText="Nombre del Secretario del Núcleo del Partido" prefHeight="49.0"
+                          prefWidth="420.0" selectable="false"/>
+            <HBox prefHeight="50.0" prefWidth="409.0" spacing="5.0">
+                <MFXTextField fx:id="refri_tariff" allowEdit="false" editable="false"
+                              floatingText="Tarifa por Refrigeración" prefHeight="49.0" prefWidth="226.0"
+                              selectable="false"/>
+                <MFXTextField fx:id="bill_amount" allowEdit="false" editable="false" floatingText="Aforo"
+                              prefHeight="49.0" prefWidth="177.0" selectable="false"/>
+            </HBox>
+            <MFXTextField fx:id="discount" allowEdit="false" editable="false"
+                          floatingText="Descuento por Trato Preferencial" prefHeight="49.0" prefWidth="420.0"
+                          selectable="false"/>
+            <HBox prefHeight="50.0" prefWidth="409.0" spacing="5.0">
+                <MFXTextField fx:id="tariff_per_hour" allowEdit="false" editable="false"
+                              floatingText="Tarifa por Horas" prefHeight="49.0" prefWidth="226.0"
+                              selectable="false"/>
+                <MFXTextField fx:id="tariff_per_weight" allowEdit="false" editable="false"
+                              floatingText="Tarifa por Peso" prefHeight="49.0" prefWidth="247.0"
+                              selectable="false"/>
+            </HBox>
+        </VBox>
+    </MFXScrollPane>
+    <MFXButton defaultButton="true" layoutX="516.0" layoutY="26.0" onAction="#toEdit" prefHeight="41.0" prefWidth="74.0"
+               rippleColor="#3a28b2" style="-fx-border-color: slateblue; -fx-border-radius: 4; -fx-border-width: 2;"
+               text="Editar"/>
 </Pane>

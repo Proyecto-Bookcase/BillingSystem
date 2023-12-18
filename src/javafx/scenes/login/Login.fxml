@@ -17,69 +17,61 @@
     <rowConstraints>
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
     </rowConstraints>
-    <children>
-        <Pane prefHeight="485.0" prefWidth="452.0">
-            <children>
-
-            </children>
-        </Pane>
-        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(0,0,0,0.7);"
-              GridPane.columnIndex="1">
-            <children>
-                <MFXTextField fx:id="username" floatingText="Username" layoutX="49.0" layoutY="250.0" prefHeight="48.0"
-                              prefWidth="227.0" stylesheets="@styles.css">
-                    <textFill>
-                        <Color red="0.9736841917037964" green="0.9646686315536499" blue="0.9646686315536499"
-                               opacity="0.8700000047683716"/>
-                    </textFill>
-                    <font>
-                        <Font name="Bodoni MT" size="14.0"/>
-                    </font>
-                </MFXTextField>
-                <MFXPasswordField fx:id="password" floatingText="Password" hideCharacter="*" layoutX="49.0"
-                                  layoutY="335.0" prefHeight="48.0" prefWidth="227.0" stylesheets="@styles.css">
-                    <textFill>
-                        <Color red="1.0" green="1.0" blue="1.0" opacity="0.8700000047683716"/>
-                    </textFill>
-                    <font>
-                        <Font name="Bodoni MT" size="14.0"/>
-                    </font>
-                </MFXPasswordField>
-                <SVGPath
-                        content="M200-327c-96.65,0-175,78.357-175,175c0,96.65,78.35,175,175,175s175-78.343,175-175C375-248.643,296.65-327,200-327z"
-                        fill="#333333" layoutX="-47.0" layoutY="281.0" opacity="0.29" scaleX="0.5" scaleY="0.5"/>
-                <SVGPath
-                        content="M199.998,3C114.395,3,45-66.393,45-151.992C45-237.584,114.395-307,199.998-307C285.592-307,355-237.603,355-152C355-66.393,285.602,3,199.998,3z"
-                        fill="WHITE" layoutX="-47.0" layoutY="281.0" opacity="0.11" scaleX="0.5" scaleY="0.5"/>
-                <SVGPath
-                        content="M353.986-134.28L234.306-245L165.5-172.5l46.333,36L100.047-68.625l76.567,69.87C184.241,2.399,192.049,3,199.998,3C279.608,3,345.191-57.02,353.986-134.28z"
-                        layoutX="-65.0" layoutY="259.0" opacity="0.1" scaleX="0.5" scaleY="0.5"/>
-                <SVGPath fx:id="body"
-                         content="M200-143.583c-76.248,0-100,49.999-100,49.999v25h200v-25C300-93.583,276.25-143.583,200-143.583z"
-                         fill="#f2f2f2" layoutX="-49.0" layoutY="254.0" scaleX="0.5" scaleY="0.5"/>
-                <Circle fx:id="head" fill="#f8f8f8" layoutX="151.0" layoutY="94.0" radius="26.0" stroke="#00000019"
-                        strokeType="INSIDE"/>
-                <MFXProgressSpinner fx:id="progress" disable="true" layoutX="74.0" layoutY="38.0" prefHeight="182.0"
-                                    prefWidth="155.0" stylesheets="@styles.css">
-                    <color4>
-                        <Color red="0.061000000685453415" green="0.6100000143051147" blue="0.33550000190734863"/>
-                    </color4>
-                </MFXProgressSpinner>
-                <MFXButton fx:id="loginButton" buttonType="RAISED" layoutX="104.0" layoutY="416.0" onAction="#onLogin"
-                           prefHeight="37.0" prefWidth="118.0" rippleColor="#d494ff" styleClass="login-button"
-                           stylesheets="@styles.css" text="Login" textFill="WHITE">
-                    <font>
-                        <Font size="14.0"/>
-                    </font>
-                </MFXButton>
-                <MFXButton fx:id="closeButton" buttonType="FLAT" layoutX="255.0" layoutY="6.0" onAction="#close"
-                           prefHeight="15.0" prefWidth="23.0" rippleAnimateBackground="false" rippleRadius="0.0"
-                           styleClass="close-button" text="x" textAlignment="CENTER" textFill="WHITE">
-                    <font>
-                        <Font size="22.0"/>
-                    </font>
-                </MFXButton>
-            </children>
-        </Pane>
-    </children>
+    <Pane prefHeight="485.0" prefWidth="452.0"></Pane>
+    <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(0,0,0,0.7);"
+          GridPane.columnIndex="1">
+        <MFXTextField fx:id="username" floatingText="Username" layoutX="49.0" layoutY="250.0" prefHeight="48.0"
+                      prefWidth="227.0" stylesheets="@styles.css">
+            <textFill>
+                <Color red="0.9736841917037964" green="0.9646686315536499" blue="0.9646686315536499"
+                       opacity="0.8700000047683716"/>
+            </textFill>
+            <font>
+                <Font name="Bodoni MT" size="14.0"/>
+            </font>
+        </MFXTextField>
+        <MFXPasswordField fx:id="password" floatingText="Password" hideCharacter="*" layoutX="49.0"
+                          layoutY="335.0" prefHeight="48.0" prefWidth="227.0" stylesheets="@styles.css">
+            <textFill>
+                <Color red="1.0" green="1.0" blue="1.0" opacity="0.8700000047683716"/>
+            </textFill>
+            <font>
+                <Font name="Bodoni MT" size="14.0"/>
+            </font>
+        </MFXPasswordField>
+        <SVGPath
+                content="M200-327c-96.65,0-175,78.357-175,175c0,96.65,78.35,175,175,175s175-78.343,175-175C375-248.643,296.65-327,200-327z"
+                fill="#333333" layoutX="-47.0" layoutY="281.0" opacity="0.29" scaleX="0.5" scaleY="0.5"/>
+        <SVGPath
+                content="M199.998,3C114.395,3,45-66.393,45-151.992C45-237.584,114.395-307,199.998-307C285.592-307,355-237.603,355-152C355-66.393,285.602,3,199.998,3z"
+                fill="WHITE" layoutX="-47.0" layoutY="281.0" opacity="0.11" scaleX="0.5" scaleY="0.5"/>
+        <SVGPath
+                content="M353.986-134.28L234.306-245L165.5-172.5l46.333,36L100.047-68.625l76.567,69.87C184.241,2.399,192.049,3,199.998,3C279.608,3,345.191-57.02,353.986-134.28z"
+                layoutX="-65.0" layoutY="259.0" opacity="0.1" scaleX="0.5" scaleY="0.5"/>
+        <SVGPath fx:id="body"
+                 content="M200-143.583c-76.248,0-100,49.999-100,49.999v25h200v-25C300-93.583,276.25-143.583,200-143.583z"
+                 fill="#f2f2f2" layoutX="-49.0" layoutY="254.0" scaleX="0.5" scaleY="0.5"/>
+        <Circle fx:id="head" fill="#f8f8f8" layoutX="151.0" layoutY="94.0" radius="26.0" stroke="#00000019"
+                strokeType="INSIDE"/>
+        <MFXProgressSpinner fx:id="progress" disable="true" layoutX="74.0" layoutY="38.0" prefHeight="182.0"
+                            prefWidth="155.0" stylesheets="@styles.css">
+            <color4>
+                <Color red="0.061000000685453415" green="0.6100000143051147" blue="0.33550000190734863"/>
+            </color4>
+        </MFXProgressSpinner>
+        <MFXButton fx:id="loginButton" buttonType="RAISED" layoutX="104.0" layoutY="416.0" onAction="#onLogin"
+                   prefHeight="37.0" prefWidth="118.0" rippleColor="#d494ff" styleClass="login-button"
+                   stylesheets="@styles.css" text="Login" textFill="WHITE">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </MFXButton>
+        <MFXButton fx:id="closeButton" buttonType="FLAT" layoutX="255.0" layoutY="6.0" onAction="#close"
+                   prefHeight="15.0" prefWidth="23.0" rippleAnimateBackground="false" rippleRadius="0.0"
+                   styleClass="close-button" text="x" textAlignment="CENTER" textFill="WHITE">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </MFXButton>
+    </Pane>
 </GridPane>

@@ -16,8 +16,6 @@ import javafx.utils.scene_manager.Scenes;
 import services.ServicesLocator;
 import services.UserServices;
 
-import java.io.IOException;
-
 import static javafx.utils.async.thread.ThreadHelpers.thread;
 
 public class LoginController {
@@ -46,7 +44,7 @@ public class LoginController {
     private MFXButton loginButton;
 
     @FXML
-    private void onLogin() throws IOException {
+    private void onLogin() {
 
         String user = username.getText();
         String pass = password.getText();
@@ -99,13 +97,7 @@ public class LoginController {
 
             progress.setProgress(1);
 
-            Timer.timeout(200, () -> {
-
-                Platform.runLater(() -> {
-                    SceneManager.show(Scenes.HOME);
-                });
-
-            });
+            Timer.timeout(200, () -> Platform.runLater(() -> SceneManager.show(Scenes.HOME)));
         });
     }
 
@@ -120,10 +112,7 @@ public class LoginController {
         progress.setColor3(Color.RED);
         progress.setColor4(Color.RED);
 
-        Timer.timeout(1000, () -> {
-
-            progress.setProgress(1);
-        });
+        Timer.timeout(1000, () -> progress.setProgress(1));
 
         username.getStyleClass().add("input-fail");
         password.getStyleClass().add("input-fail");

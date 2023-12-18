@@ -47,7 +47,7 @@ public class Draggable {
     }
 
     @Contract("_ -> new")
-    public static @NotNull Draggable set(Scene scene){
-        return new Draggable(scene);
+    public static void set(Scene scene){
+        new Draggable(scene);
     }
 }

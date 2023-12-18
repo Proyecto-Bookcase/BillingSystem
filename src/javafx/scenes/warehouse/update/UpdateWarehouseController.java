@@ -1,6 +1,5 @@
 package javafx.scenes.warehouse.update;
 
-import Dtos.ClientDto;
 import Dtos.LocationDto;
 import Dtos.WarehoseDto;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -9,7 +8,6 @@ import io.github.palexdev.materialfx.controls.MFXTableView;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import io.github.palexdev.materialfx.filter.IntegerFilter;
-import io.github.palexdev.materialfx.filter.StringFilter;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;

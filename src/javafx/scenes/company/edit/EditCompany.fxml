@@ -1,42 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXCheckListView?>
-<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
-<?import io.github.palexdev.materialfx.controls.MFXSpinner?>
-<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-
-<AnchorPane fx:id="pane" prefHeight="600.0" prefWidth="902.0" styleClass="bg" stylesheets="@../create/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.scenes.company.edit.EditCompanyController">
-    <children>
-        <Line endX="659.0" layoutX="179.0" layoutY="77.0" startX="-103.0" stroke="#740097" />
-        <Text fill="#545454" layoutX="76.0" layoutY="62.0" stroke="#17171700" strokeType="OUTSIDE" strokeWidth="5.0" text="Editando Compañía" wrappingWidth="479.7934265136719">
-            <font>
-                <Font name="Sans Serif Collection" size="27.0" />
-            </font>
-        </Text>
-        <MFXTextField fx:id="name" floatingText="Nombre de la Compañía" layoutX="73.0" layoutY="91.0" prefHeight="49.0" prefWidth="353.0" />
-        <MFXComboBox fx:id="type" floatingText="Tipo de Compañía" layoutX="505.0" layoutY="91.0" prefHeight="49.0" prefWidth="324.0" />
-        <MFXSpinner fx:id="fuel_tariff" editable="true" layoutX="348.0" layoutY="180.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="41.0" prefWidth="239.0" promptText="Tarifa por Combustible" />
-        <Text layoutX="65.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nivel de Prioridad" />
-        <Text layoutX="349.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manejo de Mercancía" />
-        <Text layoutX="614.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nivel de Condicionamiento" />
-        <MFXCheckListView fx:id="handling_goods" depthLevel="LEVEL1" layoutX="349.0" layoutY="256.0" prefHeight="320.0" prefWidth="218.0" />
-        <MFXCheckListView fx:id="priority" depthLevel="LEVEL1" layoutX="65.0" layoutY="256.0" prefHeight="320.0" prefWidth="218.0" />
-        <MFXCheckListView fx:id="conditioning" depthLevel="LEVEL1" layoutX="614.0" layoutY="256.0" prefHeight="320.0" prefWidth="218.0" />
-        <MFXButton fx:id="submit" buttonType="RAISED" defaultButton="true" depthLevel="LEVEL1" layoutX="739.0" layoutY="34.0" onAction="#onSubmit" prefHeight="35.0" prefWidth="100.0" rippleColor="#2365ab" styleClass="submit" stylesheets="@styles.css" text="Actualizar" textFill="WHITE">
-            <font>
-                <Font name="Sans Serif Collection" size="12.0" />
-            </font>
-        </MFXButton>
-      <Label layoutX="348.0" layoutY="154.0" text="Tarifa por Combustible:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-    </children>
+<?import javafx.scene.text.*?>
+<AnchorPane fx:id="pane" prefHeight="600.0" prefWidth="902.0" styleClass="bg" stylesheets="@../create/styles.css"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="javafx.scenes.company.edit.EditCompanyController">
+    <Line endX="659.0" layoutX="179.0" layoutY="77.0" startX="-103.0" stroke="#740097"/>
+    <Text fill="#545454" layoutX="76.0" layoutY="62.0" stroke="#17171700" strokeType="OUTSIDE" strokeWidth="5.0"
+          text="Editando Compañía" wrappingWidth="479.7934265136719">
+        <font>
+            <Font name="Sans Serif Collection" size="27.0"/>
+        </font>
+    </Text>
+    <MFXTextField fx:id="name" floatingText="Nombre de la Compañía" layoutX="73.0" layoutY="91.0" prefHeight="49.0"
+                  prefWidth="353.0"/>
+    <MFXComboBox fx:id="type" floatingText="Tipo de Compañía" layoutX="505.0" layoutY="91.0" prefHeight="49.0"
+                 prefWidth="324.0"/>
+    <MFXSpinner fx:id="fuel_tariff" editable="true" layoutX="348.0" layoutY="180.0" nodeOrientation="LEFT_TO_RIGHT"
+                prefHeight="41.0" prefWidth="239.0" promptText="Tarifa por Combustible"/>
+    <Text layoutX="65.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nivel de Prioridad"/>
+    <Text layoutX="349.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manejo de Mercancía"/>
+    <Text layoutX="614.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nivel de Condicionamiento"/>
+    <MFXCheckListView fx:id="handling_goods" depthLevel="LEVEL1" layoutX="349.0" layoutY="256.0" prefHeight="320.0"
+                      prefWidth="218.0"/>
+    <MFXCheckListView fx:id="priority" depthLevel="LEVEL1" layoutX="65.0" layoutY="256.0" prefHeight="320.0"
+                      prefWidth="218.0"/>
+    <MFXCheckListView fx:id="conditioning" depthLevel="LEVEL1" layoutX="614.0" layoutY="256.0" prefHeight="320.0"
+                      prefWidth="218.0"/>
+    <MFXButton fx:id="submit" buttonType="RAISED" defaultButton="true" depthLevel="LEVEL1" layoutX="739.0"
+               layoutY="34.0" onAction="#onSubmit" prefHeight="35.0" prefWidth="100.0" rippleColor="#2365ab"
+               styleClass="submit" stylesheets="@styles.css" text="Actualizar" textFill="WHITE">
+        <font>
+            <Font name="Sans Serif Collection" size="12.0"/>
+        </font>
+    </MFXButton>
+    <Label layoutX="348.0" layoutY="154.0" text="Tarifa por Combustible:">
+        <font>
+          <Font size="14.0"/>
+        </font>
+    </Label>
 </AnchorPane>

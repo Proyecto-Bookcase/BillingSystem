@@ -1,19 +1,21 @@
 package javafx.utils.components.spinner;
 
 import io.github.palexdev.materialfx.controls.models.spinner.SpinnerModel;
-import javafx.beans.property.*;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.util.StringConverter;
-import javafx.util.converter.FloatStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 
 public class IntegerSpinnerModel implements SpinnerModel<Integer> {
 
-    private IntegerProperty actual;
-    private Integer min;
-    private Integer max;
-    private Integer step;
+    private final IntegerProperty actual;
+    private final Integer min;
+    private final Integer max;
+    private final Integer step;
 
-    private IntegerStringConverter converter = new IntegerStringConverter();
+    private final IntegerStringConverter converter = new IntegerStringConverter();
 
     public IntegerSpinnerModel(Integer min, Integer max, int step) {
         this.min = min != null ? min : Integer.MIN_VALUE;
@@ -63,7 +65,6 @@ public class IntegerSpinnerModel implements SpinnerModel<Integer> {
     }
 
     /**
-     * @return
      */
     @Override
     public Integer getValue() {
@@ -71,7 +72,6 @@ public class IntegerSpinnerModel implements SpinnerModel<Integer> {
     }
 
     /**
-     * @return
      */
     @Override
     public ObjectProperty<Integer> valueProperty() {
@@ -79,7 +79,6 @@ public class IntegerSpinnerModel implements SpinnerModel<Integer> {
     }
 
     /**
-     * @param aInteger
      */
     @Override
     public void setValue(Integer aInteger) {
@@ -87,7 +86,6 @@ public class IntegerSpinnerModel implements SpinnerModel<Integer> {
     }
 
     /**
-     * @return
      */
     @Override
     public StringConverter<Integer> getConverter() {
@@ -95,7 +93,6 @@ public class IntegerSpinnerModel implements SpinnerModel<Integer> {
     }
 
     /**
-     * @return
      */
     @Override
     public ObjectProperty<StringConverter<Integer>> converterProperty() {
@@ -103,7 +100,6 @@ public class IntegerSpinnerModel implements SpinnerModel<Integer> {
     }
 
     /**
-     * @param stringConverter
      */
     @Override
     public void setConverter(StringConverter<Integer> stringConverter) {
@@ -111,7 +107,6 @@ public class IntegerSpinnerModel implements SpinnerModel<Integer> {
     }
 
     /**
-     * @return
      */
     @Override
     public boolean isWrapAround() {
@@ -119,7 +114,6 @@ public class IntegerSpinnerModel implements SpinnerModel<Integer> {
     }
 
     /**
-     * @param b
      */
     @Override
     public void setWrapAround(boolean b) {

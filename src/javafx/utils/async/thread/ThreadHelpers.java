@@ -19,9 +19,9 @@ public class ThreadHelpers {
         return thread;
     }
 
-    public static @NotNull Thread fxthread(Runnable func) {
+    public static void fxthread(Runnable func) {
 
-        return thread(() -> {
+        thread(() -> {
             Platform.runLater(func);
         });
     }

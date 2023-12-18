@@ -1,14 +1,10 @@
 package javafx.scenes.home.subscenes.scenes.cargos;
 
 import Dtos.CargoDto;
-import Dtos.ClientDto;
-import Dtos.ProductTypeDto;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPaginatedTableView;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
-import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
-import io.github.palexdev.materialfx.filter.IntegerFilter;
 import io.github.palexdev.materialfx.filter.StringFilter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,7 +13,6 @@ import javafx.utils.scene_manager.SceneManager;
 import javafx.utils.scene_manager.Scenes;
 import services.CargoServices;
 import services.ClientServices;
-import services.ProductTypeServices;
 import services.ServicesLocator;
 
 import java.net.URL;
@@ -25,11 +20,9 @@ import java.util.Comparator;
 import java.util.ResourceBundle;
 
 import static javafx.utils.async.thread.ThreadHelpers.fxthread;
-import static javafx.utils.async.thread.ThreadHelpers.thread;
 
 public class CargosController implements Initializable {
     private final CargoServices cargoServices = ServicesLocator.getCargoServices();
-    private final ProductTypeServices productTypeServices = ServicesLocator.getProductTypeServices();
     private final ClientServices clientServices = ServicesLocator.getClientServices();
 
     @FXML
@@ -41,8 +34,6 @@ public class CargosController implements Initializable {
     private MFXButton edit;
     @FXML
     private MFXButton delete;
-    @FXML
-    private MFXGenericDialog dialog;
 
     /**
      * Called to initialize a controller after its root element has been
@@ -96,9 +87,7 @@ public class CargosController implements Initializable {
 
     @FXML()
     private void create() {
-        fxthread(() -> {
-            SceneManager.show(Scenes.CARGO_CREATE);
-        });
+        fxthread(() -> SceneManager.show(Scenes.CARGO_CREATE));
     }
 
     @FXML()
