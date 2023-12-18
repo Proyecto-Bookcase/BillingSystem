@@ -15,6 +15,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        SceneManager.show(Scenes.LOGIN);
+        SceneManager.show(Scenes.HOME);
     }
 }

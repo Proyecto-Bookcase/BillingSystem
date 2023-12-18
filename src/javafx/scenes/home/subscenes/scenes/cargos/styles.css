@@ -1,0 +1,9 @@
+.slate-button:hover{
+    -fx-background-color: slateblue;
+    -fx-text-fill: white;
+}
+
+.delete-button:hover{
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}

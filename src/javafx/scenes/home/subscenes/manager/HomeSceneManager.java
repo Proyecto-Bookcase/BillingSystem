@@ -16,6 +16,7 @@ import static javafx.utils.async.thread.ThreadHelpers.fxthread;
  */
 public class HomeSceneManager {
 
+    public static Object store;
     private static HomeSceneManager instance;
 
     protected Pane scene;
@@ -30,7 +31,18 @@ public class HomeSceneManager {
         this.scenes = new HashMap<>();
 
         scenes.put(Scenes.ENTERPRISE, "/enterprise/Enterprise.fxml");
+
         scenes.put(Scenes.COMPANIES, "/companies/Companies.fxml");
+        scenes.put(Scenes.COMPANY_DELETE, "/companies/delete/CompanyDelete.fxml");
+
+        scenes.put(Scenes.CLIENTS, "/clients/Warehouses.fxml");
+        scenes.put(Scenes.CLIENT_DELETE, "/clients/delete/ClientDelete.fxml");
+
+        scenes.put(Scenes.CARGOS, "/cargos/Cargos.fxml");
+        scenes.put(Scenes.CARGO_DELETE, "/cargos/delete/CargoDelete.fxml");
+
+        scenes.put(Scenes.WAREHOUSES, "/warehouses/Warehouses.fxml");
+
     }
 
     public static void initialize(Pane pane) {
@@ -59,6 +71,24 @@ public class HomeSceneManager {
             try {
                 Parent p = instance.generatePane(sceneEnum);
                 instance.scene.getChildren().clear();
+                instance.scene.getChildren().add(p);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        if (!instance.scene.isVisible()) instance.scene.setVisible(true);
+    }
+
+    public static void to(Scenes sceneEnum, boolean over) {
+
+        fxthread(() -> {
+
+            try {
+                Parent p = instance.generatePane(sceneEnum);
+                if (!over) {
+                    instance.scene.getChildren().clear();
+                }
                 instance.scene.getChildren().add(p);
             } catch (IOException e) {
                 throw new RuntimeException(e);

@@ -7,10 +7,10 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.scenes.home.subscenes.scenes.companies.CompaniesController">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.scenes.home.subscenes.scenes.clients.ClientsController">
    <children>
       <Line endX="411.0" layoutX="148.0" layoutY="68.0" startX="-100.0" />
-      <Label layoutX="48.0" layoutY="31.0" text="Compañías">
+      <Label layoutX="48.0" layoutY="31.0" text="Clientes">
          <font>
             <Font name="Arial Rounded MT Bold" size="21.0" />
          </font>

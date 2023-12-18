@@ -14,10 +14,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="902.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.scenes.cargo.create.CreateCargoController">
+<AnchorPane prefHeight="600.0" prefWidth="902.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.scenes.cargo.edit.EditCargoController">
     <children>
         <Line endX="693.0" layoutX="153.0" layoutY="76.0" startX="-100.0" stroke="#880497" />
-        <Text layoutX="59.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crear Carga">
+        <Text layoutX="59.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editar Carga">
             <font>
                 <Font name="Sans Serif Collection" size="27.0" />
             </font>
@@ -34,7 +34,7 @@
         <MFXDatePicker fx:id="arrival_date" floatMode="INLINE" floatingText="Fecha de Llegada" layoutX="90.0" layoutY="332.0" prefHeight="38.0" prefWidth="269.0" />
         <MFXDatePicker fx:id="departure_date" floatMode="INLINE" floatingText="Fecha de Salida" layoutX="90.0" layoutY="403.0" prefHeight="38.0" prefWidth="269.0" />
         <MFXDatePicker fx:id="actual_departure_date" floatMode="INLINE" floatingText="Fecha Real de Salida" layoutX="90.0" layoutY="476.0" prefHeight="38.0" prefWidth="269.0" />
-        <MFXButton fx:id="submit" buttonType="RAISED" layoutX="758.0" layoutY="28.0" onAction="#create" prefHeight="35.0" prefWidth="89.0" text="Crear" />
+        <MFXButton fx:id="submit" buttonType="RAISED" layoutX="758.0" layoutY="28.0" onAction="#update" prefHeight="35.0" prefWidth="89.0" text="Actualizar" />
         <MFXFilterComboBox fx:id="client" floatingText="Cliente" layoutX="225.0" layoutY="26.0" prefHeight="40.0" prefWidth="230.0" />
         <MFXFilterComboBox fx:id="company" floatingText="Compañia" layoutX="476.0" layoutY="26.0" prefHeight="40.0" prefWidth="230.0" />
         <HBox fx:id="location_bg" alignment="CENTER" layoutY="565.0" prefHeight="35.0" prefWidth="902.0" spacing="5.0" styleClass="location-bg-unassigned">

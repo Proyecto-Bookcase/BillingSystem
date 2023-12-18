@@ -11,15 +11,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.scenes.client.create.CreateClientController">
+<AnchorPane prefHeight="600.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.scenes.client.edit.EditClientController">
    <children>
       <Line endX="659.0" layoutX="189.0" layoutY="87.0" startX="-103.0" stroke="#740097" />
-      <Text fill="#545454" layoutX="115.0" layoutY="68.0" stroke="#17171700" strokeType="OUTSIDE" strokeWidth="5.0" text="Creando Cliente" wrappingWidth="187.79342651367188">
+      <Text fill="#545454" layoutX="115.0" layoutY="68.0" stroke="#17171700" strokeType="OUTSIDE" strokeWidth="5.0" text="Editando Cliente" wrappingWidth="187.79342651367188">
          <font>
             <Font name="Sans Serif Collection" size="27.0" />
          </font>
       </Text>
-      <MFXButton fx:id="submit" buttonType="RAISED" defaultButton="true" depthLevel="LEVEL1" layoutX="727.0" layoutY="40.0" onAction="#create" prefHeight="35.0" prefWidth="100.0" rippleColor="#f9fcf8" styleClass="submit" stylesheets="@../../company/create/styles.css" text="Crear">
+      <MFXButton fx:id="submit" buttonType="RAISED" defaultButton="true" depthLevel="LEVEL1" layoutX="727.0" layoutY="40.0" onAction="#edit" prefHeight="35.0" prefWidth="100.0" rippleColor="#f9fcf8" styleClass="submit" stylesheets="@../../company/create/styles.css" text="Actualizar" textFill="WHITE">
          <font>
             <Font name="Sans Serif Collection" size="12.0" />
          </font>

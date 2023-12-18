@@ -34,9 +34,21 @@ public class SceneManager {
         this.scenes = new HashMap<>();
 
         scenes.put(Scenes.LOGIN, "/login/Login.fxml");
+
         scenes.put(Scenes.HOME, "/home/Home.fxml");
+
         scenes.put(Scenes.ENTERPRISE_UPDATE, "/enterprise/update/UpdateEnterprise.fxml");
+
         scenes.put(Scenes.COMPANY_CREATE, "/company/create/CreateCompany.fxml");
+        scenes.put(Scenes.COMPANY_EDIT, "/company/edit/EditCompany.fxml");
+
+        scenes.put(Scenes.CLIENT_CREATE, "/client/create/CreateClient.fxml");
+        scenes.put(Scenes.CLIENT_EDIT, "/client/edit/EditClient.fxml");
+
+        scenes.put(Scenes.CARGO_CREATE, "/cargo/create/CreateCargo.fxml");
+        scenes.put(Scenes.CARGO_EDIT, "/cargo/edit/EditCargo.fxml");
+
+        scenes.put(Scenes.WAREHOUSE_EDIT, "/warehouse/update/UpdateWarehouse.fxml");
     }
 
     private static SceneManager getInstance() {

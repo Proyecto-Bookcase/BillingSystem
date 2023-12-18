@@ -1,16 +1,21 @@
-package javafx.scenes.home.subscenes.scenes.companies;
+package javafx.scenes.home.subscenes.scenes.clients;
 
+import Dtos.ClientDto;
 import Dtos.CompanyDto;
-import io.github.palexdev.materialfx.controls.*;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXPaginatedTableView;
+import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import io.github.palexdev.materialfx.filter.FloatFilter;
+import io.github.palexdev.materialfx.filter.IntegerFilter;
 import io.github.palexdev.materialfx.filter.StringFilter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scenes.home.subscenes.manager.HomeSceneManager;
 import javafx.utils.scene_manager.SceneManager;
 import javafx.utils.scene_manager.Scenes;
+import services.ClientServices;
 import services.CompanyServices;
 import services.ServicesLocator;
 
@@ -20,13 +25,13 @@ import java.util.ResourceBundle;
 
 import static javafx.utils.async.thread.ThreadHelpers.fxthread;
 
-public class CompaniesController implements Initializable {
-    private final CompanyServices companyServices = ServicesLocator.getCompanyServices();
+public class ClientsController implements Initializable {
+    private final ClientServices clientServices = ServicesLocator.getClientServices();
 
     @FXML
     private MFXButton create;
     @FXML
-    private MFXPaginatedTableView<CompanyDto> pagination;
+    private MFXPaginatedTableView<ClientDto> pagination;
 
     @FXML
     private MFXButton edit;
@@ -49,23 +54,27 @@ public class CompaniesController implements Initializable {
 
 
         // Setting Columns
-        MFXTableColumn<CompanyDto> nameColumn = new MFXTableColumn<>("Nombre", true, Comparator.comparing(CompanyDto::getName));
-        nameColumn.setRowCellFactory(companyDto -> new MFXTableRowCell<>(CompanyDto::getName));
+        MFXTableColumn<ClientDto> nameColumn = new MFXTableColumn<>("Nombre", true, Comparator.comparing(ClientDto::getName));
+        nameColumn.setRowCellFactory(companyDto -> new MFXTableRowCell<>(ClientDto::getName));
 
-        MFXTableColumn<CompanyDto> fuelColumn = new MFXTableColumn<>("Tarifa por Combustible", true, Comparator.comparing(CompanyDto::getFuelTariff));
-        fuelColumn.setRowCellFactory(companyDto -> new MFXTableRowCell<>(CompanyDto::getFuelTariff));
+        MFXTableColumn<ClientDto> countryColumn = new MFXTableColumn<>("País", true, Comparator.comparing(ClientDto::getCountry));
+        countryColumn.setRowCellFactory(companyDto -> new MFXTableRowCell<>(ClientDto::getCountry));
+
+        MFXTableColumn<ClientDto> antiqueColumn = new MFXTableColumn<>("Antiguedad", true, Comparator.comparing(ClientDto::getAntique));
+        antiqueColumn.setRowCellFactory(companyDto -> new MFXTableRowCell<>(ClientDto::getAntique));
 
         // Adding columns
-        pagination.getTableColumns().addAll(nameColumn, fuelColumn);
+        pagination.getTableColumns().addAll(nameColumn, countryColumn, antiqueColumn);
 
         // Adding Filters
         pagination.getFilters().addAll(
-                new StringFilter<>("Name", CompanyDto::getName),
-                new FloatFilter<>("Fuel", CompanyDto::getFuelTariff)
+                new StringFilter<>("Nombre", ClientDto::getName),
+                new StringFilter<>("País", ClientDto::getCountry),
+                new IntegerFilter<>("Antiguedad", ClientDto::getAntique)
         );
 
         // Adding elements
-        pagination.getItems().addAll(companyServices.getAllCompany());
+        pagination.getItems().addAll(clientServices.getClientAllClientFunction());
 
         pagination.getSelectionModel().selectionProperty().addListener((observable, oldValue, newValue) -> {
             edit.setDisable(false);
@@ -76,19 +85,19 @@ public class CompaniesController implements Initializable {
     @FXML()
     private void create() {
         fxthread(() -> {
-            SceneManager.show(Scenes.COMPANY_CREATE);
+            SceneManager.show(Scenes.CLIENT_CREATE);
         });
     }
 
     @FXML()
     private void edit() {
         HomeSceneManager.store = pagination.getSelectionModel().getSelectedValues().get(0).getId();
-        SceneManager.show(Scenes.COMPANY_EDIT);
+        SceneManager.show(Scenes.CLIENT_EDIT);
     }
 
     @FXML()
     private void delete() {
         HomeSceneManager.store = pagination.getSelectionModel().getSelectedValues().get(0).getId();
-        HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.COMPANY_DELETE, true);
+        HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.CLIENT_DELETE, true);
     }
 }
