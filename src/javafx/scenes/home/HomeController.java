@@ -39,6 +39,14 @@ public class HomeController implements Initializable {
     private MFXRectangleToggleNode toCompanies;
     @FXML
     private ToggleGroup home_menu;
+    @FXML
+    private MFXRectangleToggleNode toClients;
+    @FXML
+    private ToggleGroup home_menu1;
+    @FXML
+    private MFXRectangleToggleNode toCargo;
+    @FXML
+    private ToggleGroup home_menu11;
 
     /**
      * Called to initialize a controller after its root element has been
@@ -57,7 +65,7 @@ public class HomeController implements Initializable {
         HomeSceneManager.initialize(side);
 
         toEnterprise.setOnAction((event -> {
-            if (toEnterprise.isSelected()){
+            if (toEnterprise.isSelected()) {
                 HomeSceneManager.to(Scenes.ENTERPRISE);
             } else {
                 side.setVisible(false);
@@ -65,8 +73,24 @@ public class HomeController implements Initializable {
         }));
 
         toCompanies.setOnAction((event) -> {
-            if (toCompanies.isSelected()){
+            if (toCompanies.isSelected()) {
                 HomeSceneManager.to(Scenes.COMPANIES);
+            } else {
+                side.setVisible(false);
+            }
+        });
+
+        toClients.setOnAction((event) -> {
+            if (toClients.isSelected()) {
+                HomeSceneManager.to(Scenes.CLIENTS);
+            } else {
+                side.setVisible(false);
+            }
+        });
+
+        toCargo.setOnAction((event) -> {
+            if (toCargo.isSelected()) {
+                HomeSceneManager.to(Scenes.CARGOS);
             } else {
                 side.setVisible(false);
             }
@@ -75,7 +99,7 @@ public class HomeController implements Initializable {
     }
 
     @FXML()
-    private void logout(){
+    private void logout() {
         SceneManager.show(javafx.utils.scene_manager.Scenes.LOGIN);
     }
 }

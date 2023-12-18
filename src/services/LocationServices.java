@@ -10,7 +10,8 @@ import java.util.ArrayList;
 
 public class LocationServices {
     private Connection connection;
-    public LocationServices(Connection connection){
+
+    public LocationServices(Connection connection) {
         this.connection = connection;
     }
 
@@ -32,10 +33,11 @@ public class LocationServices {
 
             cstmt.executeQuery();
 
-       } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
     public void deleteLocation(int p_compartment, int p_floor, int p_shelf, int p_warehouse_number) {
 
         try {
@@ -53,6 +55,7 @@ public class LocationServices {
             throw new RuntimeException(e);
         }
     }
+
     public ArrayList<LocationDto> getAllLocationByFloor(int p_floor, int p_shelf, int p_warehouse_number) {
         ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
 
@@ -64,8 +67,7 @@ public class LocationServices {
             cstmt.setInt(3, p_warehouse_number);
 
             ResultSet rs = cstmt.executeQuery();
-            while (rs.next())
-            {
+            while (rs.next()) {
                 LocationDto location = new LocationDto(
                         rs.getInt("compartment"),
                         rs.getInt("floor"),
@@ -83,6 +85,7 @@ public class LocationServices {
         }
         return locationArrayList;
     }
+
     public ArrayList<LocationDto> getAllLocationByShelf(int p_shelf, int p_warehouse_number) {
         ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
 
@@ -94,8 +97,7 @@ public class LocationServices {
             cstmt.setInt(2, p_warehouse_number);
 
             ResultSet rs = cstmt.executeQuery();
-            while (rs.next())
-            {
+            while (rs.next()) {
                 LocationDto location = new LocationDto(
                         rs.getInt("compartment"),
                         rs.getInt("floor"),
@@ -113,6 +115,7 @@ public class LocationServices {
         }
         return locationArrayList;
     }
+
     public ArrayList<LocationDto> getAllLocationByWarehouse(int p_warehouse_number) {
         ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
 
@@ -122,8 +125,7 @@ public class LocationServices {
             cstmt.setInt(1, p_warehouse_number);
 
             ResultSet rs = cstmt.executeQuery();
-            while (rs.next())
-            {
+            while (rs.next()) {
                 LocationDto location = new LocationDto(
                         rs.getInt("compartment"),
                         rs.getInt("floor"),
@@ -141,17 +143,17 @@ public class LocationServices {
         }
         return locationArrayList;
     }
+
     public ArrayList<LocationDto> getAllEmptyLocationByCooled(boolean cooledValue) {
         ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
 
         try {
             CallableStatement cstmt = connection.prepareCall(
-                    "{ call get_all_location_by_WAREHOSE(?)}");
+                    "{ call get_all_empty_location_bu_cooled(?)}");
             cstmt.setBoolean(1, cooledValue);
 
             ResultSet rs = cstmt.executeQuery();
-            while (rs.next())
-            {
+            while (rs.next()) {
                 LocationDto location = new LocationDto(
                         rs.getInt("compartment"),
                         rs.getInt("floor"),
@@ -169,6 +171,7 @@ public class LocationServices {
         }
         return locationArrayList;
     }
+
     public ArrayList<LocationDto> getAllEmptyLocation() {
         ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
 
@@ -177,8 +180,7 @@ public class LocationServices {
                     "{ call get_all_location_by_WAREHOSE()}");
 
             ResultSet rs = cstmt.executeQuery();
-            while (rs.next())
-            {
+            while (rs.next()) {
                 LocationDto location = new LocationDto(
                         rs.getInt("compartment"),
                         rs.getInt("floor"),
@@ -198,8 +200,7 @@ public class LocationServices {
     }
 
 
-
-    public void updateLocationMaintenance(int p_compartment, int p_floor, int p_shelf,int warehouse_number,
+    public void updateLocationMaintenance(int p_compartment, int p_floor, int p_shelf, int warehouse_number,
                                           boolean p_maintenance, int p_cargo_id) {
 
         try {

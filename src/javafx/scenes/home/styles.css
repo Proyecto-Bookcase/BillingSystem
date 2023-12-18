@@ -10,6 +10,7 @@
 .option {
     -fx-text-fill: white;
     -fx-background-color: transparent;
+    -fx-border-width: 2;
 }
 
 .option:hover {
