@@ -1,5 +1,7 @@
 package services;
 
+import conf.Secret;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 

@@ -53,7 +53,8 @@ public class CompanyTypeServices {
                 companyTypes.add(companyType);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
         return  companyTypes;
     }

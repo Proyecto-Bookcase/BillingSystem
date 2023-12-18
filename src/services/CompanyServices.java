@@ -8,10 +8,12 @@ import Dtos.PriorityCompanyDto;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CompanyServices {
     private Connection connection;
-    public CompanyServices(Connection connection){
+
+    public CompanyServices(Connection connection) {
         this.connection = connection;
     }
 
@@ -68,8 +70,8 @@ public class CompanyServices {
         }
     }*/
     public void insertCompany(String name, float fuelTariff, int companyTypeId, int enterpriseId,
-                                  Integer[] conditionings, Integer[] handlingGoods, Integer[] prioritys)  {
-        try  {
+                              Integer[] conditionings, Integer[] handlingGoods, Integer[] prioritys) {
+        try {
             CallableStatement cstmt = connection.prepareCall("{call insert_company(?, ?, ?, ?, ?, ?, ?)}");
             // Configurar los parámetros
             cstmt.setString(1, name);
@@ -82,57 +84,59 @@ public class CompanyServices {
 
             // Ejecutar la llamada a la función
             cstmt.executeQuery();
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
+
     public void deleteCompany(int id) {
-        try  {
-            CallableStatement cstmt = connection.prepareCall("{call delete_company()}");
+        try {
+            CallableStatement cstmt = connection.prepareCall("{call delete_company(?)}");
+            cstmt.setInt(1, id);
             cstmt.executeQuery();
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-    public CompanyDto getCompany(int companyId)
-    {
+
+    public CompanyDto getCompany(int companyId) {
         CompanyDto companyDto = new CompanyDto();
-            try  {
-                CallableStatement cstmt = connection.prepareCall("{  call getCompany(?) }");
-                cstmt.setInt(1, companyId);
+        try {
+            CallableStatement cstmt = connection.prepareCall("{  call getCompany(?) }");
+            cstmt.setInt(1, companyId);
 
 
-                // Obtener el conjunto de resultados
-                ResultSet resultSet = cstmt.executeQuery();
+            // Obtener el conjunto de resultados
+            ResultSet resultSet = cstmt.executeQuery();
 
-                if (resultSet.next()) {
-                    companyDto.setId(resultSet.getInt("ID"));
-                    companyDto.setName(resultSet.getString("NAME"));
-                    companyDto.setFuelTariff(resultSet.getFloat("FUEL_TARIFF"));
-                    companyDto.setCompanyType(new CompanyTypeDto(resultSet.getInt("COMPANYTYPE__ID"), resultSet.getString("COMPANYTYPE_description")));
-                    companyDto.setEnterpriseId(resultSet.getInt("ENTERPRISE__ID"));
-                    //ConditioningCompanyServices conditioningCompanyConnection = new ConditioningCompanyServices();
-                    ConditioningCompanyServices conditioningCompanyConnection = ServicesLocator.getConditioningCompanyServices();
-                    ArrayList<ConditioningCompanyDto> conditioningCompanies = conditioningCompanyConnection.getAllConditioningCompanyByCompany(companyDto.getId());
-                    //HandlingGoodsServices handlingGoodsConnection = new HandlingGoodsServices();
-                    HandlingGoodsServices handlingGoodsConnection = ServicesLocator.getHandlingGoodsServices();
-                    ArrayList<HandlingGoodsDto> handlingGoods = handlingGoodsConnection.getAllHandlingGoodsCompany(companyDto.getId());
-                    //PriorityCompanyServices priorityCompanyConnection = new PriorityCompanyServices();
-                    PriorityCompanyServices priorityCompanyConnection = ServicesLocator.getPriorityCompanyServices();
-                    ArrayList<PriorityCompanyDto> priorityCompanies = priorityCompanyConnection.getAllPriorityCompanyByCompany(companyDto.getId());
-                    companyDto.setConditionings(conditioningCompanies);
-                    companyDto.setHandlingGoods(handlingGoods);
-                    companyDto.setPriorityCompanies(priorityCompanies);
-                }
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
+            if (resultSet.next()) {
+                companyDto.setId(resultSet.getInt("ID"));
+                companyDto.setName(resultSet.getString("NAME"));
+                companyDto.setFuelTariff(resultSet.getFloat("FUEL_TARIFF"));
+                companyDto.setCompanyType(new CompanyTypeDto(resultSet.getInt("COMPANYTYPE__ID"), resultSet.getString("COMPANYTYPE_description")));
+                companyDto.setEnterpriseId(resultSet.getInt("ENTERPRISE__ID"));
+                //ConditioningCompanyServices conditioningCompanyConnection = new ConditioningCompanyServices();
+                ConditioningCompanyServices conditioningCompanyConnection = ServicesLocator.getConditioningCompanyServices();
+                ArrayList<ConditioningCompanyDto> conditioningCompanies = conditioningCompanyConnection.getAllConditioningCompanyByCompany(companyDto.getId());
+                //HandlingGoodsServices handlingGoodsConnection = new HandlingGoodsServices();
+                HandlingGoodsServices handlingGoodsConnection = ServicesLocator.getHandlingGoodsServices();
+                ArrayList<HandlingGoodsDto> handlingGoods = handlingGoodsConnection.getAllHandlingGoodsCompany(companyDto.getId());
+                //PriorityCompanyServices priorityCompanyConnection = new PriorityCompanyServices();
+                PriorityCompanyServices priorityCompanyConnection = ServicesLocator.getPriorityCompanyServices();
+                ArrayList<PriorityCompanyDto> priorityCompanies = priorityCompanyConnection.getAllPriorityCompanyByCompany(companyDto.getId());
+                companyDto.setConditionings(conditioningCompanies);
+                companyDto.setHandlingGoods(handlingGoods);
+                companyDto.setPriorityCompanies(priorityCompanies);
             }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         return companyDto;
     }
-    public ArrayList<CompanyDto> getAllCompany()
-    {
+
+    public ArrayList<CompanyDto> getAllCompany() {
         ArrayList<CompanyDto> companyDtoList = new ArrayList<CompanyDto>();
-        try  {
+        try {
             CallableStatement cstmt = connection.prepareCall("{  call get_all_companies() }");
             // Obtener el conjunto de resultados
             ResultSet resultSet = cstmt.executeQuery();
@@ -159,5 +163,40 @@ public class CompanyServices {
             System.out.println(e.getMessage());
         }
         return companyDtoList;
+    }
+
+
+    public void updateCompany(CompanyDto companyDto) {
+        // Declarar un arreglo de Integer de tamaño 5
+        Integer[] arrayConditionings = new Integer[companyDto.getConditionings().size()];
+        // Llenar el arreglo con un bucle for
+        for (int i = 0; i < arrayConditionings.length; i++) {
+            arrayConditionings[i] = (i + 1) * 10;  // Asignar valores a cada posición del arreglo
+        }
+        Integer[] arrayHandlingGoods = new Integer[companyDto.getConditionings().size()];
+        // Llenar el arreglo con un bucle for
+        for (int i = 0; i < arrayHandlingGoods.length; i++) {
+            arrayHandlingGoods[i] = (i + 1) * 10;  // Asignar valores a cada posición del arreglo
+        }
+        Integer[] arrayPriorityCompanies = new Integer[companyDto.getConditionings().size()];
+        // Llenar el arreglo con un bucle for
+        for (int i = 0; i < arrayPriorityCompanies.length; i++) {
+            arrayPriorityCompanies[i] = (i + 1) * 10;  // Asignar valores a cada posición del arreglo
+        }
+
+        try {
+            CallableStatement cstmt = connection.prepareCall("{  call update_company(?,?,?,?,?)}");
+            cstmt.setInt(1, companyDto.getId());
+            cstmt.setString(2, companyDto.getName());
+            cstmt.setFloat(3, companyDto.getFuelTariff());
+            cstmt.setInt(4, companyDto.getCompanyType().getId());
+            cstmt.setInt(5, companyDto.getEnterpriseId());
+            cstmt.setArray(6, connection.createArrayOf("integer", arrayConditionings));
+            cstmt.setArray(7, connection.createArrayOf("integer", arrayHandlingGoods));
+            cstmt.setArray(8, connection.createArrayOf("integer", arrayPriorityCompanies));
+        } catch (Exception e) {
+            //throw new RuntimeException(e);
+            System.out.println(e.getMessage());
+        }
     }
 }

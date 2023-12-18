@@ -20,12 +20,21 @@ public class CargoDto {
     private Timestamp arrivalDate;
     private Timestamp departureDate;
     private Timestamp actualDepartureDate;
-    private float loadingCost;
-    private float unloadingCost;
+    private float neededFuel;
     private int compartment;
     private int floor;
     private int shelf;
     private int warehouseNumber;
+
+    private float totalAmount;
+
+    public float getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(float totalAmount) {
+        this.totalAmount = totalAmount;
+    }
 
     public int getId() {
         return id;
@@ -131,21 +140,6 @@ public class CargoDto {
         this.actualDepartureDate = actualDepartureDate;
     }
 
-    public float getLoadingCost() {
-        return loadingCost;
-    }
-
-    public void setLoadingCost(float loadingCost) {
-        this.loadingCost = loadingCost;
-    }
-
-    public float getUnloadingCost() {
-        return unloadingCost;
-    }
-
-    public void setUnloadingCost(float unloadingCost) {
-        this.unloadingCost = unloadingCost;
-    }
 
     public int getCompartment() {
         return compartment;
@@ -195,12 +189,19 @@ public class CargoDto {
                 ", arrivalDate=" + arrivalDate +
                 ", departureDate=" + departureDate +
                 ", actualDepartureDate=" + actualDepartureDate +
-                ", loadingCost=" + loadingCost +
-                ", unloadingCost=" + unloadingCost +
+                ", loadingCost=" + neededFuel +
                 ", compartment=" + compartment +
                 ", floor=" + floor +
                 ", shelf=" + shelf +
                 ", warehouseNumber=" + warehouseNumber +
                 '}';
+    }
+
+    public float getNeededFuel() {
+        return neededFuel;
+    }
+
+    public void setNeededFuel(float neededFuel) {
+        this.neededFuel = neededFuel;
     }
 }
