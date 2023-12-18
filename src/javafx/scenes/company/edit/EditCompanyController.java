@@ -1,10 +1,8 @@
-package javafx.scenes.company.create;
+package javafx.scenes.company.edit;
 
-import Dtos.CompanyTypeDto;
-import Dtos.ConditioningCompanyDto;
-import Dtos.HandlingGoodsDto;
-import Dtos.PriorityCompanyDto;
+import Dtos.*;
 import io.github.palexdev.materialfx.controls.*;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
@@ -16,12 +14,13 @@ import javafx.utils.scene_manager.Scenes;
 import services.*;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static javafx.utils.async.thread.ThreadHelpers.fxthread;
 import static javafx.utils.async.thread.ThreadHelpers.thread;
 
-public class CreateCompanyController implements Initializable {
+public class EditCompanyController implements Initializable {
 
     private final EnterpriseServices enterpriseServices = ServicesLocator.getEnterpriseServices();
     private final CompanyServices companyServices = ServicesLocator.getCompanyServices();
@@ -66,7 +65,7 @@ public class CreateCompanyController implements Initializable {
         type.setConverter(new StringConverter<CompanyTypeDto>() {
             @Override
             public String toString(CompanyTypeDto object) {
-                return object == null? "": object.getDescription();
+                return object == null ? "" : object.getDescription();
             }
 
             @Override
@@ -111,20 +110,35 @@ public class CreateCompanyController implements Initializable {
             }
         });
 
+        CompanyDto company = companyServices.getCompany((int) HomeSceneManager.store);
+        name.setText(company.getName());
+        fuel_tariff.setValue(company.getFuelTariff());
+
         thread(() -> {
             handling_goods.getItems().addAll(hgServices.getAllHandlingGoodsCompany());
+            handling_goods.getSelectionModel().selectItems(handling_goods.getItems().filtered(handlingGoodsDto -> company.getHandlingGoods().stream().anyMatch(handlingGoodsDto1 -> handlingGoodsDto.getDescription().equals(handlingGoodsDto1.getDescription()))));
         });
 
         thread(() -> {
             priority.getItems().addAll(priorityServices.getAllPriorityCompany());
+
+            FilteredList<PriorityCompanyDto> filter = priority.getItems().filtered(priorityCompanyDto -> company.getPriorityCompanies().stream().anyMatch(priorityCompanyDto1 -> priorityCompanyDto.getDescription().equals(priorityCompanyDto1.getDescription())));
+            for (PriorityCompanyDto selected : filter) {
+                priority.getSelectionModel().selectItem(selected);
+            }
         });
 
         thread(() -> {
             conditioning.getItems().addAll(conditioningServices.getAllConditioningCompany());
+
+            FilteredList<ConditioningCompanyDto> filter = conditioning.getItems().filtered(conditioningCompanyDto -> company.getConditionings().stream().anyMatch(conditioningCompanyDto1 -> conditioningCompanyDto.getDescription().equals(conditioningCompanyDto1.getDescription())));
+            conditioning.getSelectionModel().selectItems(filter);
+
         });
 
         thread(() -> {
             type.getItems().addAll(ctypeServices.getAllCompanyType());
+            type.selectItem(type.getItems().filtered(companyTypeDto -> companyTypeDto.getDescription().equals(company.getCompanyType().getDescription())).get(0));
         });
     }
 
@@ -155,10 +169,5 @@ public class CreateCompanyController implements Initializable {
             });
         });
 
-    }
-
-    @FXML
-    public void onFuelTariffTextChange() {
-        System.out.println("Altro");
     }
 }
