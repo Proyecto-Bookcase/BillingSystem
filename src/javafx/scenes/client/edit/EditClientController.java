@@ -1,5 +1,6 @@
-package javafx.scenes.client.create;
+package javafx.scenes.client.edit;
 
+import Dtos.ClientDto;
 import io.github.palexdev.materialfx.controls.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,33 +16,33 @@ import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
 
-public class CreateClientController implements Initializable {
+public class EditClientController implements Initializable {
 
     private final ClientServices clientServices = ServicesLocator.getClientServices();
 
-    @javafx.fxml.FXML
+    @FXML
     private MFXButton submit;
-    @javafx.fxml.FXML
+    @FXML
     private MFXTextField name;
-    @javafx.fxml.FXML
+    @FXML
     private MFXTextField phone_number;
-    @javafx.fxml.FXML
+    @FXML
     private MFXComboBox<String> type;
-    @javafx.fxml.FXML
+    @FXML
     private MFXTextField email;
-    @javafx.fxml.FXML
+    @FXML
     private MFXTextField fax;
-    @javafx.fxml.FXML
+    @FXML
     private MFXTextField country;
-    @javafx.fxml.FXML
+    @FXML
     private MFXSpinner<Integer> antique;
-    @javafx.fxml.FXML
+    @FXML
     private MFXSpinner<Float> hours;
-    @javafx.fxml.FXML
+    @FXML
     private MFXSpinner<Float> transportation;
-    @javafx.fxml.FXML
+    @FXML
     private MFXSpinner<Float> refrigeration;
-    @javafx.fxml.FXML
+    @FXML
     private MFXSpinner<Float> billing;
     @FXML
     private MFXDatePicker preff_trate;
@@ -59,6 +60,19 @@ public class CreateClientController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         init_spinners();
         init_combos();
+
+        ClientDto client = clientServices.getClientDbFunction((Integer) HomeSceneManager.store);
+
+        name.setText(client.getName());
+        phone_number.setText(client.getPhoneNumber());
+        email.setText(client.getEmail());
+        fax.setText(client.getFax());
+        country.setText(client.getCountry());
+        antique.setValue(client.getAntique());
+        type.setValue(client.getType());
+
+        Date date = client.getPreferredRate();
+        preff_trate.setValue(date != null ? date.toLocalDate() : null);
 
     }
 
@@ -79,9 +93,9 @@ public class CreateClientController implements Initializable {
     }
 
     @FXML()
-    private void create() {
+    private void edit() {
 
-        clientServices.insertClient(
+        ClientDto dto = new ClientDto(
                 name.getText(),
                 type.getValue(),
                 country.getText(),
@@ -90,8 +104,11 @@ public class CreateClientController implements Initializable {
                 email.getText(),
                 'A',
                 antique.getValue(),
-                Date.valueOf(preff_trate.getValue())
+                (Integer) HomeSceneManager.store,
+                preff_trate.getValue() != null ? Date.valueOf(preff_trate.getValue()) : null
         );
+
+        clientServices.updateClient(dto);
 
         SceneManager.show(Scenes.HOME);
         HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.CLIENTS);
