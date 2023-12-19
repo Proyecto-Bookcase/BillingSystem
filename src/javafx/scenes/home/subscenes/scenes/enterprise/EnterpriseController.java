@@ -22,6 +22,8 @@ import services.ServicesLocator;
 import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import static javafx.utils.async.thread.ThreadHelpers.fxthread;
@@ -142,6 +144,26 @@ public class EnterpriseController implements Initializable {
 
         Integer year = this.year.getValue();
 
+        try {
+            String jasperFilePath = "src/reporte_jasper/Reporte8.jasper";
+            // Cargar el archivo .jasper
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(jasperFilePath);
+
+            // Crear un mapa para los parámetros
+            Map<String, Object> parameters = new HashMap<String, Object>();
+
+            // Agregar parámetros al mapa
+            // Por ejemplo: parameters.put("nombre_parametro (Jasper)", valor_parametro);
+            parameters.put("Año", year);
+            // Llenar el informe con datos y parámetros
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ServicesLocator.getDbManager().getConnection());
+
+            // Visualizar el informe
+            JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+            jasperViewer.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
