@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CompanyServices {
     private Connection connection;
@@ -93,7 +94,7 @@ public class CompanyServices {
             cstmt.setInt(1, id);
             cstmt.executeQuery();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
     }
 
@@ -187,7 +188,7 @@ public class CompanyServices {
         }
 
         try {
-            CallableStatement cstmt = connection.prepareCall("{  call update_company(?,?,?,?,?,?,?,?)}");
+            CallableStatement cstmt = connection.prepareCall("{  call update_company(?,?,?,?,?)}");
             cstmt.setInt(1, companyDto.getId());
             cstmt.setString(2, companyDto.getName());
             cstmt.setFloat(3, companyDto.getFuelTariff());
@@ -197,7 +198,8 @@ public class CompanyServices {
             cstmt.setArray(7, connection.createArrayOf("integer", arrayHandlingGoods));
             cstmt.setArray(8, connection.createArrayOf("integer", arrayPriorityCompanies));
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
     }
 }
