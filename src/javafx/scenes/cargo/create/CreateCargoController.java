@@ -55,8 +55,6 @@ public class CreateCargoController implements Initializable {
     @javafx.fxml.FXML
     private MFXDatePicker departure_date;
     @javafx.fxml.FXML
-    private MFXDatePicker actual_departure_date;
-    @javafx.fxml.FXML
     private MFXButton submit;
     @javafx.fxml.FXML
     private MFXFilterComboBox<CompanyDto> company;
@@ -195,7 +193,7 @@ public class CreateCargoController implements Initializable {
                 client.getValue().getId(),
                 Timestamp.valueOf(arrival_date.getValue().atStartOfDay()),
                 Timestamp.valueOf(departure_date.getValue().atStartOfDay()),
-                Timestamp.valueOf(actual_departure_date.getValue().atStartOfDay()),
+                null,
                 fuel.getValue(),
                 compartment.getSelectedItem(),
                 floor.getSelectedItem(),
