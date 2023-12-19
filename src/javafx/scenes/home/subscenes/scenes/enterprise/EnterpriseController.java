@@ -112,7 +112,7 @@ public class EnterpriseController implements Initializable {
 
         try {
             year.setSpinnerModel(new IntegerSpinnerModel(2000, LocalDate.now().getYear(), 1));
-        } catch (Exception e) {
+        } catch (Exception _) {
 
         }
 
