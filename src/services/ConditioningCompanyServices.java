@@ -14,7 +14,7 @@ public class ConditioningCompanyServices {
         this.connection = connection;
     }
 
-    public void insertConditioningCompany(String desciption){
+    public void insertConditioningCompany(String desciption) throws Exception {
 
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -23,10 +23,10 @@ public class ConditioningCompanyServices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
-    public void deleteConditioningCompany(int id){
+    public void deleteConditioningCompany(int id) throws Exception {
 
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -35,10 +35,10 @@ public class ConditioningCompanyServices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
-    public ArrayList<ConditioningCompanyDto> getAllConditioningCompany(){
+    public ArrayList<ConditioningCompanyDto> getAllConditioningCompany() throws Exception {
         ArrayList<ConditioningCompanyDto> ConditioningCompanyArrayList = new ArrayList<ConditioningCompanyDto>();
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -53,11 +53,11 @@ public class ConditioningCompanyServices {
                 ConditioningCompanyArrayList.add(ConditioningCompany);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return  ConditioningCompanyArrayList;
     }
-    public ArrayList<ConditioningCompanyDto> getAllConditioningCompanyByCompany(int companyId){
+    public ArrayList<ConditioningCompanyDto> getAllConditioningCompanyByCompany(int companyId) throws Exception {
         ArrayList<ConditioningCompanyDto> ConditioningCompanyArrayList = new ArrayList<ConditioningCompanyDto>();
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -73,12 +73,12 @@ public class ConditioningCompanyServices {
                 ConditioningCompanyArrayList.add(ConditioningCompany);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return  ConditioningCompanyArrayList;
     }
 
-    public ConditioningCompanyDto getConditioningCompanyById(int id){
+    public ConditioningCompanyDto getConditioningCompanyById(int id) throws RuntimeException {
         ConditioningCompanyDto conditioningCompany = null;
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -98,7 +98,7 @@ public class ConditioningCompanyServices {
         return  conditioningCompany;
     }
 
-    public void updateConditioningCompany(int id, String description){
+    public void updateConditioningCompany(int id, String description) throws Exception {
         try {
             CallableStatement cstmt = connection.prepareCall(
                     "{ call updateconditioning(?,?)}");
@@ -108,7 +108,7 @@ public class ConditioningCompanyServices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
 }

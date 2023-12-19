@@ -16,7 +16,7 @@ public class WarehoseSevices {
     }
 
 
-    public void insertWarehose(int enterpriseId, boolean cooled){
+    public void insertWarehose(int enterpriseId, boolean cooled) throws Exception {
 
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -27,10 +27,10 @@ public class WarehoseSevices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
-    public void deleteWarehose(int number){
+    public void deleteWarehose(int number) throws Exception {
 
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -39,10 +39,10 @@ public class WarehoseSevices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
-    public ArrayList<WarehoseDto> getAllWarehose(){
+    public ArrayList<WarehoseDto> getAllWarehose() throws Exception {
         ArrayList<WarehoseDto> priorityCompanyArrayList = new ArrayList<WarehoseDto>();
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -57,12 +57,12 @@ public class WarehoseSevices {
                 priorityCompanyArrayList.add(priorityCompany);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return  priorityCompanyArrayList;
     }
 
-    public WarehoseDto getWarehose(int number){
+    public WarehoseDto getWarehose(int number) throws Exception {
         WarehoseDto warehose = null;
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -77,12 +77,12 @@ public class WarehoseSevices {
                 );
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return  warehose;
     }
 
-    public void updateWarehose(int numer, boolean cooled){
+    public void updateWarehose(int numer, boolean cooled) throws Exception {
         try {
             CallableStatement cstmt = connection.prepareCall(
                     "{ call update_warehose(?,?)}");
@@ -92,7 +92,7 @@ public class WarehoseSevices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
 }

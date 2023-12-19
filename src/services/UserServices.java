@@ -17,7 +17,7 @@ public class UserServices {
         this.connection = connection;
     }
 
-    public void inset_User(String username, String password, String email, int id_Enterprise, int id_role){
+    public void inset_User(String username, String password, String email, int id_Enterprise, int id_role) throws Exception {
 
         try{
             CallableStatement cstmt = connection.prepareCall(
@@ -31,10 +31,10 @@ public class UserServices {
             cstmt.executeQuery();
 
         }catch(SQLException e){
-            throw new RuntimeException();
+            throw new Exception(e);
         }
     }
-    public void delete_User(String username){
+    public void delete_User(String username) throws Exception {
 
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -43,10 +43,10 @@ public class UserServices {
 
             cstmt.executeQuery();
         }catch(SQLException e){
-            throw new RuntimeException();
+            throw new Exception(e);
         }
     }
-    public void update_User(String username, String password, String email, int id_Enterprise, int id_role){
+    public void update_User(String username, String password, String email, int id_Enterprise, int id_role) throws Exception {
 
         try{
 
@@ -61,10 +61,10 @@ public class UserServices {
             cstmt.executeQuery();
 
         }catch(SQLException e){
-            throw new RuntimeException();
+            throw new Exception(e);
         }
     }
-    public ArrayList<UserDto> getAll_Users(){
+    public ArrayList<UserDto> getAll_Users() throws Exception {
 
         ArrayList<UserDto> list_users = new ArrayList<UserDto>();
         try{
@@ -80,11 +80,11 @@ public class UserServices {
                 list_users.add(user);
             }
         }catch(SQLException e){
-            throw new RuntimeException();
+            throw new Exception(e);
         }
         return list_users;
     }
-    public UserDto getUser(String username){
+    public UserDto getUser(String username) throws Exception {
         UserDto user = null;
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -103,12 +103,12 @@ public class UserServices {
                 System.out.println("3");
             }
         }catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return user;
     }
 
-    public boolean checkUser(String username, String password){
+    public boolean checkUser(String username, String password) throws Exception {
         boolean esc = true;
         ActualUser actualUser = ActualUser.getActualUser();
         try {
@@ -141,7 +141,7 @@ public class UserServices {
                 esc = false;
             }
         }catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return esc;
     }

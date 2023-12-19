@@ -3,6 +3,6 @@ package conf;
 public class Secret {
 
     public static String username = "postgres";
-    public static String password = "Smb-Mor-3500";
+    public static String password = "postgres";
 
 }

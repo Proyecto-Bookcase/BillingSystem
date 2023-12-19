@@ -14,7 +14,7 @@ public class CompanyTypeServices {
         this.connection = connection;
     }
 
-    public void insertCompanyTypeConnection(String desciption){
+    public void insertCompanyTypeConnection(String desciption) throws Exception {
 
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -23,10 +23,10 @@ public class CompanyTypeServices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
-    public void deleteCompanyType(int id){
+    public void deleteCompanyType(int id) throws Exception {
 
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -35,10 +35,10 @@ public class CompanyTypeServices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
-    public ArrayList<CompanyTypeDto> getAllCompanyType(){
+    public ArrayList<CompanyTypeDto> getAllCompanyType() throws Exception {
         ArrayList<CompanyTypeDto> companyTypes = new ArrayList<CompanyTypeDto>();
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -53,12 +53,11 @@ public class CompanyTypeServices {
                 companyTypes.add(companyType);
             }
         } catch (SQLException e) {
-            //throw new RuntimeException(e);
-            System.out.println(e.getMessage());
+            throw new Exception(e);
         }
         return  companyTypes;
     }
-    public CompanyTypeDto getCompanyTypeByCompany(int companyId){
+    public CompanyTypeDto getCompanyTypeByCompany(int companyId) throws Exception {
         CompanyTypeDto companyType = null;
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -74,12 +73,12 @@ public class CompanyTypeServices {
 
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return  companyType;
     }
 
-    public CompanyTypeDto getCompanyTypeCompanyById(int id){
+    public CompanyTypeDto getCompanyTypeCompanyById(int id) throws Exception {
         CompanyTypeDto conditioningCompany = null;
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -94,12 +93,12 @@ public class CompanyTypeServices {
                 );
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return  conditioningCompany;
     }
 
-    public void updategetCompanyType(int id, String description){
+    public void updategetCompanyType(int id, String description) throws Exception {
         try {
             CallableStatement cstmt = connection.prepareCall(
                     "{ call updatecompanytype(?,?)}");
@@ -109,7 +108,7 @@ public class CompanyTypeServices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
 }

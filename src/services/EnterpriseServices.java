@@ -46,27 +46,20 @@ public class EnterpriseServices {
     try {
 
 
-        // Crear un objeto PreparedStatement
-        //PreparedStatement pstmt = manager.getConnection().prepareStatement("SELECT * FROM enterprise WHERE id = ?");
         PreparedStatement pstmt = connection.prepareStatement("SELECT getenterprise(?)");
 
-        // Establecer los parámetros de la consulta
         pstmt.setInt(1, id);
 
-        // Ejecutar la consulta
         ResultSet rs = pstmt.executeQuery();
 
-        // Procesar los resultados
             while (rs.next()) {
-            // Obtener los valores de las columnas
             int id2 = rs.getInt("id");
             String name = rs.getString("name");
             System.out.println("llegó aqui");
             System.out.println("ID: " + id2 + ", Name: " + name);
-            // ...
+
         }
 
-            // Cerrar la conexión y los recursos
             rs.close();
             pstmt.close();
             //conn.close();
@@ -77,7 +70,7 @@ public class EnterpriseServices {
 
         return null;
     }
-    public EnterpirseDto getEnterpirseDbFunction(int id){
+    public EnterpirseDto getEnterpirseDbFunction(int id) throws Exception {
         EnterpirseDto enterpriseDTO = null;
         try {
 
@@ -117,7 +110,7 @@ public class EnterpriseServices {
             //conn.close();
 
         }catch (Exception e) {
-            System.out.println(e.getMessage());
+            throw new Exception(e);
         }
 
 
@@ -129,8 +122,7 @@ public class EnterpriseServices {
                                  float p_refri_charge, float p_bill_amount,
                                  String p_general_boss_name, float p_discount,
                                  String p_phone_number, String p_email,
-                                 float p_tariff_per_hours, float p_tariff_per_weight)
-    {
+                                 float p_tariff_per_hours, float p_tariff_per_weight) throws Exception {
         try {
 
 
@@ -163,7 +155,7 @@ public class EnterpriseServices {
             //conn.close();
 
         }catch (Exception e) {
-            System.out.println(e.getMessage());
+            throw new Exception(e);
         }
     }
 
