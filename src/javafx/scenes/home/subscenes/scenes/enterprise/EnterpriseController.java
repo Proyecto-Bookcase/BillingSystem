@@ -88,7 +88,21 @@ public class EnterpriseController implements Initializable {
 
     @FXML
     public void report1() {
-  //hola
+        try {
+            String jasperFilePath = "src/reporte_jasper/Reporte1.jasper";
+
+            // Cargar el archivo .jasper
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(jasperFilePath);
+
+            // Llenar el informe con datos y parámetros
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, ServicesLocator.getDbManager().getConnection());
+
+            // Visualizar el informe
+            JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+            jasperViewer.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
