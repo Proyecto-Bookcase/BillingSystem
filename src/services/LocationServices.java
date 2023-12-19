@@ -18,7 +18,7 @@ public class LocationServices {
     //comment to commit 2
     public void insertLocation(int p_compartment, int p_floor, int p_shelf,
                                boolean p_maintenance, int p_warehouse_number,
-                               int p_cargo_id) {
+                               int p_cargo_id) throws Exception {
 
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -34,11 +34,11 @@ public class LocationServices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
 
-    public void deleteLocation(int p_compartment, int p_floor, int p_shelf, int p_warehouse_number) {
+    public void deleteLocation(int p_compartment, int p_floor, int p_shelf, int p_warehouse_number) throws Exception {
 
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -52,11 +52,11 @@ public class LocationServices {
             cstmt.execute();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
 
-    public ArrayList<LocationDto> getAllLocationByFloor(int p_floor, int p_shelf, int p_warehouse_number) {
+    public ArrayList<LocationDto> getAllLocationByFloor(int p_floor, int p_shelf, int p_warehouse_number) throws Exception {
         ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
 
         try {
@@ -80,13 +80,12 @@ public class LocationServices {
                 locationArrayList.add(location);
             }
         } catch (SQLException e) {
-            //throw new RuntimeException(e);
-            System.out.println(e);
+            throw new Exception(e);
         }
         return locationArrayList;
     }
 
-    public ArrayList<LocationDto> getAllLocationByShelf(int p_shelf, int p_warehouse_number) {
+    public ArrayList<LocationDto> getAllLocationByShelf(int p_shelf, int p_warehouse_number) throws Exception {
         ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
 
         try {
@@ -111,12 +110,12 @@ public class LocationServices {
             }
         } catch (SQLException e) {
             //throw new RuntimeException(e);
-            System.out.println(e);
+            throw new Exception(e);
         }
         return locationArrayList;
     }
 
-    public ArrayList<LocationDto> getAllLocationByWarehouse(int p_warehouse_number) {
+    public ArrayList<LocationDto> getAllLocationByWarehouse(int p_warehouse_number) throws Exception {
         ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
 
         try {
@@ -139,12 +138,12 @@ public class LocationServices {
             }
         } catch (SQLException e) {
             //throw new RuntimeException(e);
-            System.out.println(e);
+            throw new Exception(e);
         }
         return locationArrayList;
     }
 
-    public ArrayList<LocationDto> getAllEmptyLocationByCooled(boolean cooledValue) {
+    public ArrayList<LocationDto> getAllEmptyLocationByCooled(boolean cooledValue) throws Exception {
         ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
 
         try {
@@ -167,12 +166,12 @@ public class LocationServices {
             }
         } catch (SQLException e) {
             //throw new RuntimeException(e);
-            System.out.println(e);
+            throw new Exception(e);
         }
         return locationArrayList;
     }
 
-    public ArrayList<LocationDto> getAllEmptyLocation() {
+    public ArrayList<LocationDto> getAllEmptyLocation() throws Exception {
         ArrayList<LocationDto> locationArrayList = new ArrayList<LocationDto>();
 
         try {
@@ -194,14 +193,14 @@ public class LocationServices {
             }
         } catch (SQLException e) {
             //throw new RuntimeException(e);
-            System.out.println(e);
+            throw new Exception(e);
         }
         return locationArrayList;
     }
 
 
     public void updateLocationMaintenance(int p_compartment, int p_floor, int p_shelf, int warehouse_number,
-                                          boolean p_maintenance, int p_cargo_id) {
+                                          boolean p_maintenance, int p_cargo_id) throws Exception {
 
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -217,8 +216,7 @@ public class LocationServices {
             cstmt.execute();
 
         } catch (SQLException e) {
-            //throw new RuntimeException(e);
-            System.out.println(e);
+            throw new Exception(e);
         }
     }
 

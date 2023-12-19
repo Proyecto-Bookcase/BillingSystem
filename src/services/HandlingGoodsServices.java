@@ -14,7 +14,7 @@ public class HandlingGoodsServices {
         this.connection = connection;
     }
 
-    public void insertHandlingGoodsCompany(String desciption){
+    public void insertHandlingGoodsCompany(String desciption) throws Exception {
 
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -23,10 +23,10 @@ public class HandlingGoodsServices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
-    public void deleteHandlingGoodsCompany(int id){
+    public void deleteHandlingGoodsCompany(int id) throws Exception {
 
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -35,10 +35,10 @@ public class HandlingGoodsServices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
-    public ArrayList<HandlingGoodsDto> getAllHandlingGoodsCompany(){
+    public ArrayList<HandlingGoodsDto> getAllHandlingGoodsCompany() throws Exception {
         ArrayList<HandlingGoodsDto> priorityCompanyArrayList = new ArrayList<HandlingGoodsDto>();
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -53,11 +53,11 @@ public class HandlingGoodsServices {
                 priorityCompanyArrayList.add(priorityCompany);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return  priorityCompanyArrayList;
     }
-    public ArrayList<HandlingGoodsDto> getAllHandlingGoodsCompany(int companyId){
+    public ArrayList<HandlingGoodsDto> getAllHandlingGoodsCompany(int companyId) throws Exception {
         ArrayList<HandlingGoodsDto> priorityCompanyArrayList = new ArrayList<HandlingGoodsDto>();
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -73,11 +73,11 @@ public class HandlingGoodsServices {
                 priorityCompanyArrayList.add(priorityCompany);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return  priorityCompanyArrayList;
     }
-    public HandlingGoodsDto getHandlingGoodsCompanyById(int id){
+    public HandlingGoodsDto getHandlingGoodsCompanyById(int id) throws Exception {
         HandlingGoodsDto handlingGoods = null;
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -92,12 +92,12 @@ public class HandlingGoodsServices {
                 );
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return  handlingGoods;
     }
 
-    public void updateHandlingGoodsCompany(int id, String description){
+    public void updateHandlingGoodsCompany(int id, String description) throws Exception {
         try {
             CallableStatement cstmt = connection.prepareCall(
                     "{ call updatehandlinggoods(?,?)}");
@@ -107,7 +107,7 @@ public class HandlingGoodsServices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
 }

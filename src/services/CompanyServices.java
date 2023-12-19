@@ -69,7 +69,7 @@ public class CompanyServices {
         }
     }*/
     public void insertCompany(String name, float fuelTariff, int companyTypeId, int enterpriseId,
-                              Integer[] conditionings, Integer[] handlingGoods, Integer[] prioritys) {
+                              Integer[] conditionings, Integer[] handlingGoods, Integer[] prioritys) throws Exception {
         try {
             CallableStatement cstmt = connection.prepareCall("{call insert_company(?, ?, ?, ?, ?, ?, ?)}");
             // Configurar los parámetros
@@ -84,21 +84,21 @@ public class CompanyServices {
             // Ejecutar la llamada a la función
             cstmt.executeQuery();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            throw new Exception(e);
         }
     }
 
-    public void deleteCompany(int id) {
+    public void deleteCompany(int id) throws Exception {
         try {
             CallableStatement cstmt = connection.prepareCall("{call delete_company(?)}");
             cstmt.setInt(1, id);
             cstmt.executeQuery();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            throw new Exception(e);
         }
     }
 
-    public CompanyDto getCompany(int companyId) {
+    public CompanyDto getCompany(int companyId) throws Exception {
         CompanyDto companyDto = new CompanyDto();
         try {
             CallableStatement cstmt = connection.prepareCall("{  call getCompany(?) }");
@@ -128,12 +128,12 @@ public class CompanyServices {
                 companyDto.setPriorityCompanies(priorityCompanies);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new Exception(e);
         }
         return companyDto;
     }
 
-    public ArrayList<CompanyDto> getAllCompany() {
+    public ArrayList<CompanyDto> getAllCompany() throws Exception {
         ArrayList<CompanyDto> companyDtoList = new ArrayList<CompanyDto>();
         try {
             CallableStatement cstmt = connection.prepareCall("{  call get_all_companies() }");
@@ -159,13 +159,13 @@ public class CompanyServices {
                 companyDtoList.add(companyDto);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new Exception(e);
         }
         return companyDtoList;
     }
 
 
-    public void updateCompany(CompanyDto companyDto) {
+    public void updateCompany(CompanyDto companyDto) throws Exception {
         // Declarar un arreglo de Integer de tamaño 5
         Integer[] arrayConditionings = new Integer[companyDto.getConditionings().size()];
         // Llenar el arreglo con un bucle for
@@ -184,7 +184,7 @@ public class CompanyServices {
         }
 
         try {
-            CallableStatement cstmt = connection.prepareCall("{  call update_company(?,?,?,?,?)}");
+            CallableStatement cstmt = connection.prepareCall("{  call update_company(?,?,?,?,?,?,?,?)}");
             cstmt.setInt(1, companyDto.getId());
             cstmt.setString(2, companyDto.getName());
             cstmt.setFloat(3, companyDto.getFuelTariff());
@@ -194,8 +194,7 @@ public class CompanyServices {
             cstmt.setArray(7, connection.createArrayOf("integer", arrayHandlingGoods));
             cstmt.setArray(8, connection.createArrayOf("integer", arrayPriorityCompanies));
         } catch (Exception e) {
-            //throw new RuntimeException(e);
-            System.out.println(e.getMessage());
+            throw new Exception(e);
         }
     }
 }

@@ -14,7 +14,7 @@ public class PriorityCompanyServices {
         this.connection = connection;
     }
 
-    public void insertPriorityCompany(String desciption){
+    public void insertPriorityCompany(String desciption) throws Exception {
 
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -23,10 +23,10 @@ public class PriorityCompanyServices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
-    public void deletePriorityCompany(int id){
+    public void deletePriorityCompany(int id) throws Exception {
 
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -35,10 +35,10 @@ public class PriorityCompanyServices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
-    public ArrayList<PriorityCompanyDto> getAllPriorityCompany(){
+    public ArrayList<PriorityCompanyDto> getAllPriorityCompany() throws Exception {
         ArrayList<PriorityCompanyDto> priorityCompanyArrayList = new ArrayList<PriorityCompanyDto>();
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -53,11 +53,11 @@ public class PriorityCompanyServices {
                 priorityCompanyArrayList.add(priorityCompany);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return  priorityCompanyArrayList;
     }
-    public ArrayList<PriorityCompanyDto> getAllPriorityCompanyByCompany(int companyId){
+    public ArrayList<PriorityCompanyDto> getAllPriorityCompanyByCompany(int companyId) throws Exception {
         ArrayList<PriorityCompanyDto> priorityCompanyArrayList = new ArrayList<PriorityCompanyDto>();
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -73,11 +73,11 @@ public class PriorityCompanyServices {
                 priorityCompanyArrayList.add(priorityCompany);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return  priorityCompanyArrayList;
     }
-    public PriorityCompanyDto getPriorityCompanyById(int id){
+    public PriorityCompanyDto getPriorityCompanyById(int id) throws Exception {
         PriorityCompanyDto priorityCompany = null;
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -92,12 +92,12 @@ public class PriorityCompanyServices {
                 );
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return  priorityCompany;
     }
 
-    public void updatePriorityCompany(int id, String description){
+    public void updatePriorityCompany(int id, String description) throws Exception {
         try {
             CallableStatement cstmt = connection.prepareCall(
                     "{ call updatepriority(?,?)}");
@@ -107,7 +107,7 @@ public class PriorityCompanyServices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
 
