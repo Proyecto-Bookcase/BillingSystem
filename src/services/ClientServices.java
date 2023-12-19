@@ -12,7 +12,7 @@ public class ClientServices {
 
     public  void insertClient(String p_name, String p_type, String p_country,
                          String p_phone_number, String p_fax, String p_email,
-                         char p_attention_type, int p_antique, Date p_preferred_rate) {
+                         char p_attention_type, int p_antique, Date p_preferred_rate) throws Exception {
         try {
             // Llama al procedimiento almacenado "insertclient" con los parámetros
             CallableStatement cstmt1 = connection.prepareCall(
@@ -33,7 +33,7 @@ public class ClientServices {
 
             ResultSet rs = cstmt1.executeQuery();
         }catch (Exception e) {
-            System.out.println(e.getMessage());
+            throw new Exception(e);
         }
 
 
@@ -41,20 +41,14 @@ public class ClientServices {
 
 
 
-    public ClientDto getClientDbFunction(int id) {
+    public ClientDto getClientDbFunction(int id) throws Exception {
         ClientDto clientDTO = null;
         try {
             CallableStatement cstmt = connection.prepareCall("{ call getclient(?) }");
 
-            // Establecer los parámetros de la función almacenada
             cstmt.setInt(1, id);
-
-            // Ejecutar la consulta
             ResultSet rs = cstmt.executeQuery();
-
-            // Verificar si hay resultados
             if (rs.next()) {
-                // Crear una instancia del DTO con los valores recuperados
                  clientDTO = new ClientDto(
                         rs.getString("NAME"),
                         rs.getString("TYPE"),
@@ -74,12 +68,12 @@ public class ClientServices {
             cstmt.close();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw  new Exception(e);
         }
         return clientDTO;
     }
 
-    public ArrayList<ClientDto> getClientAllClientFunction() {
+    public ArrayList<ClientDto> getClientAllClientFunction() throws Exception {
         ArrayList<ClientDto> clients = new ArrayList<ClientDto>();
         try {
             CallableStatement cstmt = connection.prepareCall("{ call getallclients() }");
@@ -106,7 +100,7 @@ public class ClientServices {
 
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return clients;
     }
@@ -133,14 +127,14 @@ public class ClientServices {
         }
     }
 
-    public void deleteClient(int id){
+    public void deleteClient(int id) throws Exception {
         try {
             CallableStatement cstmt = connection.prepareCall("{ call delete_client(?)}");
             // Configura los parámetros
             cstmt.setInt(1, id);
             cstmt.executeQuery();
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            throw new Exception(e);
         }
     }
 

@@ -14,7 +14,7 @@ public class PackedTypeServices {
         this.connection = connection;
     }
 
-    public void insertPackedType(String desciption){
+    public void insertPackedType(String desciption) throws Exception {
 
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -23,10 +23,10 @@ public class PackedTypeServices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
-    public void deletePackedType(int id){
+    public void deletePackedType(int id) throws Exception {
 
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -35,7 +35,7 @@ public class PackedTypeServices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
     public ArrayList<PackedTypeDto> getAllPackagedType(){
@@ -57,7 +57,7 @@ public class PackedTypeServices {
         }
         return  packageTypes;
     }
-    public PackedTypeDto getPackedTypeByCargo(int cargoId){
+    public PackedTypeDto getPackedTypeByCargo(int cargoId) throws Exception {
         PackedTypeDto companyType = null;
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -73,12 +73,12 @@ public class PackedTypeServices {
 
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return  companyType;
     }
 
-    public PackedTypeDto getPackedTypeById(int id){
+    public PackedTypeDto getPackedTypeById(int id) throws Exception {
         PackedTypeDto conditioningCompany = null;
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -93,12 +93,12 @@ public class PackedTypeServices {
                 );
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return  conditioningCompany;
     }
 
-    public void updatePackedType(int id, String description){
+    public void updatePackedType(int id, String description) throws Exception {
         try {
             CallableStatement cstmt = connection.prepareCall(
                     "{ call updatepackedtype(?,?)}");
@@ -108,7 +108,7 @@ public class PackedTypeServices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
 }

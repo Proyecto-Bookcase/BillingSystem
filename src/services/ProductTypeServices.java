@@ -14,7 +14,7 @@ public class ProductTypeServices {
         this.connection = connection;
     }
 
-    public void insertProductTypeConnection(String desciption){
+    public void insertProductTypeConnection(String desciption) throws Exception {
 
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -23,10 +23,10 @@ public class ProductTypeServices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
-    public void deleteProductType(int id){
+    public void deleteProductType(int id) throws Exception {
 
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -35,10 +35,10 @@ public class ProductTypeServices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
-    public ArrayList<ProductTypeDto> getAllProductType(){
+    public ArrayList<ProductTypeDto> getAllProductType() throws Exception {
         ArrayList<ProductTypeDto> companyTypes = new ArrayList<ProductTypeDto>();
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -53,11 +53,11 @@ public class ProductTypeServices {
                 companyTypes.add(companyType);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return  companyTypes;
     }
-    public ProductTypeDto getProductTypeByCargo(int cargoId){
+    public ProductTypeDto getProductTypeByCargo(int cargoId) throws Exception {
         ProductTypeDto productType = null;
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -73,12 +73,12 @@ public class ProductTypeServices {
 
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return  productType;
     }
 
-    public ProductTypeDto getProductTypeById(int id){
+    public ProductTypeDto getProductTypeById(int id) throws Exception {
         ProductTypeDto conditioningCompany = null;
         try {
             CallableStatement cstmt = connection.prepareCall(
@@ -93,12 +93,12 @@ public class ProductTypeServices {
                 );
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
         return  conditioningCompany;
     }
 
-    public void updateProductType(int id, String description){
+    public void updateProductType(int id, String description) throws Exception {
         try {
             CallableStatement cstmt = connection.prepareCall(
                     "{ call updateproducttype(?,?)}");
@@ -108,7 +108,7 @@ public class ProductTypeServices {
             cstmt.executeQuery();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
 }
