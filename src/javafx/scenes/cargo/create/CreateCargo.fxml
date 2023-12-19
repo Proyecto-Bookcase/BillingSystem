@@ -32,7 +32,6 @@
     <MFXSpinner fx:id="fuel" layoutX="527.0" layoutY="405.0" prefHeight="41.0" prefWidth="269.0" promptText="Combustible Necesario" />
     <MFXDatePicker fx:id="arrival_date" floatMode="INLINE" floatingText="Fecha de Llegada" layoutX="90.0" layoutY="332.0" prefHeight="38.0" prefWidth="269.0" />
     <MFXDatePicker fx:id="departure_date" floatMode="INLINE" floatingText="Fecha de Salida" layoutX="90.0" layoutY="403.0" prefHeight="38.0" prefWidth="269.0" />
-    <MFXDatePicker fx:id="actual_departure_date" floatMode="INLINE" floatingText="Fecha Real de Salida" layoutX="90.0" layoutY="476.0" prefHeight="38.0" prefWidth="269.0" />
     <MFXButton fx:id="submit" buttonType="RAISED" layoutX="758.0" layoutY="28.0" onAction="#create" prefHeight="35.0" prefWidth="89.0" text="Crear" />
     <MFXFilterComboBox fx:id="client" floatingText="Cliente" layoutX="225.0" layoutY="26.0" prefHeight="40.0" prefWidth="230.0" />
     <MFXFilterComboBox fx:id="company" floatingText="Compañia" layoutX="476.0" layoutY="26.0" prefHeight="40.0" prefWidth="230.0" />

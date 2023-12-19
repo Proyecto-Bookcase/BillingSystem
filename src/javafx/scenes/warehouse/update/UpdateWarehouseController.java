@@ -89,8 +89,8 @@ public class UpdateWarehouseController implements Initializable {
 
         table.getFilters().addAll(
                 new IntegerFilter<>("Estante", LocationDto::getShelf),
-                new IntegerFilter<>("Estante", LocationDto::getFloor),
-                new IntegerFilter<>("Estante", LocationDto::getCompartment)
+                new IntegerFilter<>("Piso", LocationDto::getFloor),
+                new IntegerFilter<>("Casilla", LocationDto::getCompartment)
         );
 
         table.getItems().addAll(locationServices.getAllLocationByWarehouse((Integer) HomeSceneManager.store));
