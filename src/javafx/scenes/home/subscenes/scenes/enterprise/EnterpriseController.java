@@ -102,7 +102,12 @@ public class EnterpriseController implements Initializable {
         tariff_per_hour.setText("$" + enterprise.getTariffPerHours());
         tariff_per_weight.setText("$" + enterprise.getTariffPerWeight());
 
-        year.setSpinnerModel(new IntegerSpinnerModel(2000, LocalDate.now().getYear(), 1));
+        try {
+            year.setSpinnerModel(new IntegerSpinnerModel(2000, LocalDate.now().getYear(), 1));
+        } catch (Exception e) {
+
+        }
+
 
     }
 

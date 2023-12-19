@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
 <?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXPaginatedTableView?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -65,4 +67,32 @@
          </MFXGenericDialog>
       </children>
    </Pane>
+   <MFXButton fx:id="reports" disable="true" layoutX="412.0" layoutY="83.0" onAction="#reports" rippleColor="#ae0202" style="-fx-border-radius: 3; -fx-border-color: slateblue; -fx-border-width: 2;" styleClass="delete-button" text="Reportes" />
+   <MFXGenericDialog fx:id="reports_dialog" layoutX="63.0" layoutY="166.0" onClose="#close_reports_dialog" prefHeight="272.0" prefWidth="475.0" showAlwaysOnTop="false" showMinimize="false">
+      <center>
+         <Pane prefHeight="313.0" prefWidth="453.0" BorderPane.alignment="CENTER">
+            <children>
+               <MFXDatePicker fx:id="start" floatMode="BORDER" floatingText="Inicio" layoutX="14.0" layoutY="112.0" />
+               <MFXDatePicker fx:id="end" disable="true" floatMode="BORDER" floatingText="Fin" layoutX="234.0" layoutY="112.0" />
+               <MFXToggleButton fx:id="discriminator" layoutX="189.0" layoutY="60.0" />
+               <Label layoutX="121.0" layoutY="70.0" text="Ingresada">
+                  <font>
+                     <Font size="15.0" />
+                  </font>
+               </Label>
+               <Label layoutX="241.0" layoutY="70.0" text="Egresada">
+                  <font>
+                     <Font size="15.0" />
+                  </font>
+               </Label>
+               <MFXButton fx:id="accept" layoutX="194.0" layoutY="172.0" onAction="#fire_reports" text="Aceptar" />
+               <Label layoutX="39.0" layoutY="26.0" text="Reporte de una carga en un período de tiempo">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </Label>
+            </children>
+         </Pane>
+      </center>
+   </MFXGenericDialog>
 </AnchorPane>

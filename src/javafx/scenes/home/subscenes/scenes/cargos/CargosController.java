@@ -4,10 +4,7 @@ import Dtos.CargoDto;
 import Dtos.ClientDto;
 import Dtos.LocationDto;
 import Dtos.WarehoseDto;
-import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
-import io.github.palexdev.materialfx.controls.MFXPaginatedTableView;
-import io.github.palexdev.materialfx.controls.MFXTableColumn;
+import io.github.palexdev.materialfx.controls.*;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import io.github.palexdev.materialfx.filter.StringFilter;
@@ -27,6 +24,8 @@ import net.sf.jasperreports.view.JasperViewer;
 import services.*;
 
 import java.net.URL;
+import java.sql.Timestamp;
+import java.time.YearMonth;
 import java.util.*;
 
 import static javafx.utils.async.thread.ThreadHelpers.fxthread;
@@ -72,6 +71,16 @@ public class CargosController implements Initializable {
     private MFXFilterComboBox<ClientDto> client;
     @FXML
     private MFXButton report6;
+    @FXML
+    private MFXButton reports;
+    @FXML
+    private MFXDatePicker start;
+    @FXML
+    private MFXDatePicker end;
+    @FXML
+    private MFXToggleButton discriminator;
+    @FXML
+    private MFXGenericDialog reports_dialog;
 
     /**
      * Called to initialize a controller after its root element has been
@@ -88,6 +97,16 @@ public class CargosController implements Initializable {
     }
 
     private void init() {
+
+        start.currentDateProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                end.setDisable(false);
+                end.setStartingYearMonth(YearMonth.from(newValue));
+            } else {
+                end.setDisable(true);
+                end.clear();
+            }
+        });
 
         client.setConverter(new StringConverter<ClientDto>() {
             @Override
@@ -110,6 +129,7 @@ public class CargosController implements Initializable {
         client.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             // Adding elements
             try {
+                pagination.getItems().clear();
                 pagination.getItems().addAll(cargoServices.get_active_cargoes_for_client(client.getSelectedItem().getId()));
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -128,8 +148,8 @@ public class CargosController implements Initializable {
         MFXTableColumn<CargoDto> nameColumn = new MFXTableColumn<>("Nombre", true, Comparator.comparing(CargoDto::getName));
         nameColumn.setRowCellFactory(companyDto -> new MFXTableRowCell<>(CargoDto::getName));
 
-        MFXTableColumn<CargoDto> productColumn = new MFXTableColumn<>("Producto", true, Comparator.comparing(cargoDto -> cargoDto.getProductType().getDescription()));
-        productColumn.setRowCellFactory(companyDto -> new MFXTableRowCell<>(cargoDto -> cargoDto.getProductType().getDescription()));
+        MFXTableColumn<CargoDto> productColumn = new MFXTableColumn<>("Producto", true, Comparator.comparing(cargoDto -> cargoDto != null ? cargoDto.getProductType().getDescription() : ""));
+        productColumn.setRowCellFactory(companyDto -> new MFXTableRowCell<>(cargoDto -> cargoDto.getProductType() != null ? cargoDto.getProductType() : ""));
 
 
         MFXTableColumn<CargoDto> clientColumn = new MFXTableColumn<>("Cliente", true, Comparator.comparing(cargoDto -> {
@@ -324,6 +344,39 @@ public class CargosController implements Initializable {
 
     @FXML
     public void accept_relocation() {
-        
+
+    }
+
+    @FXML
+    public void reports() {
+        reports_dialog.setVisible(!reports_dialog.isVisible());
+    }
+
+    @FXML
+    public void fire_reports() {
+        if (discriminator.isSelected()) {
+            report7();
+        } else {
+            report4();
+        }
+    }
+
+    @FXML
+    public void close_reports_dialog() {
+        reports_dialog.setVisible(false);
+    }
+
+    private void report4() {
+        CargoDto cargo = pagination.getSelectionModel().getSelectedValues().get(0);
+        Timestamp start = Timestamp.valueOf(this.start.getValue().atStartOfDay());
+        Timestamp end = Timestamp.valueOf(this.end.getValue().atStartOfDay());
+
+    }
+
+    private void report7() {
+        CargoDto cargo = pagination.getSelectionModel().getSelectedValues().get(0);
+        Timestamp start = Timestamp.valueOf(this.start.getValue().atStartOfDay());
+        Timestamp end = Timestamp.valueOf(this.end.getValue().atStartOfDay());
+
     }
 }

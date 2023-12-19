@@ -53,7 +53,7 @@ public class CompanyDeleteController implements Initializable {
             companyServices.deleteCompany((int) HomeSceneManager.store);
             cancel();
         } catch (Exception e) {
-            delete_text.setText("No es posible eliminar una compañía si tiene alguna carga registrada");
+            delete_text.setText("No es posible eliminar una compañía\nsi tiene alguna carga registrada");
         }
     }
 
