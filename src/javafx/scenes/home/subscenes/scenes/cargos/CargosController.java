@@ -8,9 +8,11 @@ import io.github.palexdev.materialfx.controls.*;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import io.github.palexdev.materialfx.filter.StringFilter;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scenes.home.subscenes.manager.HomeSceneManager;
 import javafx.util.StringConverter;
@@ -35,6 +37,16 @@ public class CargosController implements Initializable {
     private final ClientServices clientServices = ServicesLocator.getClientServices();
     private final WarehoseSevices warehoseSevices = ServicesLocator.getWarehoseSevices();
     private final LocationServices locationServices = ServicesLocator.getLocationServices();
+    @FXML
+    public MFXButton abandoned;
+    @FXML
+    public MFXGenericDialog reports_dialog1;
+    @FXML
+    public MFXDatePicker start1;
+    @FXML
+    public MFXDatePicker end1;
+    @FXML
+    public MFXButton accept_report1;
 
     @FXML
     private MFXButton create;
@@ -100,13 +112,25 @@ public class CargosController implements Initializable {
 
     private void init() {
 
-        start.currentDateProperty().addListener((observable, oldValue, newValue) -> {
+        reports.setDisable(false);
+
+        start.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 end.setDisable(false);
                 end.setStartingYearMonth(YearMonth.from(newValue));
             } else {
                 end.setDisable(true);
                 end.clear();
+            }
+        });
+
+        start1.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                end1.setDisable(false);
+                end1.setStartingYearMonth(YearMonth.from(newValue));
+            } else {
+                end1.setDisable(true);
+                end1.clear();
             }
         });
 
@@ -355,6 +379,67 @@ public class CargosController implements Initializable {
     }
 
     @FXML
+    public void close_reports_dialog() {
+        reports_dialog.setVisible(false);
+    }
+
+    private void report4() {
+        Timestamp start = Timestamp.valueOf(this.start.getValue().atStartOfDay());
+        Timestamp end = Timestamp.valueOf(this.end.getValue().atStartOfDay());
+
+        try {
+            String jasperFilePath = "src/reporte_jasper/Report4.jasper";
+            // Cargar el archivo .jasper
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(jasperFilePath);
+
+            // Crear un mapa para los parámetros
+            Map<String, Object> parameters = new HashMap<String, Object>();
+
+            // Agregar parámetros al mapa
+            // Por ejemplo: parameters.put("nombre_parametro (Jasper)", valor_parametro);
+            parameters.put("Fecha1", start);
+            parameters.put("Fecha2", end);
+            // Llenar el informe con datos y parámetros
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ServicesLocator.getDbManager().getConnection());
+
+            // Visualizar el informe
+            JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+            jasperViewer.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void report7() {
+        Timestamp start = Timestamp.valueOf(this.start.getValue().atStartOfDay());
+        Timestamp end = Timestamp.valueOf(this.end.getValue().atStartOfDay());
+
+        try {
+            String jasperFilePath = "src/reporte_jasper/Reporte7.jasper";
+            // Cargar el archivo .jasper
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(jasperFilePath);
+
+            // Crear un mapa para los parámetros
+            Map<String, Object> parameters = new HashMap<String, Object>();
+
+            // Agregar parámetros al mapa
+            // Por ejemplo: parameters.put("nombre_parametro (Jasper)", valor_parametro);
+            parameters.put("Fecha1", start);
+            parameters.put("Fecha2", end);
+            // Llenar el informe con datos y parámetros
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ServicesLocator.getDbManager().getConnection());
+
+            // Visualizar el informe
+            JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+            jasperViewer.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+    @FXML
     public void fire_reports() {
         if (discriminator.isSelected()) {
             report7();
@@ -364,21 +449,18 @@ public class CargosController implements Initializable {
     }
 
     @FXML
-    public void close_reports_dialog() {
-        reports_dialog.setVisible(false);
-    }
-
-    private void report4() {
-        CargoDto cargo = pagination.getSelectionModel().getSelectedValues().get(0);
+    public void report9(){
         Timestamp start = Timestamp.valueOf(this.start.getValue().atStartOfDay());
         Timestamp end = Timestamp.valueOf(this.end.getValue().atStartOfDay());
 
     }
+    @FXML
+    public void close_reports_dialog1(MouseEvent mouseEvent) {
+        reports_dialog1.setVisible(false);
+    }
 
-    private void report7() {
-        CargoDto cargo = pagination.getSelectionModel().getSelectedValues().get(0);
-        Timestamp start = Timestamp.valueOf(this.start.getValue().atStartOfDay());
-        Timestamp end = Timestamp.valueOf(this.end.getValue().atStartOfDay());
-
+    @FXML
+    public void fire_reports1() {
+        reports_dialog1.setVisible(!reports_dialog1.isVisible());
     }
 }

@@ -188,7 +188,7 @@ public class CompanyServices {
         }
 
         try {
-            CallableStatement cstmt = connection.prepareCall("{  call update_company(?,?,?,?,?)}");
+            CallableStatement cstmt = connection.prepareCall("{  call update_company(?,?,?,?,?,?,?,?)}");
             cstmt.setInt(1, companyDto.getId());
             cstmt.setString(2, companyDto.getName());
             cstmt.setFloat(3, companyDto.getFuelTariff());
