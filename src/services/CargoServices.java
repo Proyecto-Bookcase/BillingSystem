@@ -17,16 +17,16 @@ public class    CargoServices {
     public void insertCargo(
 
             String p_name, boolean p_refrigeration, Timestamp p_expiration_date, float p_packed_unit_weight,
-            int p_pack_parts, float p_weight, int p_producttype_id, int p_packedtype_id, int p_client_id,
+            int p_pack_parts, float p_weight, int p_producttype_id, int p_packedtype_id, int p_client_id, int p_company_id,
             Timestamp p_arrival_date, Timestamp p_departure_date, Timestamp p_actual_departure_date,
             float p_needed_fuel,
             int p_compartment, int p_floor, int p_shelf, int p_warehouse_number
-    ) {
+    ) throws Exception {
 
         try {
             // Llama al procedimiento almacenado "insert_cargo" con los parámetros
             CallableStatement cstmt = connection.prepareCall(
-                    "{ call insert_cargo(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }");
+                    "{ call insert_cargo(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }");
 
             // Configura los parámetros
             cstmt.setString(1, p_name);
@@ -49,6 +49,7 @@ public class    CargoServices {
             cstmt.setInt(15, p_floor);
             cstmt.setInt(16, p_shelf);
             cstmt.setInt(17, p_warehouse_number);
+            cstmt.setInt(18,p_company_id);
 
 
             // Ejecutar la llamada al procedimiento almacenado
@@ -57,7 +58,7 @@ public class    CargoServices {
             // Cerrar el CallableStatement
             cstmt.close();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            throw new Exception(e);
         }
     }
 
@@ -72,7 +73,7 @@ public class    CargoServices {
         }
     }
 
-    public CargoDto getCargoDbFunction(int cargoId) {
+    public CargoDto getCargoDbFunction(int cargoId) throws Exception {
         CargoDto cargoDTO = null;
         try (CallableStatement cstmt = connection.prepareCall("{call getcargo(?) }")) {
             cstmt.setInt(1, cargoId);
@@ -106,13 +107,13 @@ public class    CargoServices {
 
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            throw new Exception(e);
         }
         return cargoDTO;
 
     }
 
-    public ArrayList<CargoDto> getAllCargoDbFunction() {
+    public ArrayList<CargoDto> getAllCargoDbFunction() throws Exception {
         ArrayList<CargoDto> cargoDTOs = new ArrayList<CargoDto>();
         try (CallableStatement cstmt = connection.prepareCall("{call getAllCargo() }")) {
 
@@ -144,13 +145,13 @@ public class    CargoServices {
                 cargoDTOs.add(cargoDTO);
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            throw new Exception(e);
         }
         return cargoDTOs;
 
     }
 
-    public void colletCargoBySunad(CargoDto cargoDto) {
+    public void colletCargoBySunad(CargoDto cargoDto) throws Exception {
         CargoDto cargoDTO = null;
         try (CallableStatement cstmt = connection.prepareCall("{call getCargo(?) }")) {
             cstmt.executeQuery();
@@ -158,13 +159,13 @@ public class    CargoServices {
             // Obtener el conjunto de resultados
             ResultSet rs = cstmt.executeQuery();
         } catch (SQLException e) {
-
+            throw new Exception(e);
         }
 
     }
 
     //TODO: arreglar xq no recive el refcursor
-    public void colletCargoBySunadtest() {
+    public void colletCargoBySunadtest() throws Exception {
         try (CallableStatement cstmt = connection.prepareCall("{? = call colletcargobysunadtest() }")) {
 
             cstmt.registerOutParameter(1, Types.REF_CURSOR);
@@ -192,12 +193,12 @@ public class    CargoServices {
             // Find out all the SALES person
             // Obtener el conjunto de resultados
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new Exception(e);
         }
 
     }
 
-    public float getOutCargoById(int cargoId) {
+    public float getOutCargoById(int cargoId) throws Exception {
         float totalAmount = 0;
         try {
             CallableStatement cstmt = connection.prepareCall("{ call getOutCargoById(?)}");
@@ -205,7 +206,7 @@ public class    CargoServices {
             ResultSet rs = cstmt.executeQuery();
             totalAmount = rs.getFloat("total_amountt");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
 
 
@@ -213,7 +214,7 @@ public class    CargoServices {
     }
 
 
-    public ArrayList<CargoDto> getAbandonedCargoesOnLocation() {
+    public ArrayList<CargoDto> getAbandonedCargoesOnLocation() throws Exception {
         ArrayList<CargoDto> cargoes = new ArrayList<>();
         try {
 
@@ -238,12 +239,12 @@ public class    CargoServices {
 
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new Exception(e);
         }
 
         return cargoes;
     }
-    public ArrayList<CargoDto> get_active_cargoes_for_client(int client_id) {
+    public ArrayList<CargoDto> get_active_cargoes_for_client(int client_id) throws Exception {
         ArrayList<CargoDto> cargoes = new ArrayList<>();
         try {
 
@@ -270,7 +271,7 @@ public class    CargoServices {
 
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new Exception(e);
         }
 
         return cargoes;
