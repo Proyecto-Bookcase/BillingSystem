@@ -88,6 +88,8 @@ public class EnterpriseController implements Initializable {
 
     @FXML
     public void report1() {
+  //hola
+
 
     }
 }
