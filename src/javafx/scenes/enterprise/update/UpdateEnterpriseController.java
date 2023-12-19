@@ -59,6 +59,8 @@ public class UpdateEnterpriseController implements Initializable {
     private MFXSpinner<Float> tariff_per_weight;
     @FXML
     private MFXProgressSpinner loading;
+    @FXML
+    private MFXButton back;
 
 
     /**
@@ -146,5 +148,11 @@ public class UpdateEnterpriseController implements Initializable {
     private void onUpdateFail() {
         loading.setVisible(false);
         submit.setDisable(false);
+    }
+
+    @FXML
+    public void back() {
+        SceneManager.show(Scenes.HOME);
+        HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.ENTERPRISE);
     }
 }

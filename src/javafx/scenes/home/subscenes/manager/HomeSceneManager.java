@@ -35,7 +35,7 @@ public class HomeSceneManager {
         scenes.put(Scenes.COMPANIES, "/companies/Companies.fxml");
         scenes.put(Scenes.COMPANY_DELETE, "/companies/delete/CompanyDelete.fxml");
 
-        scenes.put(Scenes.CLIENTS, "/clients/Warehouses.fxml");
+        scenes.put(Scenes.CLIENTS, "/clients/Clients.fxml");
         scenes.put(Scenes.CLIENT_DELETE, "/clients/delete/ClientDelete.fxml");
 
         scenes.put(Scenes.CARGOS, "/cargos/Cargos.fxml");
