@@ -20,7 +20,6 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -48,13 +47,9 @@ public class CreateCargoController implements Initializable {
     @javafx.fxml.FXML
     private MFXFilterComboBox<PackedTypeDto> packed_type;
     @javafx.fxml.FXML
-    private MFXSpinner<Float> weight_per_unit;
-    @javafx.fxml.FXML
     private MFXCheckbox refrigeration;
     @javafx.fxml.FXML
     private MFXSpinner<Float> weight;
-    @javafx.fxml.FXML
-    private MFXDatePicker arrival_date;
     @javafx.fxml.FXML
     private MFXDatePicker departure_date;
     @javafx.fxml.FXML
@@ -114,7 +109,6 @@ public class CreateCargoController implements Initializable {
     }
 
     private void init_spinners() {
-        weight_per_unit.setSpinnerModel(new FloatSpinnerModel(0f, null, 0.5f));
         weight.setSpinnerModel(new FloatSpinnerModel(0f, null, 0.5f));
         fuel.setSpinnerModel(new FloatSpinnerModel(0f, null, 0.5f));
         pack_parts.setSpinnerModel(new IntegerSpinnerModel(0, null, 1));
@@ -199,14 +193,14 @@ public class CreateCargoController implements Initializable {
                     name.getText(),
                     refrigeration.isSelected(),
                     Timestamp.valueOf(expiration_date.getValue().atStartOfDay()),
-                    weight_per_unit.getValue(),
+                    0,
                     pack_parts.getValue(),
                     weight.getValue(),
                     product_type.getValue().getId(),
                     packed_type.getValue().getId(),
                     client.getValue().getId(),
                     company.getValue().getId(),
-                    Timestamp.valueOf(arrival_date.getValue().atStartOfDay()),
+                    Timestamp.valueOf(LocalDate.now().atStartOfDay()),
                     Timestamp.valueOf(departure_date.getValue().atStartOfDay()),
                     null,
                     fuel.getValue(),

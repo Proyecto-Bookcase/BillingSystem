@@ -27,6 +27,8 @@ public class WarehousesController implements Initializable {
 
     @FXML
     private MFXButton edit;
+    @FXML
+    private MFXButton report5;
 
     /**
      * Called to initialize a controller after its root element has been
@@ -71,5 +73,10 @@ public class WarehousesController implements Initializable {
     private void edit() {
         HomeSceneManager.store = pagination.getSelectionModel().getSelectedValues().get(0).getNumber();
         SceneManager.show(Scenes.WAREHOUSE_EDIT);
+    }
+
+    @FXML
+    public void report5() {
+
     }
 }
