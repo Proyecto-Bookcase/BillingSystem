@@ -84,6 +84,8 @@ public class CreateCargoController implements Initializable {
     private HBox location_bg;
     @FXML
     private MFXSpinner<Integer> pack_parts;
+    @FXML
+    private MFXButton back;
 
     /**
      * Called to initialize a controller after its root element has been
@@ -280,5 +282,11 @@ public class CreateCargoController implements Initializable {
                     : STR."Ubicación asignada"
             );
         });
+    }
+
+    @FXML
+    public void back() {
+        SceneManager.show(Scenes.HOME);
+        HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.CARGOS);
     }
 }

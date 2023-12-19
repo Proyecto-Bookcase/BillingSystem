@@ -1,59 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.*?>
-<?import javafx.scene.control.*?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXSpinner?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<AnchorPane prefHeight="600.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="javafx.scenes.client.edit.EditClientController">
-    <Line endX="659.0" layoutX="189.0" layoutY="87.0" startX="-103.0" stroke="#740097"/>
-    <Text fill="#545454" layoutX="115.0" layoutY="68.0" stroke="#17171700" strokeType="OUTSIDE" strokeWidth="5.0"
-          text="Editando Cliente" wrappingWidth="187.79342651367188">
+
+<AnchorPane prefHeight="600.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.scenes.client.edit.EditClientController">
+    <Line endX="659.0" layoutX="189.0" layoutY="87.0" startX="-103.0" stroke="#740097" />
+    <Text fill="#545454" layoutX="115.0" layoutY="68.0" stroke="#17171700" strokeType="OUTSIDE" strokeWidth="5.0" text="Editando Cliente" wrappingWidth="187.79342651367188">
         <font>
-          <Font name="Sans Serif Collection" size="27.0"/>
+          <Font name="Sans Serif Collection" size="27.0" />
         </font>
     </Text>
-    <MFXButton fx:id="submit" buttonType="RAISED" defaultButton="true" depthLevel="LEVEL1" layoutX="727.0"
-               layoutY="40.0" onAction="#edit" prefHeight="35.0" prefWidth="100.0" rippleColor="#f9fcf8"
-               styleClass="submit" stylesheets="@../../company/create/styles.css" text="Actualizar" textFill="WHITE">
+    <MFXButton fx:id="submit" buttonType="RAISED" defaultButton="true" depthLevel="LEVEL1" layoutX="727.0" layoutY="40.0" onAction="#edit" prefHeight="35.0" prefWidth="100.0" rippleColor="#f9fcf8" styleClass="submit" stylesheets="@../../company/create/styles.css" text="Actualizar" textFill="WHITE">
         <font>
-          <Font name="Sans Serif Collection" size="12.0"/>
+          <Font name="Sans Serif Collection" size="12.0" />
         </font>
     </MFXButton>
-    <Line endX="-100.0" endY="452.0" layoutX="574.0" layoutY="111.0" startX="-100.0"/>
-    <MFXTextField fx:id="name" floatingText="Nombre" layoutX="99.0" layoutY="111.0" prefHeight="54.0"
-                  prefWidth="339.0"/>
-    <MFXTextField fx:id="phone_number" floatingText="Teléfono" layoutX="99.0" layoutY="185.0" prefHeight="54.0"
-                  prefWidth="339.0"/>
-    <MFXComboBox fx:id="type" floatingText="Tipo de Cliente" layoutX="499.0" layoutY="107.0" prefHeight="54.0"
-                 prefWidth="339.0"/>
-    <MFXTextField fx:id="email" floatingText="Correo Electrónico" layoutX="99.0" layoutY="260.0" prefHeight="54.0"
-                  prefWidth="339.0"/>
-    <MFXTextField fx:id="fax" floatingText="Fax" layoutX="99.0" layoutY="335.0" prefHeight="54.0" prefWidth="339.0"/>
-    <MFXTextField fx:id="country" floatingText="País" layoutX="99.0" layoutY="408.0" prefHeight="54.0"
-                  prefWidth="339.0"/>
-    <MFXSpinner fx:id="antique" editable="true" layoutX="99.0" layoutY="500.0" prefHeight="44.0" prefWidth="308.0"
-                promptText="Antiguedad"/>
-    <MFXSpinner fx:id="hours" editable="true" layoutX="499.0" layoutY="357.0" prefHeight="44.0" prefWidth="339.0"
-                promptText="Por horas"/>
-    <MFXSpinner fx:id="transportation" editable="true" layoutX="499.0" layoutY="278.0" prefHeight="44.0"
-                prefWidth="339.0" promptText="Por Transportación"/>
-    <MFXSpinner fx:id="refrigeration" editable="true" layoutX="499.0" layoutY="516.0" prefHeight="44.0"
-                prefWidth="339.0" promptText="Por Refrigeración"/>
-    <MFXSpinner fx:id="billing" editable="true" layoutX="499.0" layoutY="436.0" prefHeight="44.0" prefWidth="339.0"
-                promptText="Aforo"/>
+    <Line endX="-100.0" endY="452.0" layoutX="574.0" layoutY="111.0" startX="-100.0" />
+    <MFXTextField fx:id="name" floatingText="Nombre" layoutX="99.0" layoutY="111.0" prefHeight="54.0" prefWidth="339.0" />
+    <MFXTextField fx:id="phone_number" floatingText="Teléfono" layoutX="99.0" layoutY="185.0" prefHeight="54.0" prefWidth="339.0" />
+    <MFXComboBox fx:id="type" floatingText="Tipo de Cliente" layoutX="499.0" layoutY="107.0" prefHeight="54.0" prefWidth="339.0" />
+    <MFXTextField fx:id="email" floatingText="Correo Electrónico" layoutX="99.0" layoutY="260.0" prefHeight="54.0" prefWidth="339.0" />
+    <MFXTextField fx:id="fax" floatingText="Fax" layoutX="99.0" layoutY="335.0" prefHeight="54.0" prefWidth="339.0" />
+    <MFXTextField fx:id="country" floatingText="País" layoutX="99.0" layoutY="408.0" prefHeight="54.0" prefWidth="339.0" />
+    <MFXSpinner fx:id="antique" editable="true" layoutX="99.0" layoutY="500.0" prefHeight="44.0" prefWidth="308.0" promptText="Antiguedad" />
+    <MFXSpinner fx:id="hours" editable="true" layoutX="499.0" layoutY="357.0" prefHeight="44.0" prefWidth="339.0" promptText="Por horas" />
+    <MFXSpinner fx:id="transportation" editable="true" layoutX="499.0" layoutY="278.0" prefHeight="44.0" prefWidth="339.0" promptText="Por Transportación" />
+    <MFXSpinner fx:id="refrigeration" editable="true" layoutX="499.0" layoutY="516.0" prefHeight="44.0" prefWidth="339.0" promptText="Por Refrigeración" />
+    <MFXSpinner fx:id="billing" editable="true" layoutX="499.0" layoutY="436.0" prefHeight="44.0" prefWidth="339.0" promptText="Aforo" />
     <Label layoutX="499.0" layoutY="225.0" text="Tarifas" underline="true" wrapText="true">
         <font>
-          <Font size="18.0"/>
+          <Font size="18.0" />
         </font>
     </Label>
-    <MFXDatePicker fx:id="preff_trate" floatMode="BORDER" floatingText="Trato Preferencial" layoutX="499.0"
-                   layoutY="171.0" prefHeight="38.0" prefWidth="339.0"/>
-    <Label layoutX="101.0" layoutY="480.0" text="Antiguedad"/>
-    <Label layoutX="499.0" layoutY="256.0" text="por Transportación"/>
-    <Label layoutX="499.0" layoutY="339.0" text="por horas"/>
-    <Label layoutX="499.0" layoutY="418.0" text="Aforo"/>
-    <Label layoutX="499.0" layoutY="498.0" text="por Refrigeración"/>
+    <MFXDatePicker fx:id="preff_trate" floatMode="BORDER" floatingText="Trato Preferencial" layoutX="499.0" layoutY="171.0" prefHeight="38.0" prefWidth="339.0" />
+    <Label layoutX="101.0" layoutY="480.0" text="Antiguedad" />
+    <Label layoutX="499.0" layoutY="256.0" text="por Transportación" />
+    <Label layoutX="499.0" layoutY="339.0" text="por horas" />
+    <Label layoutX="499.0" layoutY="418.0" text="Aforo" />
+    <Label layoutX="499.0" layoutY="498.0" text="por Refrigeración" />
+   <MFXButton fx:id="back" buttonType="RAISED" layoutX="13.0" layoutY="14.0" onAction="#back" prefHeight="25.0" prefWidth="36.0" text="&lt;" />
 </AnchorPane>

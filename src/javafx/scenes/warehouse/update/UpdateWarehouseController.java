@@ -42,6 +42,8 @@ public class UpdateWarehouseController implements Initializable {
     private MFXButton submit;
     @javafx.fxml.FXML
     private Text header;
+    @FXML
+    private MFXButton back;
 
     /**
      * Called to initialize a controller after its root element has been
@@ -64,6 +66,7 @@ public class UpdateWarehouseController implements Initializable {
         header.setText(STR. "Actualizando Almacén #\{ warehouse.getNumber() }" );
         //mantainence.setSelected(warehouse.isMaintenance());
         coolled.setSelected(warehouse.isCooled());
+        coolled.setDisable(true);
 
         thread(this::init_table);
     }
@@ -101,6 +104,12 @@ public class UpdateWarehouseController implements Initializable {
     public void submit() {
         warehoseSevices.updateWarehose((Integer) HomeSceneManager.store, coolled.isSelected());
 
+        SceneManager.show(Scenes.HOME);
+        HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.WAREHOUSES);
+    }
+
+    @FXML
+    public void back() {
         SceneManager.show(Scenes.HOME);
         HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.WAREHOUSES);
     }

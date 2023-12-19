@@ -46,6 +46,8 @@ public class EditClientController implements Initializable {
     private MFXSpinner<Float> billing;
     @FXML
     private MFXDatePicker preff_trate;
+    @FXML
+    private MFXButton back;
 
     /**
      * Called to initialize a controller after its root element has been
@@ -113,5 +115,11 @@ public class EditClientController implements Initializable {
         SceneManager.show(Scenes.HOME);
         HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.CLIENTS);
 
+    }
+
+    @FXML
+    public void back() {
+        SceneManager.show(Scenes.HOME);
+        HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.CLIENTS);
     }
 }

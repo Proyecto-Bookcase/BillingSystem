@@ -58,4 +58,5 @@
             <MFXFilterComboBox fx:id="compartment" disable="true" floatingText="Casilla" layoutX="135.0" layoutY="183.0" prefHeight="39.0" prefWidth="253.0" />
         </Pane>
     </Pane>
+   <MFXButton fx:id="back" buttonType="RAISED" layoutX="3.0" layoutY="4.0" onAction="#back" prefHeight="25.0" prefWidth="36.0" text="&lt;" />
 </AnchorPane>

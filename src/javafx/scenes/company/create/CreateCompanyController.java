@@ -47,6 +47,8 @@ public class CreateCompanyController implements Initializable {
     private MFXCheckListView<PriorityCompanyDto> priority;
     @FXML
     private MFXCheckListView<ConditioningCompanyDto> conditioning;
+    @FXML
+    private MFXButton back;
 
 
     /**
@@ -152,5 +154,11 @@ public class CreateCompanyController implements Initializable {
     @FXML
     public void onFuelTariffTextChange() {
         System.out.println("Altro");
+    }
+
+    @FXML
+    public void back() {
+        SceneManager.show(Scenes.HOME);
+        HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.COMPANIES);
     }
 }
