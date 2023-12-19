@@ -48,7 +48,7 @@
         </VBox>
     </MFXScrollPane>
     <MFXButton defaultButton="true" layoutX="466.0" layoutY="32.0" onAction="#toEdit" prefHeight="41.0" prefWidth="130.0" rippleColor="#3a28b2" style="-fx-border-color: slateblue; -fx-border-radius: 4; -fx-border-width: 2;" text="Editar" />
-    <MFXButton fx:id="report1" layoutX="467.0" layoutY="88.0" onAction="#report1" prefHeight="41.0" prefWidth="130.0" style="-fx-border-color: slateblue; -fx-border-radius: 4; -fx-border-width: 2;" styleClass="bu" text="To PDF" />
+    <MFXButton fx:id="report1" layoutX="467.0" layoutY="88.0" onAction="#report1" prefHeight="41.0" prefWidth="130.0" style="-fx-border-color: slateblue; -fx-border-radius: 4; -fx-border-width: 2;" styleClass="bu" text="PDF" />
    <MFXButton fx:id="report8_button" layoutX="467.0" layoutY="147.0" onAction="#report8_action" prefHeight="41.0" prefWidth="130.0" style="-fx-border-color: slateblue; -fx-border-radius: 4; -fx-border-width: 2;" styleClass="bu" text="Pesos Mensuales" />
    <MFXGenericDialog fx:id="report8_dialog" layoutX="50.0" layoutY="68.0" onClose="#close_report8_dialog" prefHeight="294.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false" visible="false">
       <center>

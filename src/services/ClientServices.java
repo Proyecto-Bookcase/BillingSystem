@@ -89,7 +89,7 @@ public class ClientServices {
                         rs.getString("PHONE_NUMBER"),
                         rs.getString("FAX"),
                         rs.getString("EMAIL"),
-                        rs.getString("ATTENTION_TYPE").charAt(0),
+                        rs.getCharacterStream("ATTENTION_TYPE").toString().charAt(0),
                         rs.getInt("ANTIQUE"),
                         rs.getInt("ID"),
                         rs.getDate("PREFERRED_RATE")

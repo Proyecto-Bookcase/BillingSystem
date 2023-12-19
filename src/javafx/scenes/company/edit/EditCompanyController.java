@@ -117,48 +117,44 @@ public class EditCompanyController implements Initializable {
         name.setText(company.getName());
         fuel_tariff.setValue(company.getFuelTariff());
 
-        thread(() -> {
-            try {
-                handling_goods.getItems().addAll(hgServices.getAllHandlingGoodsCompany());
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-            handling_goods.getSelectionModel().selectItems(handling_goods.getItems().filtered(handlingGoodsDto -> company.getHandlingGoods().stream().anyMatch(handlingGoodsDto1 -> handlingGoodsDto.getDescription().equals(handlingGoodsDto1.getDescription()))));
-        });
 
-        thread(() -> {
-            try {
-                priority.getItems().addAll(priorityServices.getAllPriorityCompany());
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+        try {
+            handling_goods.getItems().addAll(hgServices.getAllHandlingGoodsCompany());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        handling_goods.getSelectionModel().selectItems(handling_goods.getItems().filtered(handlingGoodsDto -> company.getHandlingGoods().stream().anyMatch(handlingGoodsDto1 -> handlingGoodsDto.getDescription().equals(handlingGoodsDto1.getDescription()))));
 
-            FilteredList<PriorityCompanyDto> filter = priority.getItems().filtered(priorityCompanyDto -> company.getPriorityCompanies().stream().anyMatch(priorityCompanyDto1 -> priorityCompanyDto.getDescription().equals(priorityCompanyDto1.getDescription())));
-            for (PriorityCompanyDto selected : filter) {
-                priority.getSelectionModel().selectItem(selected);
-            }
-        });
 
-        thread(() -> {
-            try {
-                conditioning.getItems().addAll(conditioningServices.getAllConditioningCompany());
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+        try {
+            priority.getItems().addAll(priorityServices.getAllPriorityCompany());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-            FilteredList<ConditioningCompanyDto> filter = conditioning.getItems().filtered(conditioningCompanyDto -> company.getConditionings().stream().anyMatch(conditioningCompanyDto1 -> conditioningCompanyDto.getDescription().equals(conditioningCompanyDto1.getDescription())));
-            conditioning.getSelectionModel().selectItems(filter);
+        FilteredList<PriorityCompanyDto> filter = priority.getItems().filtered(priorityCompanyDto -> company.getPriorityCompanies().stream().anyMatch(priorityCompanyDto1 -> priorityCompanyDto.getDescription().equals(priorityCompanyDto1.getDescription())));
+        for (PriorityCompanyDto selected : filter) {
+            priority.getSelectionModel().selectItem(selected);
+        }
 
-        });
 
-        thread(() -> {
-            try {
-                type.getItems().addAll(ctypeServices.getAllCompanyType());
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-            type.selectItem(type.getItems().filtered(companyTypeDto -> companyTypeDto.getDescription().equals(company.getCompanyType().getDescription())).get(0));
-        });
+        try {
+            conditioning.getItems().addAll(conditioningServices.getAllConditioningCompany());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        FilteredList<ConditioningCompanyDto> filter2 = conditioning.getItems().filtered(conditioningCompanyDto -> company.getConditionings().stream().anyMatch(conditioningCompanyDto1 -> conditioningCompanyDto.getDescription().equals(conditioningCompanyDto1.getDescription())));
+        conditioning.getSelectionModel().selectItems(filter2);
+
+
+        try {
+            type.getItems().addAll(ctypeServices.getAllCompanyType());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        type.selectItem(type.getItems().filtered(companyTypeDto -> companyTypeDto.getDescription().equals(company.getCompanyType().getDescription())).get(0));
+        
     }
 
     @FXML

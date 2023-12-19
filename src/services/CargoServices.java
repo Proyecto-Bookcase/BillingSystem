@@ -3,12 +3,11 @@ package services;
 import Dtos.CargoDto;
 import Dtos.PackedTypeDto;
 import Dtos.ProductTypeDto;
-import javafx.fxml.FXML;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class    CargoServices {
+public class CargoServices {
     private Connection connection;
 
     public CargoServices(Connection connection) {
@@ -50,7 +49,7 @@ public class    CargoServices {
             cstmt.setInt(15, p_floor);
             cstmt.setInt(16, p_shelf);
             cstmt.setInt(17, p_warehouse_number);
-            cstmt.setInt(18,p_company_id);
+            cstmt.setInt(18, p_company_id);
 
 
             // Ejecutar la llamada al procedimiento almacenado
@@ -207,8 +206,7 @@ public class    CargoServices {
             CallableStatement cstmt = connection.prepareCall("{ call getOutCargoById(?)}");
             cstmt.setInt(1, cargoId);
             ResultSet rs = cstmt.executeQuery();
-            if(rs.next())
-            {
+            if (rs.next()) {
                 totalAmount = rs.getFloat(1);
 
             }
@@ -218,9 +216,8 @@ public class    CargoServices {
         }
 
 
-        return  totalAmount;
+        return totalAmount;
     }
-
 
 
     public ArrayList<CargoDto> getAbandonedCargoesOnLocation() throws Exception {
@@ -228,23 +225,23 @@ public class    CargoServices {
         try {
 
             CallableStatement cstmt = connection.prepareCall("{ call get_abandoned_cargoes_on_LOCATION()}");
-                ResultSet resultSet = cstmt.executeQuery();
-                    while (resultSet.next()) {
-                        CargoDto cargoDto = new CargoDto();
-                        cargoDto.setId(resultSet.getInt("cargo_id"));
-                        cargoDto.setName(resultSet.getString("cargo_code"));
-                        cargoDto.setRefrigeration(resultSet.getBoolean("refrigeration"));
-                        cargoDto.setExpirationDate(resultSet.getTimestamp("expiration_date"));
-                        cargoDto.setPackedUnitWeight(resultSet.getFloat("packed_unit_weight"));
-                        cargoDto.setPackParts(resultSet.getInt("pack_parts"));
-                        cargoDto.setWeight(resultSet.getFloat("weight"));
-                        cargoDto.setCompartment(resultSet.getInt("COMPARTMENT"));
-                        cargoDto.setFloor(resultSet.getInt("FLOOR"));
-                        cargoDto.setShelf(resultSet.getInt("SHELF"));
-                        cargoDto.setWarehouseNumber(resultSet.getInt("WAREHOUSE_NUMBER"));
+            ResultSet resultSet = cstmt.executeQuery();
+            while (resultSet.next()) {
+                CargoDto cargoDto = new CargoDto();
+                cargoDto.setId(resultSet.getInt("cargo_id"));
+                cargoDto.setName(resultSet.getString("cargo_code"));
+                cargoDto.setRefrigeration(resultSet.getBoolean("refrigeration"));
+                cargoDto.setExpirationDate(resultSet.getTimestamp("expiration_date"));
+                cargoDto.setPackedUnitWeight(resultSet.getFloat("packed_unit_weight"));
+                cargoDto.setPackParts(resultSet.getInt("pack_parts"));
+                cargoDto.setWeight(resultSet.getFloat("weight"));
+                cargoDto.setCompartment(resultSet.getInt("COMPARTMENT"));
+                cargoDto.setFloor(resultSet.getInt("FLOOR"));
+                cargoDto.setShelf(resultSet.getInt("SHELF"));
+                cargoDto.setWarehouseNumber(resultSet.getInt("WAREHOUSE_NUMBER"));
 
-                        cargoes.add(cargoDto);
-                    }
+                cargoes.add(cargoDto);
+            }
 
 
         } catch (SQLException e) {
@@ -253,6 +250,7 @@ public class    CargoServices {
 
         return cargoes;
     }
+
     public ArrayList<CargoDto> get_active_cargoes_for_client(int client_id) throws Exception {
         ArrayList<CargoDto> cargoes = new ArrayList<>();
         try {
@@ -272,6 +270,7 @@ public class    CargoServices {
                 cargoDto.setFloor(resultSet.getInt("FLOOR"));
                 cargoDto.setShelf(resultSet.getInt("SHELF"));
                 cargoDto.setWarehouseNumber(resultSet.getInt("WAREHOUSE_NUMBER"));
+                cargoDto.setClientId(client_id);
 
                 cargoes.add(cargoDto);
             }
@@ -288,18 +287,18 @@ public class    CargoServices {
     public void updateCargoLocation(int compartment, int floor, int shelf, int cargoId, int warehouseNumber) throws Exception {
 
 
-            try {
-                CallableStatement cstmt = connection.prepareCall("{call update_location_of_cargo(?, ?, ?, ?, ?)}");
-                cstmt.setInt(1, compartment);
-                cstmt.setInt(2, floor);
-                cstmt.setInt(3, shelf);
-                cstmt.setInt(4, cargoId);
-                cstmt.setInt(5, warehouseNumber);
+        try {
+            CallableStatement cstmt = connection.prepareCall("{call update_location_of_cargo(?, ?, ?, ?, ?)}");
+            cstmt.setInt(1, compartment);
+            cstmt.setInt(2, floor);
+            cstmt.setInt(3, shelf);
+            cstmt.setInt(4, cargoId);
+            cstmt.setInt(5, warehouseNumber);
 
-                cstmt.execute();
-            }catch (SQLException e) {
-                throw new Exception(e);
-            }
+            cstmt.execute();
+        } catch (SQLException e) {
+            throw new Exception(e);
+        }
 
     }
 }

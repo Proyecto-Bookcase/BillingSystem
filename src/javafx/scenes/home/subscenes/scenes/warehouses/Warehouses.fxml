@@ -16,5 +16,5 @@
     </Label>
     <MFXPaginatedTableView fx:id="pagination" layoutX="48.0" layoutY="119.0" prefHeight="161.0" prefWidth="512.0" rowsPerPage="10" />
     <MFXButton fx:id="edit" disable="true" layoutX="48.0" layoutY="84.0" onAction="#edit" rippleColor="#b26aff" style="-fx-border-radius: 3; -fx-border-color: slateblue; -fx-border-width: 2;" styleClass="slate-button" text="Editar" />
-   <MFXButton fx:id="report5" layoutX="481.0" layoutY="30.0" onAction="#report5" prefHeight="35.0" prefWidth="72.0" style="-fx-border-color: slateblue; -fx-border-radius: 4; -fx-border-width: 2;" styleClass="bu" text="To PDF" />
+   <MFXButton fx:id="report5" layoutX="481.0" layoutY="30.0" onAction="#report5" prefHeight="35.0" prefWidth="72.0" style="-fx-border-color: slateblue; -fx-border-radius: 4; -fx-border-width: 2;" styleClass="bu" text="PDF" />
 </AnchorPane>
