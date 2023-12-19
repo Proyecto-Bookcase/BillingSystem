@@ -1,6 +1,7 @@
 package javafx.scenes.home.subscenes.scenes.enterprise;
 
 import Dtos.EnterpirseDto;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -42,6 +43,8 @@ public class EnterpriseController implements Initializable {
     private MFXTextField tariff_per_hour;
     @FXML
     private MFXTextField tariff_per_weight;
+    @FXML
+    private MFXButton report1;
 
     /**
      * Called to initialize a controller after its root element has been
@@ -81,5 +84,10 @@ public class EnterpriseController implements Initializable {
     @FXML()
     private void toEdit() {
         SceneManager.show(Scenes.ENTERPRISE_UPDATE);
+    }
+
+    @FXML
+    public void report1() {
+
     }
 }
