@@ -19,7 +19,7 @@ public class HomeSceneManager {
     public static Object store;
     private static HomeSceneManager instance;
 
-    protected Pane scene;
+    protected final Pane scene;
     protected Pane actualPane;
     private final HashMap<Scenes, String> scenes;
 

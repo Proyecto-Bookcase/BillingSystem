@@ -4,10 +4,7 @@ import Dtos.CargoDto;
 import Dtos.PackedTypeDto;
 import Dtos.ProductTypeDto;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class    CargoServices {

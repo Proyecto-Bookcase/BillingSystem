@@ -132,9 +132,7 @@ public class UpdateEnterpriseController implements Initializable {
                     tariff_per_hours.getValue(),
                     tariff_per_weight.getValue()
             );
-            timeout(1000,()->{
-                fxthread(this::onUpdateSucceed);
-            });
+            timeout(1000,()-> fxthread(this::onUpdateSucceed));
         });
     }
 

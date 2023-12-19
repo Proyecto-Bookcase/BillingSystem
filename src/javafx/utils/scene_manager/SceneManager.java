@@ -19,7 +19,7 @@ import java.util.HashMap;
 public class SceneManager {
 
     private static SceneManager instance;
-    protected Stage stage;
+    protected final Stage stage;
     protected Scene actualScene;
     private final HashMap<String, Scene> store;
 
@@ -104,11 +104,10 @@ public class SceneManager {
     /**
      * @param sceneEnum Scene que se quiere mostrar
      * @param cache     (Opcional) si se quiere guardar la scene en caché
-     * @return
      */
-    public static Scene show(Scenes sceneEnum, boolean... cache) {
+    public static void show(Scenes sceneEnum, boolean... cache) {
 
-        Scene scene = null;
+        Scene scene;
         try {
             scene = getInstance().generateScene(cache, sceneEnum);
             getInstance().stage.setScene(scene);
@@ -124,7 +123,6 @@ public class SceneManager {
             throw new RuntimeException(e);
         }
 
-        return scene;
     }
 
     public static void close() {

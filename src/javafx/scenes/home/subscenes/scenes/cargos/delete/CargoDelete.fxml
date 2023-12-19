@@ -7,22 +7,22 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: rgba(100,100,100,0.4);" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.scenes.home.subscenes.scenes.clients.delete.ClientDeleteController">
-   <children>
-      <MFXGenericDialog fx:id="deleteDialog" layoutX="100.0" layoutY="215.0" onClose="#cancel" prefHeight="200.0" prefWidth="474.0" showAlwaysOnTop="false" showMinimize="false">
-         <center>
-            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <MFXButton fx:id="delete" layoutX="117.0" layoutY="103.0" onAction="#delete" styleClass="delete" text="Eliminar" />
-                  <MFXButton fx:id="cancel" layoutX="197.0" layoutY="103.0" onAction="#cancel" text="Cancelar" />
-                  <Label fx:id="delete_text" layoutX="40.0" layoutY="37.0">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-         </center>
-      </MFXGenericDialog>
-   </children>
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: rgba(100,100,100,0.4);"
+            stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="javafx.scenes.home.subscenes.scenes.clients.delete.ClientDeleteController">
+   <MFXGenericDialog fx:id="deleteDialog" layoutX="100.0" layoutY="215.0" onClose="#cancel" prefHeight="200.0"
+                     prefWidth="474.0" showAlwaysOnTop="false" showMinimize="false">
+      <center>
+         <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <MFXButton fx:id="delete" layoutX="117.0" layoutY="103.0" onAction="#delete" styleClass="delete"
+                       text="Eliminar"/>
+            <MFXButton fx:id="cancel" layoutX="197.0" layoutY="103.0" onAction="#cancel" text="Cancelar"/>
+            <Label fx:id="delete_text" layoutX="40.0" layoutY="37.0">
+               <font>
+                  <Font size="16.0"/>
+               </font>
+            </Label>
+         </Pane>
+      </center>
+   </MFXGenericDialog>
 </AnchorPane>

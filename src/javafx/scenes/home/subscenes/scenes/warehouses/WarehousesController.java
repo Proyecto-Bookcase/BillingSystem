@@ -1,29 +1,23 @@
 package javafx.scenes.home.subscenes.scenes.warehouses;
 
-import Dtos.ClientDto;
 import Dtos.WarehoseDto;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPaginatedTableView;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
-import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import io.github.palexdev.materialfx.filter.BooleanFilter;
 import io.github.palexdev.materialfx.filter.IntegerFilter;
-import io.github.palexdev.materialfx.filter.StringFilter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scenes.home.subscenes.manager.HomeSceneManager;
 import javafx.utils.scene_manager.SceneManager;
 import javafx.utils.scene_manager.Scenes;
-import services.ClientServices;
 import services.ServicesLocator;
 import services.WarehoseSevices;
 
 import java.net.URL;
 import java.util.Comparator;
 import java.util.ResourceBundle;
-
-import static javafx.utils.async.thread.ThreadHelpers.fxthread;
 
 public class WarehousesController implements Initializable {
     private final WarehoseSevices warehoseSevices = ServicesLocator.getWarehoseSevices();
@@ -66,9 +60,7 @@ public class WarehousesController implements Initializable {
         // Adding elements
         pagination.getItems().addAll(warehoseSevices.getAllWarehose());
 
-        pagination.getSelectionModel().selectionProperty().addListener((observable, oldValue, newValue) -> {
-            edit.setDisable(false);
-        });
+        pagination.getSelectionModel().selectionProperty().addListener((observable, oldValue, newValue) -> edit.setDisable(false));
     }
 
     @FXML()

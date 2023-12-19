@@ -1,7 +1,6 @@
 package javafx.scenes.home.subscenes.scenes.cargos.delete;
 
 import Dtos.CargoDto;
-import Dtos.ClientDto;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.fxml.FXML;
@@ -11,7 +10,6 @@ import javafx.scenes.home.subscenes.manager.HomeSceneManager;
 import javafx.utils.scene_manager.SceneManager;
 import javafx.utils.scene_manager.Scenes;
 import services.CargoServices;
-import services.ClientServices;
 import services.ServicesLocator;
 
 import java.net.URL;

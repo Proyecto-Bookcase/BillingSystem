@@ -10,12 +10,12 @@ import javafx.util.converter.FloatStringConverter;
 
 public class FloatSpinnerModel implements SpinnerModel<Float> {
 
-    private FloatProperty actual;
-    private Float min;
-    private Float max;
-    private Float step;
+    private final FloatProperty actual;
+    private final Float min;
+    private final Float max;
+    private final Float step;
 
-    private FloatStringConverter converter = new FloatStringConverter();
+    private final FloatStringConverter converter = new FloatStringConverter();
 
     public FloatSpinnerModel(Float min, Float max, float step) {
         this.min = min != null ? min : Float.MIN_VALUE;
@@ -65,7 +65,6 @@ public class FloatSpinnerModel implements SpinnerModel<Float> {
     }
 
     /**
-     * @return
      */
     @Override
     public Float getValue() {
@@ -73,7 +72,6 @@ public class FloatSpinnerModel implements SpinnerModel<Float> {
     }
 
     /**
-     * @return
      */
     @Override
     public ObjectProperty<Float> valueProperty() {
@@ -81,7 +79,6 @@ public class FloatSpinnerModel implements SpinnerModel<Float> {
     }
 
     /**
-     * @param aFloat
      */
     @Override
     public void setValue(Float aFloat) {
@@ -89,7 +86,6 @@ public class FloatSpinnerModel implements SpinnerModel<Float> {
     }
 
     /**
-     * @return
      */
     @Override
     public StringConverter<Float> getConverter() {
@@ -97,7 +93,6 @@ public class FloatSpinnerModel implements SpinnerModel<Float> {
     }
 
     /**
-     * @return
      */
     @Override
     public ObjectProperty<StringConverter<Float>> converterProperty() {
@@ -105,7 +100,6 @@ public class FloatSpinnerModel implements SpinnerModel<Float> {
     }
 
     /**
-     * @param stringConverter
      */
     @Override
     public void setConverter(StringConverter<Float> stringConverter) {
@@ -113,7 +107,6 @@ public class FloatSpinnerModel implements SpinnerModel<Float> {
     }
 
     /**
-     * @return
      */
     @Override
     public boolean isWrapAround() {
@@ -121,7 +114,6 @@ public class FloatSpinnerModel implements SpinnerModel<Float> {
     }
 
     /**
-     * @param b
      */
     @Override
     public void setWrapAround(boolean b) {

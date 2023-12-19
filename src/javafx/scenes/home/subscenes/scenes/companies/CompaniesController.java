@@ -1,7 +1,9 @@
 package javafx.scenes.home.subscenes.scenes.companies;
 
 import Dtos.CompanyDto;
-import io.github.palexdev.materialfx.controls.*;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXPaginatedTableView;
+import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import io.github.palexdev.materialfx.filter.FloatFilter;
@@ -75,9 +77,7 @@ public class CompaniesController implements Initializable {
 
     @FXML()
     private void create() {
-        fxthread(() -> {
-            SceneManager.show(Scenes.COMPANY_CREATE);
-        });
+        fxthread(() -> SceneManager.show(Scenes.COMPANY_CREATE));
     }
 
     @FXML()

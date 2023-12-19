@@ -2,13 +2,11 @@ package javafx.scenes.home.subscenes.scenes.companies.delete;
 
 import Dtos.CompanyDto;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXSpinner;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scenes.home.subscenes.manager.HomeSceneManager;
-import javafx.utils.components.spinner.FloatSpinnerModel;
 import javafx.utils.scene_manager.SceneManager;
 import javafx.utils.scene_manager.Scenes;
 import services.CompanyServices;
@@ -16,11 +14,10 @@ import services.ServicesLocator;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.ServiceLoader;
 
 public class CompanyDeleteController implements Initializable {
 
-    CompanyServices companyServices = ServicesLocator.getCompanyServices();
+    private final CompanyServices companyServices = ServicesLocator.getCompanyServices();
     @javafx.fxml.FXML
     private MFXGenericDialog deleteDialog;
     @javafx.fxml.FXML

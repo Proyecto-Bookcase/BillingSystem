@@ -16,7 +16,7 @@ import javafx.utils.scene_manager.Scenes;
 import services.*;
 
 import java.net.URL;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -117,10 +117,10 @@ public class CreateCargoController implements Initializable {
 
     private void init_combos() {
 
-        product_type.setConverter(new StringConverter<ProductTypeDto>() {
+        product_type.setConverter(new StringConverter<>() {
             @Override
             public String toString(ProductTypeDto object) {
-                return object.getDescription();
+                return object != null ? object.getDescription() : "";
             }
 
             @Override
@@ -132,10 +132,10 @@ public class CreateCargoController implements Initializable {
         product_type.getItems().addAll(productTypeServices.getAllProductType());
 
 
-        packed_type.setConverter(new StringConverter<PackedTypeDto>() {
+        packed_type.setConverter(new StringConverter<>() {
             @Override
             public String toString(PackedTypeDto object) {
-                return object.getDescription();
+                return object != null ? object.getDescription() : "";
             }
 
             @Override
@@ -147,10 +147,10 @@ public class CreateCargoController implements Initializable {
         packed_type.getItems().addAll(packedTypeServices.getAllPackagedType());
 
 
-        company.setConverter(new StringConverter<CompanyDto>() {
+        company.setConverter(new StringConverter<>() {
             @Override
             public String toString(CompanyDto object) {
-                return object.getName();
+                return object != null ? object.getName() : "";
             }
 
             @Override
@@ -162,10 +162,10 @@ public class CreateCargoController implements Initializable {
         company.getItems().addAll(companyServices.getAllCompany());
 
 
-        client.setConverter(new StringConverter<ClientDto>() {
+        client.setConverter(new StringConverter<>() {
             @Override
             public String toString(ClientDto object) {
-                return object.getName();
+                return object != null ? object.getName() : "";
             }
 
             @Override
@@ -184,16 +184,16 @@ public class CreateCargoController implements Initializable {
         cargoServices.insertCargo(
                 name.getText(),
                 refrigeration.isSelected(),
-                Date.valueOf(expiration_date.getValue()),
+                Timestamp.valueOf(expiration_date.getValue().atStartOfDay()),
                 weight_per_unit.getValue(),
                 pack_parts.getValue(),
                 weight.getValue(),
                 product_type.getValue().getId(),
                 packed_type.getValue().getId(),
                 client.getValue().getId(),
-                Date.valueOf(arrival_date.getValue()),
-                Date.valueOf(departure_date.getValue()),
-                Date.valueOf(actual_departure_date.getValue()),
+                Timestamp.valueOf(arrival_date.getValue().atStartOfDay()),
+                Timestamp.valueOf(departure_date.getValue().atStartOfDay()),
+                Timestamp.valueOf(actual_departure_date.getValue().atStartOfDay()),
                 fuel.getValue(),
                 compartment.getSelectedItem(),
                 floor.getSelectedItem(),
@@ -212,7 +212,7 @@ public class CreateCargoController implements Initializable {
             warehose.getItems().addAll(warehoseSevices.getAllWarehose().stream().filter(warehoseDto -> warehoseDto.isCooled() && refrigeration.isSelected()).toList());
         });
 
-        warehose.setConverter(new StringConverter<WarehoseDto>() {
+        warehose.setConverter(new StringConverter<>() {
             @Override
             public String toString(WarehoseDto object) {
                 return object != null ? object.getNumber() + "" : "";

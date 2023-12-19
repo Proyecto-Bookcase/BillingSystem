@@ -63,10 +63,10 @@ public class CreateCompanyController implements Initializable {
 
         fuel_tariff.setSpinnerModel(new FloatSpinnerModel(0f, null, 0.5f));
 
-        type.setConverter(new StringConverter<CompanyTypeDto>() {
+        type.setConverter(new StringConverter<>() {
             @Override
             public String toString(CompanyTypeDto object) {
-                return object == null? "": object.getDescription();
+                return object == null ? "" : object.getDescription();
             }
 
             @Override
@@ -75,7 +75,7 @@ public class CreateCompanyController implements Initializable {
             }
         });
 
-        handling_goods.setConverter(new StringConverter<HandlingGoodsDto>() {
+        handling_goods.setConverter(new StringConverter<>() {
             @Override
             public String toString(HandlingGoodsDto object) {
                 return object.getDescription();
@@ -87,7 +87,7 @@ public class CreateCompanyController implements Initializable {
             }
         });
 
-        priority.setConverter(new StringConverter<PriorityCompanyDto>() {
+        priority.setConverter(new StringConverter<>() {
             @Override
             public String toString(PriorityCompanyDto object) {
                 return object.getDescription();
@@ -99,7 +99,7 @@ public class CreateCompanyController implements Initializable {
             }
         });
 
-        conditioning.setConverter(new StringConverter<ConditioningCompanyDto>() {
+        conditioning.setConverter(new StringConverter<>() {
             @Override
             public String toString(ConditioningCompanyDto object) {
                 return object.getDescription();
@@ -111,21 +111,13 @@ public class CreateCompanyController implements Initializable {
             }
         });
 
-        thread(() -> {
-            handling_goods.getItems().addAll(hgServices.getAllHandlingGoodsCompany());
-        });
+        thread(() -> handling_goods.getItems().addAll(hgServices.getAllHandlingGoodsCompany()));
 
-        thread(() -> {
-            priority.getItems().addAll(priorityServices.getAllPriorityCompany());
-        });
+        thread(() -> priority.getItems().addAll(priorityServices.getAllPriorityCompany()));
 
-        thread(() -> {
-            conditioning.getItems().addAll(conditioningServices.getAllConditioningCompany());
-        });
+        thread(() -> conditioning.getItems().addAll(conditioningServices.getAllConditioningCompany()));
 
-        thread(() -> {
-            type.getItems().addAll(ctypeServices.getAllCompanyType());
-        });
+        thread(() -> type.getItems().addAll(ctypeServices.getAllCompanyType()));
     }
 
     @FXML

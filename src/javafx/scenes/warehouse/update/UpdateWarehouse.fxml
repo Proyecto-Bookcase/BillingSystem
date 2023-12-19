@@ -9,16 +9,14 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="warehouse_label" prefHeight="600.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.scenes.warehouse.update.UpdateWarehouseController">
-   <children>
-      <Line endX="693.0" layoutX="163.0" layoutY="86.0" startX="-100.0" stroke="#880497" />
-      <Text fx:id="header" layoutX="69.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Actualizando Almacén #">
-         <font>
-            <Font name="Sans Serif Collection" size="27.0" />
-         </font>
-      </Text>
-      <MFXToggleButton fx:id="mantainence" layoutX="428.0" layoutY="27.0" text="Mantenimiento" />
-      <MFXTableView fx:id="table" layoutX="63.0" layoutY="138.0" prefHeight="440.0" prefWidth="786.0" />
-      <MFXToggleButton fx:id="coolled" layoutX="603.0" layoutY="27.0" text="Refrigerado" />
-      <MFXButton fx:id="submit" buttonType="RAISED" layoutX="760.0" layoutY="30.0" prefHeight="35.0" prefWidth="89.0" text="Actualizar" />
-   </children>
+    <Line endX="693.0" layoutX="163.0" layoutY="86.0" startX="-100.0" stroke="#880497" />
+    <Text fx:id="header" layoutX="69.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Actualizando Almacén #">
+        <font>
+          <Font name="Sans Serif Collection" size="27.0" />
+        </font>
+    </Text>
+    <MFXToggleButton fx:id="mantainence" layoutX="428.0" layoutY="27.0" text="Mantenimiento" />
+    <MFXTableView fx:id="table" layoutX="63.0" layoutY="138.0" prefHeight="440.0" prefWidth="786.0" />
+    <MFXToggleButton fx:id="coolled" layoutX="603.0" layoutY="27.0" text="Refrigerado" />
+    <MFXButton fx:id="submit" buttonType="RAISED" layoutX="760.0" layoutY="30.0" onAction="#submit" prefHeight="35.0" prefWidth="89.0" text="Actualizar" />
 </AnchorPane>

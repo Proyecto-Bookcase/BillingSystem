@@ -14,7 +14,6 @@ import javafx.utils.scene_manager.Scenes;
 import services.*;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import static javafx.utils.async.thread.ThreadHelpers.fxthread;
@@ -62,7 +61,7 @@ public class EditCompanyController implements Initializable {
 
         fuel_tariff.setSpinnerModel(new FloatSpinnerModel(0f, null, 0.5f));
 
-        type.setConverter(new StringConverter<CompanyTypeDto>() {
+        type.setConverter(new StringConverter<>() {
             @Override
             public String toString(CompanyTypeDto object) {
                 return object == null ? "" : object.getDescription();
@@ -74,7 +73,7 @@ public class EditCompanyController implements Initializable {
             }
         });
 
-        handling_goods.setConverter(new StringConverter<HandlingGoodsDto>() {
+        handling_goods.setConverter(new StringConverter<>() {
             @Override
             public String toString(HandlingGoodsDto object) {
                 return object.getDescription();
@@ -86,7 +85,7 @@ public class EditCompanyController implements Initializable {
             }
         });
 
-        priority.setConverter(new StringConverter<PriorityCompanyDto>() {
+        priority.setConverter(new StringConverter<>() {
             @Override
             public String toString(PriorityCompanyDto object) {
                 return object.getDescription();
@@ -98,7 +97,7 @@ public class EditCompanyController implements Initializable {
             }
         });
 
-        conditioning.setConverter(new StringConverter<ConditioningCompanyDto>() {
+        conditioning.setConverter(new StringConverter<>() {
             @Override
             public String toString(ConditioningCompanyDto object) {
                 return object.getDescription();
