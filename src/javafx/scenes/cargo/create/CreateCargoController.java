@@ -17,7 +17,10 @@ import services.*;
 
 import java.net.URL;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -106,6 +109,8 @@ public class CreateCargoController implements Initializable {
 
         this.location.setOnMousePressed(event -> modal.setVisible(!modal.isVisible()));
         this.accept.setOnAction(event -> modal.setVisible(false));
+
+        departure_date.setStartingYearMonth(YearMonth.now());
     }
 
     private void init_spinners() {

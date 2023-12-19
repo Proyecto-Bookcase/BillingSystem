@@ -35,7 +35,7 @@ public class CompaniesController implements Initializable {
     @FXML
     private MFXButton delete;
     @FXML
-    private MFXGenericDialog dialog;
+    private MFXButton report3;
 
     /**
      * Called to initialize a controller after its root element has been
@@ -72,6 +72,7 @@ public class CompaniesController implements Initializable {
         pagination.getSelectionModel().selectionProperty().addListener((observable, oldValue, newValue) -> {
             edit.setDisable(false);
             delete.setDisable(false);
+            report3.setDisable(false);
         });
     }
 
@@ -90,5 +91,10 @@ public class CompaniesController implements Initializable {
     private void delete() {
         HomeSceneManager.store = pagination.getSelectionModel().getSelectedValues().get(0).getId();
         HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.COMPANY_DELETE, true);
+    }
+
+    @FXML
+    public void report3() {
+        CompanyDto company = pagination.getSelectionModel().getSelectedValues().get(0);
     }
 }

@@ -2,28 +2,50 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXPaginatedTableView?>
+<?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="600.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="javafx.scenes.home.subscenes.scenes.cargos.CargosController">
-    <Line endX="411.0" layoutX="148.0" layoutY="68.0" startX="-100.0"/>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.scenes.home.subscenes.scenes.cargos.CargosController">
+    <Line endX="411.0" layoutX="148.0" layoutY="68.0" startX="-100.0" />
     <Label layoutX="48.0" layoutY="31.0" text="Cargas">
         <font>
-            <Font name="Arial Rounded MT Bold" size="21.0"/>
+            <Font name="Arial Rounded MT Bold" size="21.0" />
         </font>
     </Label>
-    <MFXButton fx:id="create" layoutX="493.0" layoutY="26.0" onAction="#create" prefHeight="36.0" prefWidth="67.0"
-               rippleColor="#2365ab" style="-fx-background-color: #338EFCFF;" text="Nuevo" textFill="WHITE">
+    <MFXButton fx:id="create" layoutX="493.0" layoutY="26.0" onAction="#create" prefHeight="36.0" prefWidth="67.0" rippleColor="#2365ab" style="-fx-background-color: #338EFCFF;" text="Nuevo" textFill="WHITE">
         <font>
-            <Font name="Arial Rounded MT Bold" size="12.0"/>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
         </font>
     </MFXButton>
-    <MFXPaginatedTableView fx:id="pagination" layoutX="48.0" layoutY="119.0" prefHeight="161.0" prefWidth="512.0"
-                           rowsPerPage="10"/>
-    <MFXButton fx:id="delete" disable="true" layoutX="53.0" layoutY="83.0" onAction="#delete" rippleColor="#ae0202"
-               style="-fx-border-radius: 3; -fx-border-color: red; -fx-border-width: 2;" styleClass="delete-button"
-               text="Eliminar"/>
+    <MFXPaginatedTableView fx:id="pagination" layoutX="48.0" layoutY="119.0" prefHeight="161.0" prefWidth="512.0" rowsPerPage="10" />
+    <MFXButton fx:id="delete" disable="true" layoutX="53.0" layoutY="83.0" onAction="#delete" rippleColor="#ae0202" style="-fx-border-radius: 3; -fx-border-color: red; -fx-border-width: 2;" styleClass="delete-button" text="Eliminar" />
+   <Pane fx:id="modal" layoutY="-2.0" prefHeight="606.0" prefWidth="600.0" style="-fx-background-color: rgba(100,100,100,0.5);" visible="false">
+      <children>
+         <MFXGenericDialog fx:id="payment" headerText="Importe" layoutX="100.0" layoutY="203.0" prefHeight="346.0" prefWidth="400.0">
+            <center>
+               <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <children>
+                     <Label layoutX="51.0" layoutY="53.0" text="\$">
+                        <font>
+                           <Font size="26.0" />
+                        </font>
+                     </Label>
+                     <Label fx:id="payment_text" layoutX="74.0" layoutY="53.0">
+                        <font>
+                           <Font size="26.0" />
+                        </font>
+                     </Label>
+                     <MFXButton fx:id="picker" layoutX="148.0" layoutY="138.0" onAction="#picker" prefHeight="36.0" prefWidth="83.0" style="-fx-border-color: green; -fx-border-width: 2; -fx-border-radius: 5;" text="Recoger" />
+                  </children>
+               </Pane>
+            </center>
+         </MFXGenericDialog>
+      </children>
+   </Pane>
+   <MFXButton fx:id="pick" disable="true" layoutX="494.0" layoutY="83.0" onAction="#pick" rippleColor="#ae0202" style="-fx-border-radius: 3; -fx-border-color: green; -fx-border-width: 2;" styleClass="delete-button" text="Recoger" />
 </AnchorPane>

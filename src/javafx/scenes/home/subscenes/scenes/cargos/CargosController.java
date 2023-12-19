@@ -5,9 +5,12 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPaginatedTableView;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
+import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import io.github.palexdev.materialfx.filter.StringFilter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.scenes.home.subscenes.manager.HomeSceneManager;
 import javafx.utils.scene_manager.SceneManager;
 import javafx.utils.scene_manager.Scenes;
@@ -20,6 +23,7 @@ import java.util.Comparator;
 import java.util.ResourceBundle;
 
 import static javafx.utils.async.thread.ThreadHelpers.fxthread;
+import static javafx.utils.async.thread.ThreadHelpers.thread;
 
 public class CargosController implements Initializable {
     private final CargoServices cargoServices = ServicesLocator.getCargoServices();
@@ -31,9 +35,17 @@ public class CargosController implements Initializable {
     private MFXPaginatedTableView<CargoDto> pagination;
 
     @FXML
-    private MFXButton edit;
-    @FXML
     private MFXButton delete;
+    @FXML
+    private Pane modal;
+    @FXML
+    private MFXGenericDialog payment;
+    @FXML
+    private Label payment_text;
+    @FXML
+    private MFXButton pick;
+    @FXML
+    private MFXButton picker;
 
     /**
      * Called to initialize a controller after its root element has been
@@ -50,6 +62,12 @@ public class CargosController implements Initializable {
     }
 
     private void init() {
+
+        payment.setShowAlwaysOnTop(false);
+        payment.setShowMinimize(false);
+        payment.setOnClose(event -> {
+            modal.setVisible(false);
+        });
 
         // Setting Columns
         MFXTableColumn<CargoDto> nameColumn = new MFXTableColumn<>("Nombre", true, Comparator.comparing(CargoDto::getName));
@@ -100,7 +118,7 @@ public class CargosController implements Initializable {
         pagination.setCurrentPage(1);
 
         pagination.getSelectionModel().selectionProperty().addListener((observable, oldValue, newValue) -> {
-            edit.setDisable(false);
+            pick.setDisable(false);
             delete.setDisable(false);
         });
 
@@ -113,14 +131,32 @@ public class CargosController implements Initializable {
     }
 
     @FXML()
-    private void edit() {
-        HomeSceneManager.store = pagination.getSelectionModel().getSelectedValues().get(0).getId();
-        SceneManager.show(Scenes.CARGO_EDIT);
-    }
-
-    @FXML()
     private void delete() {
         HomeSceneManager.store = pagination.getSelectionModel().getSelectedValues().get(0).getId();
         HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.CARGO_DELETE, true);
+    }
+
+    @FXML
+    public void pick() {
+        CargoDto cargo = pagination.getSelectionModel().getSelectedValues().get(0);
+
+        fxthread(() -> {
+            payment_text.setText(cargo.getTotalAmount() + "");
+        });
+
+        modal.setVisible(true);
+    }
+
+    @FXML
+    public void picker() {
+        CargoDto cargo = pagination.getSelectionModel().getSelectedValues().get(0);
+
+        try {
+            cargoServices.getOutCargoById(cargo.getId());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        modal.setVisible(false);
     }
 }
