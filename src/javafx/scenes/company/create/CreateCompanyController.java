@@ -113,13 +113,37 @@ public class CreateCompanyController implements Initializable {
             }
         });
 
-        thread(() -> handling_goods.getItems().addAll(hgServices.getAllHandlingGoodsCompany()));
+        thread(() -> {
+            try {
+                handling_goods.getItems().addAll(hgServices.getAllHandlingGoodsCompany());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
 
-        thread(() -> priority.getItems().addAll(priorityServices.getAllPriorityCompany()));
+        thread(() -> {
+            try {
+                priority.getItems().addAll(priorityServices.getAllPriorityCompany());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
 
-        thread(() -> conditioning.getItems().addAll(conditioningServices.getAllConditioningCompany()));
+        thread(() -> {
+            try {
+                conditioning.getItems().addAll(conditioningServices.getAllConditioningCompany());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
 
-        thread(() -> type.getItems().addAll(ctypeServices.getAllCompanyType()));
+        thread(() -> {
+            try {
+                type.getItems().addAll(ctypeServices.getAllCompanyType());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @FXML
@@ -134,15 +158,19 @@ public class CreateCompanyController implements Initializable {
 
 
         thread(() -> {
-            companyServices.insertCompany(
-                    cname,
-                    cfuel_tariff,
-                    ctype.getId(),
-                    enterpriseServices.getEnterpirseDbFunction(6).getId(),
-                    cconditioning,
-                    chandling_goods,
-                    cpriority
-            );
+            try {
+                companyServices.insertCompany(
+                        cname,
+                        cfuel_tariff,
+                        ctype.getId(),
+                        enterpriseServices.getEnterpirseDbFunction(6).getId(),
+                        cconditioning,
+                        chandling_goods,
+                        cpriority
+                );
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             fxthread(() -> {
                 SceneManager.show(Scenes.HOME);
                 HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.COMPANIES);

@@ -129,7 +129,11 @@ public class CreateCargoController implements Initializable {
             }
         });
 
-        product_type.getItems().addAll(productTypeServices.getAllProductType());
+        try {
+            product_type.getItems().addAll(productTypeServices.getAllProductType());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
 
         packed_type.setConverter(new StringConverter<>() {
@@ -174,32 +178,41 @@ public class CreateCargoController implements Initializable {
             }
         });
 
-        client.getItems().addAll(clientServices.getClientAllClientFunction());
+        try {
+            client.getItems().addAll(clientServices.getClientAllClientFunction());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
     @FXML
     private void create() {
 
-        cargoServices.insertCargo(
-                name.getText(),
-                refrigeration.isSelected(),
-                Timestamp.valueOf(expiration_date.getValue().atStartOfDay()),
-                weight_per_unit.getValue(),
-                pack_parts.getValue(),
-                weight.getValue(),
-                product_type.getValue().getId(),
-                packed_type.getValue().getId(),
-                client.getValue().getId(),
-                Timestamp.valueOf(arrival_date.getValue().atStartOfDay()),
-                Timestamp.valueOf(departure_date.getValue().atStartOfDay()),
-                null,
-                fuel.getValue(),
-                compartment.getSelectedItem(),
-                floor.getSelectedItem(),
-                shelf.getSelectedItem(),
-                warehose.getSelectedItem().getNumber()
-        );
+        try {
+            cargoServices.insertCargo(
+                    name.getText(),
+                    refrigeration.isSelected(),
+                    Timestamp.valueOf(expiration_date.getValue().atStartOfDay()),
+                    weight_per_unit.getValue(),
+                    pack_parts.getValue(),
+                    weight.getValue(),
+                    product_type.getValue().getId(),
+                    packed_type.getValue().getId(),
+                    client.getValue().getId(),
+                    company.getValue().getId(),
+                    Timestamp.valueOf(arrival_date.getValue().atStartOfDay()),
+                    Timestamp.valueOf(departure_date.getValue().atStartOfDay()),
+                    null,
+                    fuel.getValue(),
+                    compartment.getSelectedItem(),
+                    floor.getSelectedItem(),
+                    shelf.getSelectedItem(),
+                    warehose.getSelectedItem().getNumber()
+            );
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         SceneManager.show(Scenes.HOME);
         HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.CARGOS);
@@ -209,7 +222,11 @@ public class CreateCargoController implements Initializable {
 
         refrigeration.selectedProperty().addListener(observable -> {
             warehose.getItems().clear();
-            warehose.getItems().addAll(warehoseSevices.getAllWarehose().stream().filter(warehoseDto -> warehoseDto.isCooled() && refrigeration.isSelected()).toList());
+            try {
+                warehose.getItems().addAll(warehoseSevices.getAllWarehose().stream().filter(warehoseDto -> warehoseDto.isCooled() && refrigeration.isSelected()).toList());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         });
 
         warehose.setConverter(new StringConverter<>() {
@@ -223,7 +240,11 @@ public class CreateCargoController implements Initializable {
                 return warehose.getItems().filtered(warehoseDto -> string.equals(warehoseDto.getNumber() + "")).get(0);
             }
         });
-        warehose.getItems().addAll(warehoseSevices.getAllWarehose().stream().filter(warehoseDto -> warehoseDto.isCooled() && refrigeration.isSelected()).toList());
+        try {
+            warehose.getItems().addAll(warehoseSevices.getAllWarehose().stream().filter(warehoseDto -> warehoseDto.isCooled() && refrigeration.isSelected()).toList());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         warehose.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (!shelf.isDisable()) shelf.setDisable(true);
 
@@ -232,7 +253,12 @@ public class CreateCargoController implements Initializable {
             compartment.getItems().clear();
 
             if (newValue != null) {
-                List<LocationDto> locations = locationServices.getAllEmptyLocationByCooled(refrigeration.isSelected()).stream().filter(locationDto -> warehose.getValue().getNumber() == locationDto.getWarehouseNumber()).toList();
+                List<LocationDto> locations = null;
+                try {
+                    locations = locationServices.getAllEmptyLocationByCooled(refrigeration.isSelected()).stream().filter(locationDto -> warehose.getValue().getNumber() == locationDto.getWarehouseNumber()).toList();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
 
                 shelf.getItems().addAll(locations.stream().map(LocationDto::getShelf).distinct().toArray(Integer[]::new));
                 shelf.setDisable(warehose.getSelectionModel().getSelectedItem() == null);
@@ -248,7 +274,12 @@ public class CreateCargoController implements Initializable {
             compartment.getItems().clear();
 
             if (newValue != null) {
-                List<LocationDto> locations = locationServices.getAllLocationByShelf(shelf.getSelectedItem(), warehose.getSelectedItem().getNumber()).stream().filter(locationDto -> locationDto.getCargoId() == 0).toList();
+                List<LocationDto> locations = null;
+                try {
+                    locations = locationServices.getAllLocationByShelf(shelf.getSelectedItem(), warehose.getSelectedItem().getNumber()).stream().filter(locationDto -> locationDto.getCargoId() == 0).toList();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
 
                 floor.getItems().addAll(locations.stream().map(LocationDto::getFloor).distinct().toArray(Integer[]::new));
                 floor.setDisable(shelf.getSelectionModel().getSelectedItem() == null);
@@ -264,7 +295,12 @@ public class CreateCargoController implements Initializable {
             compartment.getItems().clear();
 
             if (newValue != null) {
-                List<LocationDto> locations = locationServices.getAllLocationByFloor(floor.getSelectedItem(), shelf.getSelectedItem(), warehose.getSelectedItem().getNumber()).stream().filter(locationDto -> locationDto.getCargoId() == 0).toList();
+                List<LocationDto> locations = null;
+                try {
+                    locations = locationServices.getAllLocationByFloor(floor.getSelectedItem(), shelf.getSelectedItem(), warehose.getSelectedItem().getNumber()).stream().filter(locationDto -> locationDto.getCargoId() == 0).toList();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
 
                 compartment.getItems().addAll(locations.stream().map(LocationDto::getCompartment).distinct().toArray(Integer[]::new));
                 compartment.setDisable(floor.getSelectionModel().getSelectedItem() == null);

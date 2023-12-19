@@ -65,6 +65,7 @@ public class IntegerSpinnerModel implements SpinnerModel<Integer> {
     }
 
     /**
+     *
      */
     @Override
     public Integer getValue() {
@@ -72,6 +73,7 @@ public class IntegerSpinnerModel implements SpinnerModel<Integer> {
     }
 
     /**
+     *
      */
     @Override
     public ObjectProperty<Integer> valueProperty() {
@@ -79,6 +81,7 @@ public class IntegerSpinnerModel implements SpinnerModel<Integer> {
     }
 
     /**
+     *
      */
     @Override
     public void setValue(Integer aInteger) {
@@ -86,6 +89,7 @@ public class IntegerSpinnerModel implements SpinnerModel<Integer> {
     }
 
     /**
+     *
      */
     @Override
     public StringConverter<Integer> getConverter() {
@@ -93,6 +97,7 @@ public class IntegerSpinnerModel implements SpinnerModel<Integer> {
     }
 
     /**
+     *
      */
     @Override
     public ObjectProperty<StringConverter<Integer>> converterProperty() {
@@ -100,6 +105,7 @@ public class IntegerSpinnerModel implements SpinnerModel<Integer> {
     }
 
     /**
+     *
      */
     @Override
     public void setConverter(StringConverter<Integer> stringConverter) {
@@ -107,6 +113,7 @@ public class IntegerSpinnerModel implements SpinnerModel<Integer> {
     }
 
     /**
+     *
      */
     @Override
     public boolean isWrapAround() {
@@ -114,6 +121,7 @@ public class IntegerSpinnerModel implements SpinnerModel<Integer> {
     }
 
     /**
+     *
      */
     @Override
     public void setWrapAround(boolean b) {

@@ -8,13 +8,12 @@ import org.jetbrains.annotations.NotNull;
 public abstract class Auxiliary {
 
     /**
-     *
      * @param callingOrder if passed, increment the order of the calling function.
      * @return Name of the calling function
      */
-    public static @NotNull String getCallingFunctionName(int...callingOrder){
+    public static @NotNull String getCallingFunctionName(int... callingOrder) {
 
-        int callIncrement = callingOrder.length > 0? 3 + callingOrder[0] : 3;
+        int callIncrement = callingOrder.length > 0 ? 3 + callingOrder[0] : 3;
 
         StackTraceElement[] elements = Thread.currentThread().getStackTrace();
         return elements[callIncrement].getMethodName();

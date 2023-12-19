@@ -63,7 +63,12 @@ public class EnterpriseController implements Initializable {
     private void init() {
 
         EnterpriseServices services = ServicesLocator.getEnterpriseServices();
-        EnterpirseDto enterprise = services.getEnterpirseDbFunction(6);
+        EnterpirseDto enterprise = null;
+        try {
+            enterprise = services.getEnterpirseDbFunction(6);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         name.setText(enterprise.getName());
         postal.setText(enterprise.getPostalDir());

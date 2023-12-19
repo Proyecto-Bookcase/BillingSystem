@@ -14,13 +14,13 @@
     <Text fill="#fffefe" layoutX="381.0" layoutY="550.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="BEVEL"
           strokeType="OUTSIDE" strokeWidth="2.0" text="Adaminista" wrappingWidth="456.13671875">
         <font>
-          <Font name="Bell MT" size="96.0"/>
+            <Font name="Bell MT" size="96.0"/>
         </font>
     </Text>
     <MFXProgressSpinner fx:id="progress" disable="true" layoutX="28.0" layoutY="18.0" prefHeight="77.0" prefWidth="65.0"
                         stylesheets="@../login/styles.css">
         <color4>
-          <Color red="0.061000000685453415" green="0.6100000143051147" blue="0.33550000190734863"/>
+            <Color red="0.061000000685453415" green="0.6100000143051147" blue="0.33550000190734863"/>
         </color4>
     </MFXProgressSpinner>
     <SVGPath fx:id="body"
@@ -34,7 +34,7 @@
     <Label fx:id="username" contentDisplay="TOP" layoutX="119.0" layoutY="43.0" prefHeight="27.0" prefWidth="162.0"
            text="Username" textAlignment="CENTER" textFill="#fffbfb" underline="true">
         <font>
-          <Font size="18.0"/>
+            <Font size="18.0"/>
         </font>
     </Label>
     <AnchorPane fx:id="side" layoutX="302.0" prefHeight="600.0" prefWidth="601.0"
@@ -42,34 +42,34 @@
     <MFXRectangleToggleNode fx:id="toEnterprise" layoutX="18.0" layoutY="121.0" prefHeight="31.0" prefWidth="258.0"
                             styleClass="option" text="Enterprise" wrapText="true">
         <toggleGroup>
-          <ToggleGroup fx:id="home_menu"/>
+            <ToggleGroup fx:id="home_menu"/>
         </toggleGroup>
         <font>
-          <Font name="Book Antiqua" size="16.0"/>
+            <Font name="Book Antiqua" size="16.0"/>
         </font>
     </MFXRectangleToggleNode>
     <MFXRectangleToggleNode fx:id="toCompanies" layoutX="18.0" layoutY="163.0" prefHeight="31.0" prefWidth="258.0"
                             styleClass="option" text="Companies" toggleGroup="$home_menu">
         <font>
-          <Font name="Book Antiqua" size="16.0"/>
+            <Font name="Book Antiqua" size="16.0"/>
         </font>
     </MFXRectangleToggleNode>
     <MFXRectangleToggleNode fx:id="toClients" layoutX="18.0" layoutY="205.0" prefHeight="31.0" prefWidth="258.0"
                             styleClass="option" text="Clientes" toggleGroup="$home_menu">
         <font>
-          <Font name="Book Antiqua" size="16.0"/>
+            <Font name="Book Antiqua" size="16.0"/>
         </font>
     </MFXRectangleToggleNode>
     <MFXRectangleToggleNode fx:id="toCargo" layoutX="18.0" layoutY="246.0" prefHeight="31.0" prefWidth="258.0"
                             styleClass="option" text="Cargas" toggleGroup="$home_menu">
         <font>
-          <Font name="Book Antiqua" size="16.0"/>
+            <Font name="Book Antiqua" size="16.0"/>
         </font>
     </MFXRectangleToggleNode>
     <MFXRectangleToggleNode fx:id="toWarehouses" layoutX="18.0" layoutY="287.0" prefHeight="31.0" prefWidth="258.0"
                             styleClass="option" text="Almacenes" toggleGroup="$home_menu">
         <font>
-          <Font name="Book Antiqua" size="16.0"/>
+            <Font name="Book Antiqua" size="16.0"/>
         </font>
     </MFXRectangleToggleNode>
 </AnchorPane>

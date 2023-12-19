@@ -58,7 +58,11 @@ public class WarehousesController implements Initializable {
         );
 
         // Adding elements
-        pagination.getItems().addAll(warehoseSevices.getAllWarehose());
+        try {
+            pagination.getItems().addAll(warehoseSevices.getAllWarehose());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         pagination.getSelectionModel().selectionProperty().addListener((observable, oldValue, newValue) -> edit.setDisable(false));
     }

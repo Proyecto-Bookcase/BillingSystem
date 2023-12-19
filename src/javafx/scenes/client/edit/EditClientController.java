@@ -63,7 +63,12 @@ public class EditClientController implements Initializable {
         init_spinners();
         init_combos();
 
-        ClientDto client = clientServices.getClientDbFunction((Integer) HomeSceneManager.store);
+        ClientDto client = null;
+        try {
+            client = clientServices.getClientDbFunction((Integer) HomeSceneManager.store);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         name.setText(client.getName());
         phone_number.setText(client.getPhoneNumber());

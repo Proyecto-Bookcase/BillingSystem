@@ -65,6 +65,7 @@ public class FloatSpinnerModel implements SpinnerModel<Float> {
     }
 
     /**
+     *
      */
     @Override
     public Float getValue() {
@@ -72,6 +73,7 @@ public class FloatSpinnerModel implements SpinnerModel<Float> {
     }
 
     /**
+     *
      */
     @Override
     public ObjectProperty<Float> valueProperty() {
@@ -79,6 +81,7 @@ public class FloatSpinnerModel implements SpinnerModel<Float> {
     }
 
     /**
+     *
      */
     @Override
     public void setValue(Float aFloat) {
@@ -86,6 +89,7 @@ public class FloatSpinnerModel implements SpinnerModel<Float> {
     }
 
     /**
+     *
      */
     @Override
     public StringConverter<Float> getConverter() {
@@ -93,6 +97,7 @@ public class FloatSpinnerModel implements SpinnerModel<Float> {
     }
 
     /**
+     *
      */
     @Override
     public ObjectProperty<StringConverter<Float>> converterProperty() {
@@ -100,6 +105,7 @@ public class FloatSpinnerModel implements SpinnerModel<Float> {
     }
 
     /**
+     *
      */
     @Override
     public void setConverter(StringConverter<Float> stringConverter) {
@@ -107,6 +113,7 @@ public class FloatSpinnerModel implements SpinnerModel<Float> {
     }
 
     /**
+     *
      */
     @Override
     public boolean isWrapAround() {
@@ -114,6 +121,7 @@ public class FloatSpinnerModel implements SpinnerModel<Float> {
     }
 
     /**
+     *
      */
     @Override
     public void setWrapAround(boolean b) {

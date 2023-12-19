@@ -35,7 +35,7 @@ public class ClientsController implements Initializable {
     @FXML
     private MFXButton delete;
     @FXML
-    private MFXGenericDialog dialog;
+    private MFXButton report2;
 
     /**
      * Called to initialize a controller after its root element has been
@@ -71,11 +71,16 @@ public class ClientsController implements Initializable {
         );
 
         // Adding elements
-        pagination.getItems().addAll(clientServices.getClientAllClientFunction());
+        try {
+            pagination.getItems().addAll(clientServices.getClientAllClientFunction());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         pagination.getSelectionModel().selectionProperty().addListener((observable, oldValue, newValue) -> {
             edit.setDisable(false);
             delete.setDisable(false);
+            report2.setDisable(false);
         });
     }
 
@@ -94,5 +99,11 @@ public class ClientsController implements Initializable {
     private void delete() {
         HomeSceneManager.store = pagination.getSelectionModel().getSelectedValues().get(0).getId();
         HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.CLIENT_DELETE, true);
+    }
+
+    @FXML
+    public void report2() {
+        ClientDto client = pagination.getSelectionModel().getSelectedValues().get(0);
+        System.out.println(client.getId());
     }
 }

@@ -13,7 +13,7 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.scenes.home.subscenes.scenes.enterprise.EnterpriseController">
     <Label fx:id="name" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="122.0" layoutY="26.0" text="Nombre de la Empresa">
         <font>
-          <Font name="Georgia" size="35.0" />
+            <Font name="Georgia" size="35.0" />
         </font>
     </Label>
     <MFXScrollPane layoutX="82.0" layoutY="80.0" prefHeight="508.0" prefWidth="434.0" style="-fx-background-color: transparent;">
@@ -45,5 +45,5 @@
         </VBox>
     </MFXScrollPane>
     <MFXButton defaultButton="true" layoutX="516.0" layoutY="26.0" onAction="#toEdit" prefHeight="41.0" prefWidth="74.0" rippleColor="#3a28b2" style="-fx-border-color: slateblue; -fx-border-radius: 4; -fx-border-width: 2;" text="Editar" />
-   <MFXButton fx:id="report1" layoutX="516.0" layoutY="80.0" onAction="#report1" prefHeight="41.0" prefWidth="74.0" style="-fx-border-color: slateblue; -fx-border-radius: 4; -fx-border-width: 2;" styleClass="bu" text="To PDF" />
+    <MFXButton fx:id="report1" layoutX="516.0" layoutY="80.0" onAction="#report1" prefHeight="41.0" prefWidth="74.0" style="-fx-border-color: slateblue; -fx-border-radius: 4; -fx-border-width: 2;" styleClass="bu" text="To PDF" />
 </Pane>

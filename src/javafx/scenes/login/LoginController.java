@@ -53,7 +53,12 @@ public class LoginController {
         thread(() -> {
 
             UserServices userServices = ServicesLocator.getUserServices();
-            boolean check = userServices.checkUser(user, pass);
+            boolean check = false;
+            try {
+                check = userServices.checkUser(user, pass);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
 
             if (check)
                 succeed();
