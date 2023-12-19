@@ -13,9 +13,15 @@ import javafx.fxml.Initializable;
 import javafx.scenes.home.subscenes.manager.HomeSceneManager;
 import javafx.utils.scene_manager.SceneManager;
 import javafx.utils.scene_manager.Scenes;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import services.CompanyServices;
 import services.ServicesLocator;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Comparator;
 import java.util.ResourceBundle;
@@ -96,5 +102,21 @@ public class CompaniesController implements Initializable {
     @FXML
     public void report3() {
         CompanyDto company = pagination.getSelectionModel().getSelectedValues().get(0);
+
+        try {
+            String jasperFilePath = "src/reporte_jasper/Reporte3.jasper";
+
+            // Cargar el archivo .jasper
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(new File(jasperFilePath));
+
+            // Llenar el informe con datos y parámetros
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, ServicesLocator.getDbManager().getConnection());
+
+            // Visualizar el informe
+            JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+            jasperViewer.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

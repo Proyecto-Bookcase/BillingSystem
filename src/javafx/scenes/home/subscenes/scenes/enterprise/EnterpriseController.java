@@ -8,9 +8,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.utils.scene_manager.SceneManager;
 import javafx.utils.scene_manager.Scenes;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+import net.sf.jasperreports.engine.util.JRLoader;
 import services.EnterpriseServices;
 import services.ServicesLocator;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -97,7 +103,7 @@ public class EnterpriseController implements Initializable {
             String jasperFilePath = "src/reporte_jasper/Reporte1.jasper";
 
             // Cargar el archivo .jasper
-            JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(jasperFilePath);
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(new File(jasperFilePath));
 
             // Llenar el informe con datos y parámetros
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, ServicesLocator.getDbManager().getConnection());
