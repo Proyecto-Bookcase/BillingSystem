@@ -88,6 +88,7 @@ public class EnterpriseController implements Initializable {
 
     @FXML
     public void report1() {
+
         try {
             String jasperFilePath = "src/reporte_jasper/Reporte1.jasper";
 
