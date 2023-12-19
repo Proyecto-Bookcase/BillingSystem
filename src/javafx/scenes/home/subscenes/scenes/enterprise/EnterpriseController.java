@@ -2,22 +2,26 @@ package javafx.scenes.home.subscenes.scenes.enterprise;
 
 import Dtos.EnterpirseDto;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXSpinner;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.utils.components.spinner.IntegerSpinnerModel;
 import javafx.utils.scene_manager.SceneManager;
 import javafx.utils.scene_manager.Scenes;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import services.EnterpriseServices;
 import services.ServicesLocator;
 
 import java.io.File;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import static javafx.utils.async.thread.ThreadHelpers.fxthread;
@@ -51,6 +55,14 @@ public class EnterpriseController implements Initializable {
     private MFXTextField tariff_per_weight;
     @FXML
     private MFXButton report1;
+    @FXML
+    private MFXButton report8_button;
+    @FXML
+    private MFXSpinner<Integer> year;
+    @FXML
+    private MFXButton report8;
+    @FXML
+    private MFXGenericDialog report8_dialog;
 
     /**
      * Called to initialize a controller after its root element has been
@@ -90,6 +102,8 @@ public class EnterpriseController implements Initializable {
         tariff_per_hour.setText("$" + enterprise.getTariffPerHours());
         tariff_per_weight.setText("$" + enterprise.getTariffPerWeight());
 
+        year.setSpinnerModel(new IntegerSpinnerModel(2000, LocalDate.now().getYear(), 1));
+
     }
 
     @FXML()
@@ -116,5 +130,22 @@ public class EnterpriseController implements Initializable {
         }
 
 
+    }
+
+    @FXML
+    public void report8_action() {
+        report8_dialog.setVisible(!report8_dialog.isVisible());
+    }
+
+    @FXML
+    public void report8() {
+
+        Integer year = this.year.getValue();
+
+    }
+
+    @FXML
+    public void close_report8_dialog() {
+        report8_dialog.setVisible(false);
     }
 }

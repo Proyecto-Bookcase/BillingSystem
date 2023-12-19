@@ -3,6 +3,7 @@ package services;
 import Dtos.CargoDto;
 import Dtos.PackedTypeDto;
 import Dtos.ProductTypeDto;
+import javafx.fxml.FXML;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -199,12 +200,19 @@ public class    CargoServices {
     }
 
     public float getOutCargoById(int cargoId) throws Exception {
+
         float totalAmount = 0;
+
         try {
             CallableStatement cstmt = connection.prepareCall("{ call getOutCargoById(?)}");
             cstmt.setInt(1, cargoId);
             ResultSet rs = cstmt.executeQuery();
-            totalAmount = rs.getFloat("total_amountt");
+            if(rs.next())
+            {
+                totalAmount = rs.getFloat(1);
+
+            }
+
         } catch (SQLException e) {
             throw new Exception(e);
         }
@@ -255,7 +263,7 @@ public class    CargoServices {
             while (resultSet.next()) {
                 CargoDto cargoDto = new CargoDto();
                 cargoDto.setId(resultSet.getInt("cargo_id"));
-                cargoDto.setName(resultSet.getString("cargo_code"));
+                cargoDto.setName(resultSet.getString("cargo_name"));
                 cargoDto.setRefrigeration(resultSet.getBoolean("refrigeration"));
                 cargoDto.setExpirationDate(resultSet.getTimestamp("expiration_date"));
                 cargoDto.setPackedUnitWeight(resultSet.getFloat("packed_unit_weight"));
