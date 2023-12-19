@@ -81,6 +81,8 @@ public class CargosController implements Initializable {
     private MFXToggleButton discriminator;
     @FXML
     private MFXGenericDialog reports_dialog;
+    @FXML
+    private MFXButton accept_report;
 
     /**
      * Called to initialize a controller after its root element has been

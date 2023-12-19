@@ -85,7 +85,7 @@
                      <Font size="15.0" />
                   </font>
                </Label>
-               <MFXButton fx:id="accept" layoutX="194.0" layoutY="172.0" onAction="#fire_reports" text="Aceptar" />
+               <MFXButton fx:id="accept_report" layoutX="194.0" layoutY="172.0" onAction="#fire_reports" text="Aceptar" />
                <Label layoutX="39.0" layoutY="26.0" text="Reporte de una carga en un período de tiempo">
                   <font>
                      <Font size="18.0" />
