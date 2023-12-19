@@ -88,7 +88,12 @@ public class UpdateEnterpriseController implements Initializable {
 
     private void init() {
 
-        EnterpirseDto enterprise = services.getEnterpirseDbFunction(6);
+        EnterpirseDto enterprise = null;
+        try {
+            enterprise = services.getEnterpirseDbFunction(6);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         name.setText(enterprise.getName());
         postal.setText(enterprise.getPostalDir());
@@ -112,29 +117,40 @@ public class UpdateEnterpriseController implements Initializable {
     @FXML()
     private void update() {
 
-        EnterpirseDto enterprise = services.getEnterpirseDbFunction(6);
+        EnterpirseDto enterprise = null;
+        try {
+            enterprise = services.getEnterpirseDbFunction(6);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         loading.setVisible(true);
         submit.setDisable(true);
 
+        EnterpirseDto finalEnterprise = enterprise;
+
         thread(() -> {
-            services.updateEnterprise(
-                    6,
-                    name.getText(),
-                    postal.getText(),
-                    hh_rr_boss.getText(),
-                    cont_resp.getText(),
-                    sec_sind.getText(),
-                    enterprise.getLogo(),
-                    colling_tariff.getValue(),
-                    billing_amount.getValue(),
-                    general_boss.getText(),
-                    discount.getValue(),
-                    phone_number.getText(),
-                    email.getText(),
-                    tariff_per_hours.getValue(),
-                    tariff_per_weight.getValue()
-            );
-            timeout(1000,()-> fxthread(this::onUpdateSucceed));
+            try {
+                services.updateEnterprise(
+                        6,
+                        name.getText(),
+                        postal.getText(),
+                        hh_rr_boss.getText(),
+                        cont_resp.getText(),
+                        sec_sind.getText(),
+                        finalEnterprise.getLogo(),
+                        colling_tariff.getValue(),
+                        billing_amount.getValue(),
+                        general_boss.getText(),
+                        discount.getValue(),
+                        phone_number.getText(),
+                        email.getText(),
+                        tariff_per_hours.getValue(),
+                        tariff_per_weight.getValue()
+                );
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            timeout(1000, () -> fxthread(this::onUpdateSucceed));
         });
     }
 

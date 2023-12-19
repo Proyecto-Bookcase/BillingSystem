@@ -129,6 +129,8 @@ public class CompanyServices {
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return companyDto;
     }
@@ -160,6 +162,8 @@ public class CompanyServices {
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return companyDtoList;
     }

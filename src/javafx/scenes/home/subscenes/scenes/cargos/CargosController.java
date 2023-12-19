@@ -59,8 +59,20 @@ public class CargosController implements Initializable {
         productColumn.setRowCellFactory(companyDto -> new MFXTableRowCell<>(cargoDto -> cargoDto.getProductType().getDescription()));
 
 
-        MFXTableColumn<CargoDto> clientColumn = new MFXTableColumn<>("Cliente", true, Comparator.comparing(cargoDto -> clientServices.getClientDbFunction(cargoDto.getClientId()).getName()));
-        clientColumn.setRowCellFactory(companyDto -> new MFXTableRowCell<>(cargoDto -> clientServices.getClientDbFunction(cargoDto.getClientId()).getName()));
+        MFXTableColumn<CargoDto> clientColumn = new MFXTableColumn<>("Cliente", true, Comparator.comparing(cargoDto -> {
+            try {
+                return clientServices.getClientDbFunction(cargoDto.getClientId()).getName();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }));
+        clientColumn.setRowCellFactory(companyDto -> new MFXTableRowCell<>(cargoDto -> {
+            try {
+                return clientServices.getClientDbFunction(cargoDto.getClientId()).getName();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }));
 
         // Adding columns
         pagination.getTableColumns().addAll(nameColumn, productColumn, clientColumn);
@@ -69,11 +81,21 @@ public class CargosController implements Initializable {
         pagination.getFilters().addAll(
                 new StringFilter<>("Nombre", CargoDto::getName),
                 new StringFilter<>("Producto", cargoDto -> cargoDto.getProductType().getDescription()),
-                new StringFilter<>("Cliente", cargoDto -> clientServices.getClientDbFunction(cargoDto.getClientId()).getName())
+                new StringFilter<>("Cliente", cargoDto -> {
+                    try {
+                        return clientServices.getClientDbFunction(cargoDto.getClientId()).getName();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                })
         );
 
         // Adding elements
-        pagination.getItems().addAll(cargoServices.getAllCargoDbFunction());
+        try {
+            pagination.getItems().addAll(cargoServices.getAllCargoDbFunction());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         pagination.setCurrentPage(1);
 

@@ -61,7 +61,12 @@ public class UpdateWarehouseController implements Initializable {
 
     private void init() {
 
-        WarehoseDto warehouse = warehoseSevices.getWarehose((Integer) HomeSceneManager.store);
+        WarehoseDto warehouse = null;
+        try {
+            warehouse = warehoseSevices.getWarehose((Integer) HomeSceneManager.store);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         header.setText(STR. "Actualizando Almacén #\{ warehouse.getNumber() }" );
         //mantainence.setSelected(warehouse.isMaintenance());
@@ -93,7 +98,11 @@ public class UpdateWarehouseController implements Initializable {
                 new IntegerFilter<>("Casilla", LocationDto::getCompartment)
         );
 
-        table.getItems().addAll(locationServices.getAllLocationByWarehouse((Integer) HomeSceneManager.store));
+        try {
+            table.getItems().addAll(locationServices.getAllLocationByWarehouse((Integer) HomeSceneManager.store));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         table.getSelectionModel().selectionProperty().addListener((observable, oldValue, newValue) -> {
             //edit.setDisable(false);
@@ -102,7 +111,11 @@ public class UpdateWarehouseController implements Initializable {
 
     @FXML
     public void submit() {
-        warehoseSevices.updateWarehose((Integer) HomeSceneManager.store, coolled.isSelected());
+        try {
+            warehoseSevices.updateWarehose((Integer) HomeSceneManager.store, coolled.isSelected());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         SceneManager.show(Scenes.HOME);
         HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.WAREHOUSES);

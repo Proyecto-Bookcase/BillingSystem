@@ -39,10 +39,15 @@ public class CargotDeleteController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        CargoDto cargo = cargoServices.getCargoDbFunction((int) HomeSceneManager.store);
+        CargoDto cargo = null;
+        try {
+            cargo = cargoServices.getCargoDbFunction((int) HomeSceneManager.store);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         deleteDialog.setHeaderText(cargo.getName());
 
-        delete_text.setText(STR. "Eliminar carga \"\{cargo.getName()}\"?" );
+        delete_text.setText(STR. "Eliminar carga \"\{ cargo.getName() }\"?" );
 
 
     }

@@ -38,7 +38,7 @@
     -mfx-color4: green;
 }
 
-.progress-loading{
+.progress-loading {
     -mfx-color1: slateblue;
     -mfx-color2: violet;
     -mfx-color3: blue;
@@ -68,6 +68,6 @@
     -fx-background-color: rgba(246, 34, 34, 0.5);
 }
 
-.input-fail{
+.input-fail {
     -fx-border-color: red;
 }

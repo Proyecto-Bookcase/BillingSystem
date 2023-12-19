@@ -11,11 +11,12 @@ public class Draggable {
     private final double[] xOffset;
     private final double[] yOffset;
 
-    private Draggable(){
+    private Draggable() {
         xOffset = new double[1];
         yOffset = new double[1];
     }
-    private Draggable(@NotNull Scene scene){
+
+    private Draggable(@NotNull Scene scene) {
         this();
         Window stage = scene.getWindow();
 
@@ -30,7 +31,7 @@ public class Draggable {
         });
     }
 
-    private Draggable(@NotNull Node node){
+    private Draggable(@NotNull Node node) {
         this();
 
         Window stage = node.getScene().getWindow();
@@ -47,7 +48,7 @@ public class Draggable {
     }
 
     @Contract("_ -> new")
-    public static void set(Scene scene){
+    public static void set(Scene scene) {
         new Draggable(scene);
     }
 }

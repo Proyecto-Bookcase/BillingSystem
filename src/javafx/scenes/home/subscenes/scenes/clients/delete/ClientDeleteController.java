@@ -39,17 +39,26 @@ public class ClientDeleteController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        ClientDto client = clientServices.getClientDbFunction((int) HomeSceneManager.store);
+        ClientDto client = null;
+        try {
+            client = clientServices.getClientDbFunction((int) HomeSceneManager.store);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         deleteDialog.setHeaderText(client.getName());
 
-        delete_text.setText(STR. "Eliminar cliente \"\{client.getName()}\"?" );
+        delete_text.setText(STR. "Eliminar cliente \"\{ client.getName() }\"?" );
 
 
     }
 
     @FXML()
     private void delete() {
-        clientServices.deleteClient((int) HomeSceneManager.store);
+        try {
+            clientServices.deleteClient((int) HomeSceneManager.store);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         cancel();
     }
 

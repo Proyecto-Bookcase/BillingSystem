@@ -17,7 +17,7 @@
     -fx-border-color: slateblue;
 }
 
-.option:selected{
+.option:selected {
     -fx-background-color: slateblue;
     -fx-border-color: slateblue;
 }

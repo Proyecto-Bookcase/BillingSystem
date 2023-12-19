@@ -42,7 +42,7 @@ public class CompanyDeleteController implements Initializable {
         CompanyDto company = companyServices.getCompany((int) HomeSceneManager.store);
         deleteDialog.setHeaderText(company.getName());
 
-        delete_text.setText(STR. "Eliminar compañía \"\{company.getName()}\"?" );
+        delete_text.setText(STR. "Eliminar compañía \"\{ company.getName() }\"?" );
 
 
     }
@@ -52,7 +52,7 @@ public class CompanyDeleteController implements Initializable {
         try {
             companyServices.deleteCompany((int) HomeSceneManager.store);
             cancel();
-        } catch (Exception e){
+        } catch (Exception e) {
             delete_text.setText("No es posible eliminar una compañía si tiene alguna carga registrada");
         }
     }

@@ -83,17 +83,21 @@ public class CreateClientController implements Initializable {
     @FXML()
     private void create() {
 
-        clientServices.insertClient(
-                name.getText(),
-                type.getValue(),
-                country.getText(),
-                phone_number.getText(),
-                fax.getText(),
-                email.getText(),
-                'A',
-                antique.getValue(),
-                Date.valueOf(preff_trate.getValue())
-        );
+        try {
+            clientServices.insertClient(
+                    name.getText(),
+                    type.getValue(),
+                    country.getText(),
+                    phone_number.getText(),
+                    fax.getText(),
+                    email.getText(),
+                    'A',
+                    antique.getValue(),
+                    Date.valueOf(preff_trate.getValue())
+            );
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         SceneManager.show(Scenes.HOME);
         HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.CLIENTS);

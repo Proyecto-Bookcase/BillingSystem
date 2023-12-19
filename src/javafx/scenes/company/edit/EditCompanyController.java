@@ -118,12 +118,20 @@ public class EditCompanyController implements Initializable {
         fuel_tariff.setValue(company.getFuelTariff());
 
         thread(() -> {
-            handling_goods.getItems().addAll(hgServices.getAllHandlingGoodsCompany());
+            try {
+                handling_goods.getItems().addAll(hgServices.getAllHandlingGoodsCompany());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             handling_goods.getSelectionModel().selectItems(handling_goods.getItems().filtered(handlingGoodsDto -> company.getHandlingGoods().stream().anyMatch(handlingGoodsDto1 -> handlingGoodsDto.getDescription().equals(handlingGoodsDto1.getDescription()))));
         });
 
         thread(() -> {
-            priority.getItems().addAll(priorityServices.getAllPriorityCompany());
+            try {
+                priority.getItems().addAll(priorityServices.getAllPriorityCompany());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
 
             FilteredList<PriorityCompanyDto> filter = priority.getItems().filtered(priorityCompanyDto -> company.getPriorityCompanies().stream().anyMatch(priorityCompanyDto1 -> priorityCompanyDto.getDescription().equals(priorityCompanyDto1.getDescription())));
             for (PriorityCompanyDto selected : filter) {
@@ -132,7 +140,11 @@ public class EditCompanyController implements Initializable {
         });
 
         thread(() -> {
-            conditioning.getItems().addAll(conditioningServices.getAllConditioningCompany());
+            try {
+                conditioning.getItems().addAll(conditioningServices.getAllConditioningCompany());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
 
             FilteredList<ConditioningCompanyDto> filter = conditioning.getItems().filtered(conditioningCompanyDto -> company.getConditionings().stream().anyMatch(conditioningCompanyDto1 -> conditioningCompanyDto.getDescription().equals(conditioningCompanyDto1.getDescription())));
             conditioning.getSelectionModel().selectItems(filter);
@@ -140,7 +152,11 @@ public class EditCompanyController implements Initializable {
         });
 
         thread(() -> {
-            type.getItems().addAll(ctypeServices.getAllCompanyType());
+            try {
+                type.getItems().addAll(ctypeServices.getAllCompanyType());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             type.selectItem(type.getItems().filtered(companyTypeDto -> companyTypeDto.getDescription().equals(company.getCompanyType().getDescription())).get(0));
         });
     }
