@@ -14,6 +14,8 @@ import javafx.utils.scene_manager.Scenes;
 import services.*;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static javafx.utils.async.thread.ThreadHelpers.fxthread;
@@ -149,16 +151,24 @@ public class EditCompanyController implements Initializable {
         String cname = name.getText();
         CompanyTypeDto ctype = type.getValue();
         float cfuel_tariff = fuel_tariff.getValue();
-        Integer[] chandling_goods = handling_goods.getSelectionModel().getSelectedValues().stream().map(HandlingGoodsDto::getId).toList().toArray(new Integer[0]);
-        Integer[] cpriority = priority.getSelectionModel().getSelectedValues().stream().map(PriorityCompanyDto::getId).toList().toArray(new Integer[0]);
-        Integer[] cconditioning = conditioning.getSelectionModel().getSelectedValues().stream().map(ConditioningCompanyDto::getId).toList().toArray(new Integer[0]);
+        List<HandlingGoodsDto> chandling_goods = handling_goods.getSelectionModel().getSelectedValues();
+        List<PriorityCompanyDto> cpriority = priority.getSelectionModel().getSelectedValues();
+        List<ConditioningCompanyDto> cconditioning = conditioning.getSelectionModel().getSelectedValues();
 
 
         CompanyDto company = new CompanyDto();
+        company.setId((Integer) HomeSceneManager.store);
+        company.setEnterpriseId(6);
+        company.setName(cname);
+        company.setCompanyType(ctype);
+        company.setFuelTariff(cfuel_tariff);
+        company.setHandlingGoods((ArrayList<HandlingGoodsDto>) chandling_goods);
+        company.setPriorityCompanies((ArrayList<PriorityCompanyDto>) cpriority);
+        company.setConditionings((ArrayList<ConditioningCompanyDto>) cconditioning);
 
 
         thread(() -> {
-            companyServices.updateCompany(new CompanyDto());
+            companyServices.updateCompany(company);
             fxthread(() -> {
                 SceneManager.show(Scenes.HOME);
                 HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.COMPANIES);

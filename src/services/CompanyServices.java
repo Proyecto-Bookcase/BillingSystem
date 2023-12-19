@@ -184,7 +184,7 @@ public class CompanyServices {
         }
 
         try {
-            CallableStatement cstmt = connection.prepareCall("{  call update_company(?,?,?,?,?)}");
+            CallableStatement cstmt = connection.prepareCall("{  call update_company(?,?,?,?,?,?,?,?)}");
             cstmt.setInt(1, companyDto.getId());
             cstmt.setString(2, companyDto.getName());
             cstmt.setFloat(3, companyDto.getFuelTariff());
@@ -193,9 +193,11 @@ public class CompanyServices {
             cstmt.setArray(6, connection.createArrayOf("integer", arrayConditionings));
             cstmt.setArray(7, connection.createArrayOf("integer", arrayHandlingGoods));
             cstmt.setArray(8, connection.createArrayOf("integer", arrayPriorityCompanies));
+            cstmt.executeQuery();
+
         } catch (Exception e) {
             //throw new RuntimeException(e);
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }
