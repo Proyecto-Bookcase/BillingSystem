@@ -25,7 +25,23 @@
     </MFXButton>
     <MFXPaginatedTableView fx:id="pagination" layoutX="48.0" layoutY="119.0" prefHeight="161.0" prefWidth="512.0" rowsPerPage="10" />
     <MFXButton fx:id="delete" disable="true" layoutX="123.0" layoutY="83.0" onAction="#delete" rippleColor="#ae0202" style="-fx-border-radius: 3; -fx-border-color: red; -fx-border-width: 2;" styleClass="delete-button" text="Eliminar" />
-   <Pane fx:id="modal" layoutY="-2.0" prefHeight="606.0" prefWidth="600.0" style="-fx-background-color: rgba(100,100,100,0.5);">
+   <MFXButton fx:id="pick" disable="true" layoutX="494.0" layoutY="83.0" onAction="#pick" rippleColor="#ae0202" style="-fx-border-radius: 3; -fx-border-color: green; -fx-border-width: 2;" styleClass="delete-button" text="Recoger" />
+   <Pane fx:id="modal_edit" prefHeight="604.0" prefWidth="600.0" style="-fx-background-color: rgba(100,100,100,0.5);" visible="false">
+      <children>
+         <Pane layoutX="40.0" layoutY="144.0" prefHeight="347.0" prefWidth="520.0" style="-fx-background-color: #EEE; -fx-background-radius: 15;">
+            <children>
+               <MFXButton fx:id="accept" layoutX="193.0" layoutY="262.0" prefHeight="35.0" prefWidth="136.0" text="Aceptar" />
+               <MFXFilterComboBox fx:id="warehose" floatingText="Almacén" layoutX="134.0" layoutY="39.0" prefHeight="39.0" prefWidth="253.0" />
+               <MFXFilterComboBox fx:id="floor" disable="true" floatingText="Piso" layoutX="135.0" layoutY="134.0" prefHeight="39.0" prefWidth="253.0" />
+               <MFXFilterComboBox fx:id="shelf" disable="true" floatingText="Estante" layoutX="134.0" layoutY="86.0" prefHeight="39.0" prefWidth="253.0" />
+               <MFXFilterComboBox fx:id="compartment" disable="true" floatingText="Casilla" layoutX="135.0" layoutY="183.0" prefHeight="39.0" prefWidth="253.0" />
+            </children>
+         </Pane>
+      </children>
+   </Pane>
+   <MFXButton fx:id="relocate" disable="true" layoutX="48.0" layoutY="83.0" onAction="#relocate" rippleColor="#ae0202" style="-fx-border-radius: 3; -fx-border-color: slateblue; -fx-border-width: 2;" styleClass="delete-button" text="Reubicar" />
+   <MFXFilterComboBox fx:id="client" allowEdit="true" floatingText="Cliente" layoutX="186.0" layoutY="24.0" prefHeight="40.0" prefWidth="236.0" />
+   <Pane fx:id="modal" layoutY="-2.0" prefHeight="606.0" prefWidth="600.0" style="-fx-background-color: rgba(100,100,100,0.5);" visible="false">
       <children>
          <MFXGenericDialog fx:id="payment" headerText="Importe" layoutX="100.0" layoutY="203.0" prefHeight="346.0" prefWidth="400.0">
             <center>
@@ -49,20 +65,4 @@
          </MFXGenericDialog>
       </children>
    </Pane>
-   <MFXButton fx:id="pick" disable="true" layoutX="494.0" layoutY="83.0" onAction="#pick" rippleColor="#ae0202" style="-fx-border-radius: 3; -fx-border-color: green; -fx-border-width: 2;" styleClass="delete-button" text="Recoger" />
-   <Pane fx:id="modal_edit" prefHeight="604.0" prefWidth="600.0" style="-fx-background-color: rgba(100,100,100,0.5);" visible="false">
-      <children>
-         <Pane layoutX="40.0" layoutY="144.0" prefHeight="347.0" prefWidth="520.0" style="-fx-background-color: #EEE; -fx-background-radius: 15;">
-            <children>
-               <MFXButton fx:id="accept" layoutX="193.0" layoutY="262.0" prefHeight="35.0" prefWidth="136.0" text="Aceptar" />
-               <MFXFilterComboBox fx:id="warehose" floatingText="Almacén" layoutX="134.0" layoutY="39.0" prefHeight="39.0" prefWidth="253.0" />
-               <MFXFilterComboBox fx:id="floor" disable="true" floatingText="Piso" layoutX="135.0" layoutY="134.0" prefHeight="39.0" prefWidth="253.0" />
-               <MFXFilterComboBox fx:id="shelf" disable="true" floatingText="Estante" layoutX="134.0" layoutY="86.0" prefHeight="39.0" prefWidth="253.0" />
-               <MFXFilterComboBox fx:id="compartment" disable="true" floatingText="Casilla" layoutX="135.0" layoutY="183.0" prefHeight="39.0" prefWidth="253.0" />
-            </children>
-         </Pane>
-      </children>
-   </Pane>
-   <MFXButton fx:id="relocate" disable="true" layoutX="48.0" layoutY="83.0" onAction="#relocate" rippleColor="#ae0202" style="-fx-border-radius: 3; -fx-border-color: slateblue; -fx-border-width: 2;" styleClass="delete-button" text="Reubicar" />
-   <MFXFilterComboBox fx:id="client" allowEdit="true" floatingText="Cliente" layoutX="186.0" layoutY="24.0" prefHeight="40.0" prefWidth="236.0" />
 </AnchorPane>

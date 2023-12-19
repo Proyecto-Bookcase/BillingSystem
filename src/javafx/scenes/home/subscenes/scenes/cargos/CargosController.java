@@ -92,7 +92,7 @@ public class CargosController implements Initializable {
         client.setConverter(new StringConverter<ClientDto>() {
             @Override
             public String toString(ClientDto object) {
-                return object != null? object.getName() : "";
+                return object != null ? object.getName() : "";
             }
 
             @Override
@@ -209,7 +209,6 @@ public class CargosController implements Initializable {
     @FXML
     public void relocate() {
         CargoDto cargo = pagination.getSelectionModel().getSelectedValues().get(0);
-
         init_location();
 
     }
@@ -321,5 +320,10 @@ public class CargosController implements Initializable {
             e.printStackTrace();
         }
 
+    }
+
+    @FXML
+    public void accept_relocation() {
+        
     }
 }
