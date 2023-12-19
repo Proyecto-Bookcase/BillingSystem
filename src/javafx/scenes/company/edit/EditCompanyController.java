@@ -154,16 +154,11 @@ public class EditCompanyController implements Initializable {
         Integer[] cconditioning = conditioning.getSelectionModel().getSelectedValues().stream().map(ConditioningCompanyDto::getId).toList().toArray(new Integer[0]);
 
 
+        CompanyDto company = new CompanyDto();
+
+
         thread(() -> {
-            companyServices.insertCompany(
-                    cname,
-                    cfuel_tariff,
-                    ctype.getId(),
-                    enterpriseServices.getEnterpirseDbFunction(6).getId(),
-                    cconditioning,
-                    chandling_goods,
-                    cpriority
-            );
+            companyServices.updateCompany(new CompanyDto());
             fxthread(() -> {
                 SceneManager.show(Scenes.HOME);
                 HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.COMPANIES);
