@@ -14,6 +14,7 @@ import javafx.utils.scene_manager.Scenes;
 import services.*;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -180,7 +181,11 @@ public class EditCompanyController implements Initializable {
 
 
         thread(() -> {
-            companyServices.updateCompany(company);
+            try {
+                companyServices.updateCompany(company);
+            } catch (SQLException e) {
+
+            }
             fxthread(() -> {
                 SceneManager.show(Scenes.HOME);
                 HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.COMPANIES);

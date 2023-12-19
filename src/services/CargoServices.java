@@ -151,9 +151,9 @@ public class CargoServices {
 
     }
 
-    public void colletCargoBySunad(CargoDto cargoDto) throws Exception {
+    public void colletCargoBySunad() throws Exception {
         CargoDto cargoDTO = null;
-        try (CallableStatement cstmt = connection.prepareCall("{call getCargo(?) }")) {
+        try (CallableStatement cstmt = connection.prepareCall("{call colletcargobysunad() }")) {
             cstmt.executeQuery();
 
             // Obtener el conjunto de resultados
