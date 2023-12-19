@@ -214,6 +214,7 @@ public class    CargoServices {
     }
 
 
+
     public ArrayList<CargoDto> getAbandonedCargoesOnLocation() throws Exception {
         ArrayList<CargoDto> cargoes = new ArrayList<>();
         try {
@@ -275,5 +276,24 @@ public class    CargoServices {
         }
 
         return cargoes;
+    }
+
+
+    public void updateCargoLocation(int compartment, int floor, int shelf, int cargoId, int warehouseNumber) throws Exception {
+
+
+            try {
+                CallableStatement cstmt = connection.prepareCall("{call update_location_of_cargo(?, ?, ?, ?, ?)}");
+                cstmt.setInt(1, compartment);
+                cstmt.setInt(2, floor);
+                cstmt.setInt(3, shelf);
+                cstmt.setInt(4, cargoId);
+                cstmt.setInt(5, warehouseNumber);
+
+                cstmt.execute();
+            }catch (SQLException e) {
+                throw new Exception(e);
+            }
+
     }
 }
