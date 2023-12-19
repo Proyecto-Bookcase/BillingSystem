@@ -18,6 +18,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import services.ServicesLocator;
+import services.UserServices;
 import services.WarehoseSevices;
 
 import java.net.URL;
@@ -26,6 +27,7 @@ import java.util.ResourceBundle;
 
 public class WarehousesController implements Initializable {
     private final WarehoseSevices warehoseSevices = ServicesLocator.getWarehoseSevices();
+    private final UserServices userServices = ServicesLocator.getUserServices();
 
     @FXML
     private MFXPaginatedTableView<WarehoseDto> pagination;
@@ -47,6 +49,7 @@ public class WarehousesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        edit.setDisable(!userServices.checkPermission("EDIT_WAREHOUSE"));
 
         // Setting Columns
         MFXTableColumn<WarehoseDto> numberColumn = new MFXTableColumn<>("Número", true, Comparator.comparing(WarehoseDto::getNumber));

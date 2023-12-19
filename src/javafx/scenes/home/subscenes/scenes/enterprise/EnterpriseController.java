@@ -18,6 +18,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import services.EnterpriseServices;
 import services.ServicesLocator;
+import services.UserServices;
 
 import java.io.File;
 import java.net.URL;
@@ -29,6 +30,9 @@ import java.util.ResourceBundle;
 import static javafx.utils.async.thread.ThreadHelpers.fxthread;
 
 public class EnterpriseController implements Initializable {
+    private final UserServices userServices = ServicesLocator.getUserServices();
+    @FXML
+    public MFXButton edit;
     @javafx.fxml.FXML
     private Label name;
     @javafx.fxml.FXML
@@ -81,6 +85,8 @@ public class EnterpriseController implements Initializable {
     }
 
     private void init() {
+
+        edit.setDisable(!userServices.checkPermission("EDIT_ENTERPRISE"));
 
         EnterpriseServices services = ServicesLocator.getEnterpriseServices();
         EnterpirseDto enterprise = null;

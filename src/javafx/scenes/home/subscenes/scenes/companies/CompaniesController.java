@@ -20,6 +20,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import services.CompanyServices;
 import services.ServicesLocator;
+import services.UserServices;
 
 import java.io.File;
 import java.net.URL;
@@ -32,6 +33,7 @@ import static javafx.utils.async.thread.ThreadHelpers.fxthread;
 
 public class CompaniesController implements Initializable {
     private final CompanyServices companyServices = ServicesLocator.getCompanyServices();
+    private final UserServices userServices = ServicesLocator.getUserServices() ;
 
     @FXML
     private MFXButton create;
@@ -57,6 +59,9 @@ public class CompaniesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        create.setDisable(!userServices.checkPermission("CREATE_COMPANY"));
+        edit.setDisable(!userServices.checkPermission("EDIT_COMPANY"));
+        delete.setDisable(!userServices.checkPermission("DELETE_COMPANY"));
 
         // Setting Columns
         MFXTableColumn<CompanyDto> nameColumn = new MFXTableColumn<>("Nombre", true, Comparator.comparing(CompanyDto::getName));
