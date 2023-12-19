@@ -24,6 +24,8 @@ import services.ServicesLocator;
 import java.io.File;
 import java.net.URL;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import static javafx.utils.async.thread.ThreadHelpers.fxthread;
@@ -104,13 +106,18 @@ public class CompaniesController implements Initializable {
         CompanyDto company = pagination.getSelectionModel().getSelectedValues().get(0);
 
         try {
-            String jasperFilePath = "src/reporte_jasper/Reporte3.jasper";
-
+            String jasperFilePath = "src/reporte_jasper/Report3.jasper";
             // Cargar el archivo .jasper
-            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(new File(jasperFilePath));
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(jasperFilePath);
 
+            // Crear un mapa para los parámetros
+            Map<String, Object> parameters = new HashMap<String, Object>();
+
+            // Agregar parámetros al mapa
+            // Por ejemplo: parameters.put("nombre_parametro (Jasper)", valor_parametro (se escoge de lo que seleccione el usuario));
+            parameters.put("Company", company.getId());
             // Llenar el informe con datos y parámetros
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, ServicesLocator.getDbManager().getConnection());
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ServicesLocator.getDbManager().getConnection());
 
             // Visualizar el informe
             JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);

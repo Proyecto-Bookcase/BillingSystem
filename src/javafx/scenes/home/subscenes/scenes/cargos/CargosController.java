@@ -19,13 +19,15 @@ import javafx.scenes.home.subscenes.manager.HomeSceneManager;
 import javafx.util.StringConverter;
 import javafx.utils.scene_manager.SceneManager;
 import javafx.utils.scene_manager.Scenes;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import services.*;
 
 import java.net.URL;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static javafx.utils.async.thread.ThreadHelpers.fxthread;
 
@@ -297,6 +299,27 @@ public class CargosController implements Initializable {
     @FXML
     public void report6() {
         ClientDto client = this.client.getSelectedItem();
+
+        try {
+            String jasperFilePath = "src/reporte_jasper/Report6.jasper";
+            // Cargar el archivo .jasper
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(jasperFilePath);
+
+            // Crear un mapa para los parámetros
+            Map<String, Object> parameters = new HashMap<String, Object>();
+
+            // Agregar parámetros al mapa
+            // Por ejemplo: parameters.put("nombre_parametro (Jasper)", valor_parametro);
+            parameters.put("Cliente", client.getId());
+            // Llenar el informe con datos y parámetros
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ServicesLocator.getDbManager().getConnection());
+
+            // Visualizar el informe
+            JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+            jasperViewer.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }
