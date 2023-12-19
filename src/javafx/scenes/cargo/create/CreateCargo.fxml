@@ -45,7 +45,8 @@
     <Label layoutX="90.0" layoutY="172.0" text="Peso de la Carga" />
     <Label layoutX="527.0" layoutY="245.0" text="Cantidad de Partes" />
     <Label layoutX="527.0" layoutY="318.0" text="Combustible Necesario" />
-    <Pane fx:id="modal" prefHeight="600.0" prefWidth="902.0" style="-fx-background-color: rgba(100,100,100,0.5);" visible="false">
+    <MFXButton fx:id="back" buttonType="RAISED" layoutX="3.0" layoutY="4.0" onAction="#back" prefHeight="25.0" prefWidth="36.0" text="&lt;" />
+    <Pane fx:id="modal" prefHeight="600.0" prefWidth="902.0" style="-fx-background-color: rgba(100,100,100,0.5);">
         <Pane layoutX="191.0" layoutY="127.0" prefHeight="347.0" prefWidth="520.0" style="-fx-background-color: #EEE; -fx-background-radius: 15;">
             <MFXButton fx:id="accept" layoutX="193.0" layoutY="262.0" prefHeight="35.0" prefWidth="136.0" text="Aceptar" />
             <MFXFilterComboBox fx:id="warehose" floatingText="Almacén" layoutX="134.0" layoutY="39.0" prefHeight="39.0" prefWidth="253.0" />
@@ -54,5 +55,4 @@
             <MFXFilterComboBox fx:id="compartment" disable="true" floatingText="Casilla" layoutX="135.0" layoutY="183.0" prefHeight="39.0" prefWidth="253.0" />
         </Pane>
     </Pane>
-    <MFXButton fx:id="back" buttonType="RAISED" layoutX="3.0" layoutY="4.0" onAction="#back" prefHeight="25.0" prefWidth="36.0" text="&lt;" />
 </AnchorPane>

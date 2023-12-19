@@ -1,7 +1,11 @@
 package javafx.scenes.home.subscenes.scenes.cargos;
 
 import Dtos.CargoDto;
+import Dtos.ClientDto;
+import Dtos.LocationDto;
+import Dtos.WarehoseDto;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXPaginatedTableView;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
@@ -12,22 +16,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scenes.home.subscenes.manager.HomeSceneManager;
+import javafx.util.StringConverter;
 import javafx.utils.scene_manager.SceneManager;
 import javafx.utils.scene_manager.Scenes;
-import services.CargoServices;
-import services.ClientServices;
-import services.ServicesLocator;
+import services.*;
 
 import java.net.URL;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static javafx.utils.async.thread.ThreadHelpers.fxthread;
-import static javafx.utils.async.thread.ThreadHelpers.thread;
 
 public class CargosController implements Initializable {
     private final CargoServices cargoServices = ServicesLocator.getCargoServices();
     private final ClientServices clientServices = ServicesLocator.getClientServices();
+    private final WarehoseSevices warehoseSevices = ServicesLocator.getWarehoseSevices();
+    private final LocationServices locationServices = ServicesLocator.getLocationServices();
 
     @FXML
     private MFXButton create;
@@ -46,6 +52,24 @@ public class CargosController implements Initializable {
     private MFXButton pick;
     @FXML
     private MFXButton picker;
+    @FXML
+    private Pane modal_edit;
+    @FXML
+    private MFXButton accept;
+    @FXML
+    private MFXFilterComboBox<WarehoseDto> warehose;
+    @FXML
+    private MFXFilterComboBox<Integer> floor;
+    @FXML
+    private MFXFilterComboBox<Integer> shelf;
+    @FXML
+    private MFXFilterComboBox<Integer> compartment;
+    @FXML
+    private MFXButton relocate;
+    @FXML
+    private MFXFilterComboBox<ClientDto> client;
+    @FXML
+    private MFXButton report6;
 
     /**
      * Called to initialize a controller after its root element has been
@@ -62,6 +86,35 @@ public class CargosController implements Initializable {
     }
 
     private void init() {
+
+        client.setConverter(new StringConverter<ClientDto>() {
+            @Override
+            public String toString(ClientDto object) {
+                return object != null? object.getName() : "";
+            }
+
+            @Override
+            public ClientDto fromString(String string) {
+                return client.getItems().filtered(clientDto -> Objects.equals(clientDto.getName(), string)).get(0);
+            }
+        });
+
+        try {
+            client.getItems().addAll(clientServices.getClientAllClientFunction());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        client.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            // Adding elements
+            try {
+                pagination.getItems().addAll(cargoServices.get_active_cargoes_for_client(client.getSelectedItem().getId()));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+            pagination.setCurrentPage(1);
+        });
 
         payment.setShowAlwaysOnTop(false);
         payment.setShowMinimize(false);
@@ -108,15 +161,6 @@ public class CargosController implements Initializable {
                 })
         );
 
-        // Adding elements
-        try {
-            pagination.getItems().addAll(cargoServices.getAllCargoDbFunction());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        pagination.setCurrentPage(1);
-
         pagination.getSelectionModel().selectionProperty().addListener((observable, oldValue, newValue) -> {
             pick.setDisable(false);
             delete.setDisable(false);
@@ -158,5 +202,101 @@ public class CargosController implements Initializable {
         }
 
         modal.setVisible(false);
+    }
+
+    @FXML
+    public void relocate() {
+        CargoDto cargo = pagination.getSelectionModel().getSelectedValues().get(0);
+
+        init_location();
+
+    }
+
+    private void init_location() {
+
+        warehose.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(WarehoseDto object) {
+                return object != null ? object.getNumber() + "" : "";
+            }
+
+            @Override
+            public WarehoseDto fromString(String string) {
+                return warehose.getItems().filtered(warehoseDto -> string.equals(warehoseDto.getNumber() + "")).get(0);
+            }
+        });
+        try {
+            warehose.getItems().addAll(warehoseSevices.getAllWarehose().stream().filter(warehoseDto -> warehoseDto.isCooled() == pagination.getSelectionModel().getSelectedValues().get(0).isRefrigeration()).toArray(WarehoseDto[]::new));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        warehose.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (!shelf.isDisable()) shelf.setDisable(true);
+
+            shelf.getItems().clear();
+            floor.getItems().clear();
+            compartment.getItems().clear();
+
+            if (newValue != null) {
+                List<LocationDto> locations = null;
+                try {
+                    locations = locationServices.getAllEmptyLocationByCooled(pagination.getSelectionModel().getSelectedValues().get(0).isRefrigeration()).stream().filter(locationDto -> warehose.getValue().getNumber() == locationDto.getWarehouseNumber()).toList();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
+                shelf.getItems().addAll(locations.stream().map(LocationDto::getShelf).distinct().toArray(Integer[]::new));
+                shelf.setDisable(warehose.getSelectionModel().getSelectedItem() == null);
+            }
+
+        });
+
+        shelf.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (!floor.isDisable()) floor.setDisable(true);
+
+            floor.getItems().clear();
+            compartment.getItems().clear();
+
+            if (newValue != null) {
+                List<LocationDto> locations = null;
+                try {
+                    locations = locationServices.getAllLocationByShelf(shelf.getSelectedItem(), warehose.getSelectedItem().getNumber()).stream().filter(locationDto -> locationDto.getCargoId() == 0).toList();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
+                floor.getItems().addAll(locations.stream().map(LocationDto::getFloor).distinct().toArray(Integer[]::new));
+                floor.setDisable(shelf.getSelectionModel().getSelectedItem() == null);
+            }
+
+        });
+
+        floor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (!compartment.isDisable()) compartment.setDisable(true);
+
+
+            compartment.getItems().clear();
+
+            if (newValue != null) {
+                List<LocationDto> locations = null;
+                try {
+                    locations = locationServices.getAllLocationByFloor(floor.getSelectedItem(), shelf.getSelectedItem(), warehose.getSelectedItem().getNumber()).stream().filter(locationDto -> locationDto.getCargoId() == 0).toList();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
+                compartment.getItems().addAll(locations.stream().map(LocationDto::getCompartment).distinct().toArray(Integer[]::new));
+                compartment.setDisable(floor.getSelectionModel().getSelectedItem() == null);
+            }
+
+        });
+    }
+
+    @FXML
+    public void report6() {
+        ClientDto client = this.client.getSelectedItem();
+
     }
 }
