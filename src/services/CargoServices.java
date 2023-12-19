@@ -266,8 +266,6 @@ public class    CargoServices {
                 cargoDto.setName(resultSet.getString("cargo_name"));
                 cargoDto.setRefrigeration(resultSet.getBoolean("refrigeration"));
                 cargoDto.setExpirationDate(resultSet.getTimestamp("expiration_date"));
-                cargoDto.setPackedUnitWeight(resultSet.getFloat("packed_unit_weight"));
-                cargoDto.setPackParts(resultSet.getInt("pack_parts"));
                 cargoDto.setWeight(resultSet.getFloat("weight"));
                 cargoDto.setTotalAmount(resultSet.getFloat("total_amount"));
                 cargoDto.setCompartment(resultSet.getInt("COMPARTMENT"));
