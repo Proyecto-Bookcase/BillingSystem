@@ -463,4 +463,13 @@ public class CargosController implements Initializable {
     public void fire_reports1() {
         reports_dialog1.setVisible(!reports_dialog1.isVisible());
     }
+
+    public void abandoned_cargos_pick(ActionEvent actionEvent) {
+
+        try {
+            cargoServices.colletCargoBySunad();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

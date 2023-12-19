@@ -69,33 +69,30 @@ public class CompanyServices {
         }
     }*/
     public void insertCompany(String name, float fuelTariff, int companyTypeId, int enterpriseId,
-                              Integer[] conditionings, Integer[] handlingGoods, Integer[] prioritys) {
-        try {
-            CallableStatement cstmt = connection.prepareCall("{call insert_company(?, ?, ?, ?, ?, ?, ?)}");
-            // Configurar los parámetros
-            cstmt.setString(1, name);
-            cstmt.setFloat(2, fuelTariff);
-            cstmt.setInt(3, companyTypeId);
-            cstmt.setInt(4, enterpriseId);
-            cstmt.setArray(5, connection.createArrayOf("integer", conditionings));
-            cstmt.setArray(6, connection.createArrayOf("integer", handlingGoods));
-            cstmt.setArray(7, connection.createArrayOf("integer", prioritys));
+                              Integer[] conditionings, Integer[] handlingGoods, Integer[] prioritys) throws SQLException {
 
-            // Ejecutar la llamada a la función
-            cstmt.executeQuery();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        CallableStatement cstmt = connection.prepareCall("{call insert_company(?, ?, ?, ?, ?, ?, ?)}");
+        // Configurar los parámetros
+        cstmt.setString(1, name);
+        cstmt.setFloat(2, fuelTariff);
+        cstmt.setInt(3, companyTypeId);
+        cstmt.setInt(4, enterpriseId);
+        cstmt.setArray(5, connection.createArrayOf("integer", conditionings));
+        cstmt.setArray(6, connection.createArrayOf("integer", handlingGoods));
+        cstmt.setArray(7, connection.createArrayOf("integer", prioritys));
+
+        // Ejecutar la llamada a la función
+        cstmt.executeQuery();
+
+
     }
 
-    public void deleteCompany(int id) {
-        try {
-            CallableStatement cstmt = connection.prepareCall("{call delete_company(?)}");
-            cstmt.setInt(1, id);
-            cstmt.executeQuery();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    public void deleteCompany(int id) throws SQLException {
+
+        CallableStatement cstmt = connection.prepareCall("{call delete_company(?)}");
+        cstmt.setInt(1, id);
+        cstmt.executeQuery();
+
     }
 
     public CompanyDto getCompany(int companyId) {
@@ -169,7 +166,7 @@ public class CompanyServices {
     }
 
 
-    public void updateCompany(CompanyDto companyDto) {
+    public void updateCompany(CompanyDto companyDto) throws SQLException {
         // Declarar un arreglo de Integer de tamaño 5
         Integer[] arrayConditionings = new Integer[companyDto.getConditionings().size()];
         // Llenar el arreglo con un bucle for
@@ -187,19 +184,17 @@ public class CompanyServices {
             arrayPriorityCompanies[i] = (i + 1) * 10;  // Asignar valores a cada posición del arreglo
         }
 
-        try {
-            CallableStatement cstmt = connection.prepareCall("{  call update_company(?,?,?,?,?,?,?,?)}");
-            cstmt.setInt(1, companyDto.getId());
-            cstmt.setString(2, companyDto.getName());
-            cstmt.setFloat(3, companyDto.getFuelTariff());
-            cstmt.setInt(4, companyDto.getCompanyType().getId());
-            cstmt.setInt(5, companyDto.getEnterpriseId());
-            cstmt.setArray(6, connection.createArrayOf("integer", arrayConditionings));
-            cstmt.setArray(7, connection.createArrayOf("integer", arrayHandlingGoods));
-            cstmt.setArray(8, connection.createArrayOf("integer", arrayPriorityCompanies));
-        } catch (Exception e) {
-            //throw new RuntimeException(e);
-            System.out.println(e.getMessage());
-        }
+        CallableStatement cstmt = connection.prepareCall("{  call update_company(?,?,?,?,?,?,?,?)}");
+        cstmt.setInt(1, companyDto.getId());
+        cstmt.setString(2, companyDto.getName());
+        cstmt.setFloat(3, companyDto.getFuelTariff());
+        cstmt.setInt(4, companyDto.getCompanyType().getId());
+        cstmt.setInt(5, companyDto.getEnterpriseId());
+        cstmt.setArray(6, connection.createArrayOf("integer", arrayConditionings));
+        cstmt.setArray(7, connection.createArrayOf("integer", arrayHandlingGoods));
+        cstmt.setArray(8, connection.createArrayOf("integer", arrayPriorityCompanies));
+
+        cstmt.executeQuery();
+
     }
 }
