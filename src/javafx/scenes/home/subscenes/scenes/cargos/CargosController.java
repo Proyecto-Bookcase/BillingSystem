@@ -447,7 +447,6 @@ public class CargosController implements Initializable {
 
 
     }
-
     @FXML
     public void fire_reports() {
         if (discriminator.isSelected()) {
@@ -458,10 +457,31 @@ public class CargosController implements Initializable {
     }
 
     @FXML
-    public void report9() {
-        Timestamp start = Timestamp.valueOf(this.start.getValue().atStartOfDay());
-        Timestamp end = Timestamp.valueOf(this.end.getValue().atStartOfDay());
+    public void report9(){
+        Timestamp start = Timestamp.valueOf(this.start1.getValue().atStartOfDay());
+        Timestamp end = Timestamp.valueOf(this.end1.getValue().atStartOfDay());
 
+        try {
+            String jasperFilePath = "src/reporte_jasper/Reporte9.jasper";
+            // Cargar el archivo .jasper
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(jasperFilePath);
+
+            // Crear un mapa para los parámetros
+            Map<String, Object> parameters = new HashMap<String, Object>();
+
+            // Agregar parámetros al mapa
+            // Por ejemplo: parameters.put("nombre_parametro (Jasper)", valor_parametro);
+            parameters.put("Fecha1", start);
+            parameters.put("Fecha2", end);
+            // Llenar el informe con datos y parámetros
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ServicesLocator.getDbManager().getConnection());
+
+            // Visualizar el informe
+            JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+            jasperViewer.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
