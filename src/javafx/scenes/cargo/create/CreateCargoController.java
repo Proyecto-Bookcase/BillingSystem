@@ -120,7 +120,7 @@ public class CreateCargoController implements Initializable {
         product_type.setConverter(new StringConverter<>() {
             @Override
             public String toString(ProductTypeDto object) {
-                return object.getDescription();
+                return object != null ? object.getDescription() : "";
             }
 
             @Override
@@ -135,7 +135,7 @@ public class CreateCargoController implements Initializable {
         packed_type.setConverter(new StringConverter<>() {
             @Override
             public String toString(PackedTypeDto object) {
-                return object.getDescription();
+                return object != null ? object.getDescription() : "";
             }
 
             @Override
@@ -150,7 +150,7 @@ public class CreateCargoController implements Initializable {
         company.setConverter(new StringConverter<>() {
             @Override
             public String toString(CompanyDto object) {
-                return object.getName();
+                return object != null ? object.getName() : "";
             }
 
             @Override
@@ -165,7 +165,7 @@ public class CreateCargoController implements Initializable {
         client.setConverter(new StringConverter<>() {
             @Override
             public String toString(ClientDto object) {
-                return object.getName();
+                return object != null ? object.getName() : "";
             }
 
             @Override

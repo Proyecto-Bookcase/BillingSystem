@@ -8,10 +8,13 @@ import io.github.palexdev.materialfx.controls.MFXTableView;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import io.github.palexdev.materialfx.filter.IntegerFilter;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scenes.home.subscenes.manager.HomeSceneManager;
+import javafx.utils.scene_manager.SceneManager;
+import javafx.utils.scene_manager.Scenes;
 import services.LocationServices;
 import services.ServicesLocator;
 import services.WarehoseSevices;
@@ -92,5 +95,13 @@ public class UpdateWarehouseController implements Initializable {
         table.getSelectionModel().selectionProperty().addListener((observable, oldValue, newValue) -> {
             //edit.setDisable(false);
         });
+    }
+
+    @FXML
+    public void submit() {
+        warehoseSevices.updateWarehose((Integer) HomeSceneManager.store, coolled.isSelected());
+
+        SceneManager.show(Scenes.HOME);
+        HomeSceneManager.to(javafx.scenes.home.subscenes.manager.Scenes.WAREHOUSES);
     }
 }

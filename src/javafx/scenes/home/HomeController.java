@@ -42,11 +42,9 @@ public class HomeController implements Initializable {
     @FXML
     private MFXRectangleToggleNode toClients;
     @FXML
-    private ToggleGroup home_menu1;
-    @FXML
     private MFXRectangleToggleNode toCargo;
     @FXML
-    private ToggleGroup home_menu11;
+    private MFXRectangleToggleNode toWarehouses;
 
     /**
      * Called to initialize a controller after its root element has been
@@ -91,6 +89,14 @@ public class HomeController implements Initializable {
         toCargo.setOnAction((event) -> {
             if (toCargo.isSelected()) {
                 HomeSceneManager.to(Scenes.CARGOS);
+            } else {
+                side.setVisible(false);
+            }
+        });
+
+        toWarehouses.setOnAction((event) -> {
+            if (toWarehouses.isSelected()) {
+                HomeSceneManager.to(Scenes.WAREHOUSES);
             } else {
                 side.setVisible(false);
             }
