@@ -37,6 +37,7 @@ public class CargosController implements Initializable {
     private final ClientServices clientServices = ServicesLocator.getClientServices();
     private final WarehoseSevices warehoseSevices = ServicesLocator.getWarehoseSevices();
     private final LocationServices locationServices = ServicesLocator.getLocationServices();
+    private final UserServices userServices = ServicesLocator.getUserServices();
     @FXML
     public MFXButton abandoned;
     @FXML
@@ -111,6 +112,13 @@ public class CargosController implements Initializable {
     }
 
     private void init() {
+
+        create.setDisable(!userServices.checkPermission("CREATE_CARGO"));
+        relocate.setDisable(!userServices.checkPermission("RELOCATE_CARGO"));
+        delete.setDisable(!userServices.checkPermission("DELETE_CARGO"));
+        abandoned.setDisable(!userServices.checkPermission("ABANDONED_CARGO"));
+        reports.setDisable(!userServices.checkPermission("REPORTS_CARGO"));
+        pick.setDisable(!userServices.checkPermission("PICKS_CARGO"));
 
         reports.setDisable(false);
 
@@ -475,6 +483,7 @@ public class CargosController implements Initializable {
             e.printStackTrace();
         }
     }
+
     @FXML
     public void close_reports_dialog1(MouseEvent mouseEvent) {
         reports_dialog1.setVisible(false);

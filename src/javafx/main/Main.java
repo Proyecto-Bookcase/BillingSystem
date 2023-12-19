@@ -13,6 +13,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        SceneManager.show(Scenes.HOME);
+        SceneManager.show(Scenes.LOGIN);
     }
 }

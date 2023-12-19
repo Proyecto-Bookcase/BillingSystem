@@ -14,11 +14,15 @@ import javafx.scene.shape.SVGPath;
 import javafx.scenes.home.subscenes.manager.HomeSceneManager;
 import javafx.scenes.home.subscenes.manager.Scenes;
 import javafx.utils.scene_manager.SceneManager;
+import services.ServicesLocator;
+import services.UserServices;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
+
+    private final UserServices userServices = ServicesLocator.getUserServices();
 
     @javafx.fxml.FXML
     private MFXProgressSpinner progress;
@@ -62,6 +66,7 @@ public class HomeController implements Initializable {
 
         HomeSceneManager.initialize(side);
 
+        toEnterprise.setDisable(userServices.checkPermission("ENTERPRISE"));
         toEnterprise.setOnAction((event -> {
             if (toEnterprise.isSelected()) {
                 HomeSceneManager.to(Scenes.ENTERPRISE);
@@ -70,6 +75,7 @@ public class HomeController implements Initializable {
             }
         }));
 
+        toCompanies.setDisable(userServices.checkPermission("COMPANY"));
         toCompanies.setOnAction((event) -> {
             if (toCompanies.isSelected()) {
                 HomeSceneManager.to(Scenes.COMPANIES);
@@ -78,6 +84,7 @@ public class HomeController implements Initializable {
             }
         });
 
+        toClients.setDisable(userServices.checkPermission("CLIENT"));
         toClients.setOnAction((event) -> {
             if (toClients.isSelected()) {
                 HomeSceneManager.to(Scenes.CLIENTS);
@@ -86,6 +93,7 @@ public class HomeController implements Initializable {
             }
         });
 
+        toCargo.setDisable(userServices.checkPermission("CARGO"));
         toCargo.setOnAction((event) -> {
             if (toCargo.isSelected()) {
                 HomeSceneManager.to(Scenes.CARGOS);
@@ -94,6 +102,7 @@ public class HomeController implements Initializable {
             }
         });
 
+        toWarehouses.setDisable(userServices.checkPermission("WAREHOUSE"));
         toWarehouses.setOnAction((event) -> {
             if (toWarehouses.isSelected()) {
                 HomeSceneManager.to(Scenes.WAREHOUSES);
