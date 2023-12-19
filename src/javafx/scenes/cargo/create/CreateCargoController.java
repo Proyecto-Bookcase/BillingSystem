@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static java.lang.StringTemplate.STR;
 import static javafx.utils.async.thread.ThreadHelpers.thread;
 
 public class CreateCargoController implements Initializable {
