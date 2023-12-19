@@ -102,7 +102,9 @@
             <children>
                <MFXDatePicker fx:id="start1" floatMode="BORDER" floatingText="Inicio" layoutX="14.0" layoutY="112.0" />
                <MFXDatePicker fx:id="end1" disable="true" floatMode="BORDER" floatingText="Fin" layoutX="234.0" layoutY="112.0" />
-               <MFXButton fx:id="accept_report1" layoutX="94.0" layoutY="170.0" onAction="#fire_reports1" text="PDF" />
+
+               <MFXButton fx:id="accept_report1" layoutX="194.0" layoutY="172.0" onAction="#report9" text="Aceptar" />
+
                <Label layoutX="62.0" layoutY="26.0" text="Reporte de las cargas en abandono legal">
                   <font>
                      <Font size="18.0" />
